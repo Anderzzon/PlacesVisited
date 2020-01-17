@@ -11,9 +11,10 @@ import UIKit
 class ViewController: UIViewController {
     
     let seguId = "segToViewControllerProgress"
-    let listOfCountries = [Countries]()
+    var listOfCountries = [Countries]()
 
 
+    //Buttons
     @IBOutlet weak var button0: UIButton!
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
