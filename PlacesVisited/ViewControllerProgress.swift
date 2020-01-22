@@ -43,6 +43,8 @@ class ViewControllerProgress: UIViewController {
         return percent
     }
     
+    
+    
 
     /*
     // MARK: - Navigation
