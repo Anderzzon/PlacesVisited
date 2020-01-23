@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03472D2223D9BA89006443D3 /* CountriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472D2123D9BA89006443D3 /* CountriesTableViewController.swift */; };
+		03472D2423D9BBE8006443D3 /* ListOfCountries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472D2323D9BBE8006443D3 /* ListOfCountries.swift */; };
+		03472D2723D9D9EB006443D3 /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03472D2523D9D9EB006443D3 /* CountryTableViewCell.swift */; };
+		03472D2823D9D9EB006443D3 /* CountryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03472D2623D9D9EB006443D3 /* CountryTableViewCell.xib */; };
 		03912D9423D08418008EF805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912D9323D08418008EF805 /* AppDelegate.swift */; };
 		03912D9623D08418008EF805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912D9523D08418008EF805 /* SceneDelegate.swift */; };
 		03912D9823D08418008EF805 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912D9723D08418008EF805 /* ViewController.swift */; };
@@ -16,7 +20,7 @@
 		03912DAB23D0841C008EF805 /* PlacesVisitedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DAA23D0841C008EF805 /* PlacesVisitedTests.swift */; };
 		03912DB623D0841C008EF805 /* PlacesVisitedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DB523D0841C008EF805 /* PlacesVisitedUITests.swift */; };
 		03912DC423D085AA008EF805 /* ViewControllerProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DC323D085AA008EF805 /* ViewControllerProgress.swift */; };
-		03912DC623D08678008EF805 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DC523D08678008EF805 /* Countries.swift */; };
+		03912DC623D08678008EF805 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DC523D08678008EF805 /* Country.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03472D2123D9BA89006443D3 /* CountriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesTableViewController.swift; sourceTree = "<group>"; };
+		03472D2323D9BBE8006443D3 /* ListOfCountries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfCountries.swift; sourceTree = "<group>"; };
+		03472D2523D9D9EB006443D3 /* CountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
+		03472D2623D9D9EB006443D3 /* CountryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryTableViewCell.xib; sourceTree = "<group>"; };
 		03912D9023D08418008EF805 /* PlacesVisited.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacesVisited.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03912D9323D08418008EF805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03912D9523D08418008EF805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +60,7 @@
 		03912DB523D0841C008EF805 /* PlacesVisitedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesVisitedUITests.swift; sourceTree = "<group>"; };
 		03912DB723D0841C008EF805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03912DC323D085AA008EF805 /* ViewControllerProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProgress.swift; sourceTree = "<group>"; };
-		03912DC523D08678008EF805 /* Countries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
+		03912DC523D08678008EF805 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +115,12 @@
 				03912D9523D08418008EF805 /* SceneDelegate.swift */,
 				03912D9723D08418008EF805 /* ViewController.swift */,
 				03912DC323D085AA008EF805 /* ViewControllerProgress.swift */,
+				03472D2123D9BA89006443D3 /* CountriesTableViewController.swift */,
+				03472D2523D9D9EB006443D3 /* CountryTableViewCell.swift */,
+				03472D2623D9D9EB006443D3 /* CountryTableViewCell.xib */,
+				03472D2323D9BBE8006443D3 /* ListOfCountries.swift */,
+				03912DC523D08678008EF805 /* Country.swift */,
 				03912D9923D08418008EF805 /* Main.storyboard */,
-				03912DC523D08678008EF805 /* Countries.swift */,
 				03912D9C23D0841B008EF805 /* Assets.xcassets */,
 				03912D9E23D0841B008EF805 /* LaunchScreen.storyboard */,
 				03912DA123D0841B008EF805 /* Info.plist */,
@@ -238,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03472D2823D9D9EB006443D3 /* CountryTableViewCell.xib in Resources */,
 				03912DA023D0841B008EF805 /* LaunchScreen.storyboard in Resources */,
 				03912D9D23D0841B008EF805 /* Assets.xcassets in Resources */,
 				03912D9B23D08418008EF805 /* Main.storyboard in Resources */,
@@ -268,7 +281,10 @@
 				03912D9823D08418008EF805 /* ViewController.swift in Sources */,
 				03912D9423D08418008EF805 /* AppDelegate.swift in Sources */,
 				03912D9623D08418008EF805 /* SceneDelegate.swift in Sources */,
-				03912DC623D08678008EF805 /* Countries.swift in Sources */,
+				03912DC623D08678008EF805 /* Country.swift in Sources */,
+				03472D2723D9D9EB006443D3 /* CountryTableViewCell.swift in Sources */,
+				03472D2223D9BA89006443D3 /* CountriesTableViewController.swift in Sources */,
+				03472D2423D9BBE8006443D3 /* ListOfCountries.swift in Sources */,
 				03912DC423D085AA008EF805 /* ViewControllerProgress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let seguId = "segToViewControllerProgress"
-    var listOfCountries = [Countries]()
+    var listOfCountries = [Country]()
 
 
     //Buttons
@@ -31,13 +31,13 @@ class ViewController: UIViewController {
     }
 
     func setCountries(){
-        listOfCountries.append(Countries(short: "SWE", name: "Sweden"))
-        listOfCountries.append(Countries(short: "DEN", name: "Denmark"))
-        listOfCountries.append(Countries(short: "USA", name: "USA"))
-        listOfCountries.append(Countries(short: "FRA", name: "France"))
-        listOfCountries.append(Countries(short: "THI", name: "Thailand"))
-        listOfCountries.append(Countries(short: "CHI", name: "China"))
-        listOfCountries.append(Countries(short: "FIN", name: "Finland"))
+        listOfCountries.append(Country(short: "SWE", name: "Sweden", continent: "Europe", flagIcon: "🇸🇪"))
+        listOfCountries.append(Country(short: "DEN", name: "Denmark", continent: "Europe", flagIcon: "🇸🇪"))
+        listOfCountries.append(Country(short: "USA", name: "USA", continent: "North America", flagIcon: "🇸🇪"))
+        listOfCountries.append(Country(short: "FRA", name: "France", continent: "Europe", flagIcon: "🇸🇪"))
+        listOfCountries.append(Country(short: "THI", name: "Thailand", continent: "Asia",flagIcon: "🇸🇪"))
+        listOfCountries.append(Country(short: "CHI", name: "China", continent: "Asia",flagIcon: "🇸🇪"))
+        listOfCountries.append(Country(short: "FIN", name: "Finland", continent: "Europe",flagIcon: "🇸🇪"))
         
         button0.setTitle(listOfCountries[0].fullName, for: .normal)
         button1.setTitle(listOfCountries[1].fullName, for: .normal)

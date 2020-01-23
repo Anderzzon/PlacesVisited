@@ -8,15 +8,20 @@
 
 import Foundation
 
-class Countries {
+class Country {
     
     let shortName: String
     let fullName: String
+    let continent: String
+    let flagIcon: Character
     var visited = false
+    var wantToGo = false
     
-    init(short:String, name:String) {
+    init(short:String, name:String, continent:String, flagIcon:Character) {
         self.shortName = short
         self.fullName = name
+        self.continent = continent
+        self.flagIcon = flagIcon
     }
     
     

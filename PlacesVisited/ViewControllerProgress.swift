@@ -12,7 +12,7 @@ class ViewControllerProgress: UIViewController {
     
     @IBOutlet weak var percentOfWorld: UILabel!
     
-    var recivingArrey: [Countries]?
+    var recivingArrey: [Country]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
