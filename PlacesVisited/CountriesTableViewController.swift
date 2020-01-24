@@ -34,6 +34,28 @@ class CountriesTableViewController: UITableViewController {
         countries.add(country: Country(short: "AUS", name: "Australia", continent: "Australia", flagIcon: "🇦🇺"))
         countries.add(country: Country(short: "GRE", name: "Greece", continent: "Europe", flagIcon: "🇬🇷"))
         countries.add(country: Country(short: "BEL", name: "Belgium", continent: "Europe", flagIcon: "🇧🇪"))
+        countries.add(country: Country(short: "SWE", name: "Sweden", continent: "Europe", flagIcon: "🇸🇪"))
+        countries.add(country: Country(short: "DEN", name: "Denmark", continent: "Europe", flagIcon: "🇩🇰"))
+        countries.add(country: Country(short: "USA", name: "USA", continent: "North America", flagIcon: "🇺🇸"))
+        countries.add(country: Country(short: "FRA", name: "France", continent: "Europe", flagIcon: "🇫🇷"))
+        countries.add(country: Country(short: "THI", name: "Thailand", continent: "Asia", flagIcon: "🇹🇭"))
+        countries.add(country: Country(short: "CHI", name: "China", continent: "Asia", flagIcon: "🇨🇳"))
+        countries.add(country: Country(short: "FIN", name: "Finland", continent: "Europe", flagIcon: "🇫🇮"))
+        countries.add(country: Country(short: "GER", name: "Germany", continent: "Europe", flagIcon: "🇩🇪"))
+        countries.add(country: Country(short: "AUS", name: "Australia", continent: "Australia", flagIcon: "🇦🇺"))
+        countries.add(country: Country(short: "GRE", name: "Greece", continent: "Europe", flagIcon: "🇬🇷"))
+        countries.add(country: Country(short: "BEL", name: "Belgium", continent: "Europe", flagIcon: "🇧🇪"))
+        countries.add(country: Country(short: "SWE", name: "Sweden", continent: "Europe", flagIcon: "🇸🇪"))
+        countries.add(country: Country(short: "DEN", name: "Denmark", continent: "Europe", flagIcon: "🇩🇰"))
+        countries.add(country: Country(short: "USA", name: "USA", continent: "North America", flagIcon: "🇺🇸"))
+        countries.add(country: Country(short: "FRA", name: "France", continent: "Europe", flagIcon: "🇫🇷"))
+        countries.add(country: Country(short: "THI", name: "Thailand", continent: "Asia", flagIcon: "🇹🇭"))
+        countries.add(country: Country(short: "CHI", name: "China", continent: "Asia", flagIcon: "🇨🇳"))
+        countries.add(country: Country(short: "FIN", name: "Finland", continent: "Europe", flagIcon: "🇫🇮"))
+        countries.add(country: Country(short: "GER", name: "Germany", continent: "Europe", flagIcon: "🇩🇪"))
+        countries.add(country: Country(short: "AUS", name: "Australia", continent: "Australia", flagIcon: "🇦🇺"))
+        countries.add(country: Country(short: "GRE", name: "Greece", continent: "Europe", flagIcon: "🇬🇷"))
+        countries.add(country: Country(short: "BEL", name: "Belgium", continent: "Europe", flagIcon: "🇧🇪"))
 
         
         
@@ -66,23 +88,42 @@ class CountriesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentity, for: indexPath) as! CountryTableViewCell
 
         // Configure the cell:
+        
         if let country = countries.showCountry(index: indexPath.row) {
             cell.countryFullNameLabel?.text = country.fullName
             cell.flagLabel?.text = String(country.flagIcon)
         }
 
+        configureCheckmark(for: cell, at: indexPath)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        countries.visitCountry(index: indexPath.row, visit: true)
+        if let cell = tableView.cellForRow(at: indexPath) {
+            countries.visitCountry(index: indexPath.row, visit: true) //Updates the Country
+            configureCheckmark(for: cell, at: indexPath)
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+        
+        
+        
         print(countries.showCountry(index: indexPath.row)?.fullName)
         
         print(countries.showCountry(index: indexPath.row)?.visited)
     }
     
+    func configureCheckmark(for cell: UITableViewCell, at indexPath: IndexPath) {
+        
+            if countries.showCountry(index: indexPath.row)?.visited == false {
+                cell.accessoryType = .none
+            } else {
+                cell.accessoryType = .checkmark
+            }
+        }
+    
+   
     
 
     /*
