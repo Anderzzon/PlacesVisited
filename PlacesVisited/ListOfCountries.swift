@@ -9,7 +9,7 @@
 import Foundation
 
 class ListOfCountries {
-    private var countries = [Country]()
+    var countries = [Country]()
     
     //computed property
     var count:Int {
@@ -28,7 +28,11 @@ class ListOfCountries {
         return nil
     }
     
-
+    //Sets a country to visited or reverse that
+    func visitCountry(index: Int, visit: Bool ) {
+        countries[index].visited = visit
+        
+    }
     
     
 }

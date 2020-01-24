@@ -11,13 +11,17 @@ import UIKit
 class CountriesTableViewController: UITableViewController {
     
     let cellIdentity = "countryCell"
-    let countries = ListOfCountries()
+    var countries = ListOfCountries()
 
+    @IBOutlet weak var navBar: UINavigationBar!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set title in nav bar:
+        navBar.topItem?.title = "Countries"
         
         countries.add(country: Country(short: "SWE", name: "Sweden", continent: "Europe", flagIcon: "🇸🇪"))
         countries.add(country: Country(short: "DEN", name: "Denmark", continent: "Europe", flagIcon: "🇩🇰"))
@@ -30,6 +34,8 @@ class CountriesTableViewController: UITableViewController {
         countries.add(country: Country(short: "AUS", name: "Australia", continent: "Australia", flagIcon: "🇦🇺"))
         countries.add(country: Country(short: "GRE", name: "Greece", continent: "Europe", flagIcon: "🇬🇷"))
         countries.add(country: Country(short: "BEL", name: "Belgium", continent: "Europe", flagIcon: "🇧🇪"))
+
+        
         
         let nib = UINib(nibName: "CountryTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentity)
@@ -66,6 +72,15 @@ class CountriesTableViewController: UITableViewController {
         }
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        countries.visitCountry(index: indexPath.row, visit: true)
+        print(countries.showCountry(index: indexPath.row)?.fullName)
+        
+        print(countries.showCountry(index: indexPath.row)?.visited)
     }
     
     
