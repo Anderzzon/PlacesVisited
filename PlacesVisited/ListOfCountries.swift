@@ -9,30 +9,68 @@
 import Foundation
 
 class ListOfCountries {
-    var countries = [Country]()
+    
+    enum Continents: Int, CaseIterable {
+        case Europe, Asia, NorthAmerica, Africa
+    }
+    
+    private var countriesInEurope: [Country] = []
+    private var countriesInAsia: [Country] = []
+    private var countriesInNorthAmerica: [Country] = []
+    private var countriesInAfrica: [Country] = []
+    
+    //var countries = [Country]()
     
     //computed property
     var count:Int {
-        return countries.count
-    }
-    
-    func add(country: Country) {
-        countries.append(country)
-    }
-    
-    func showCountry(index: Int) -> Country? {
+        var countEnum = 0
+        countEnum += countriesInAsia.count
+        countEnum += countriesInAfrica.count
+        countEnum += countriesInNorthAmerica.count
+        countEnum += countriesInEurope.count
         
-        if(index >= 0 && index < countries.count) {
-            return countries[index]
-        }
-        return nil
+        return countEnum
     }
+    
+    func add(country: Country, for continent: Continents) {
+        //countries.append(country)
+        switch continent {
+        case .Africa:
+            countriesInAfrica.append(country)
+        case .Asia:
+            countriesInAsia.append(country)
+        case .Europe:
+            countriesInEurope.append(country)
+        case .NorthAmerica:
+            countriesInNorthAmerica.append(country)
+        }
+    }
+    
+    func listOfCountries(for continent: Continents) -> [Country] {
+        switch continent {
+        case .Africa:
+            return countriesInAfrica
+        case .Asia:
+            return countriesInAsia
+        case .Europe:
+            return countriesInEurope
+        case .NorthAmerica:
+            return countriesInNorthAmerica
+        }
+    }
+    
+//    func showCountry(index: Int) -> Country? {
+//
+//        if(index >= 0 && index < countries.count) {
+//            return countries[index]
+//        }
+//        return nil
+//    }
     
     //Sets a country to visited or reverse that
-    func visitCountry(index: Int, visit: Bool ) {
-        countries[index].visited = visit
-        
-    }
+//    func visitCountry(index: Int, visit: Bool ) {
+//        countries[index].visited = visit
+//    }
     
     
 }

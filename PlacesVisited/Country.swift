@@ -24,5 +24,17 @@ class Country {
         self.flagIcon = flagIcon
     }
     
+    //Sets a country to visited or reverse that
+    func visitCountry(visit: Bool ) {
+        visited = visit
+    }
+    
+    func toggleVisited() {
+        if self.visited == false {
+            visited = true
+        } else if self.visited == true {
+            visited = false
+        }
+    }
     
 }
