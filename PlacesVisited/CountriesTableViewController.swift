@@ -38,9 +38,17 @@ class CountriesTableViewController: UITableViewController {
         countries.add(country: Country(short: "CHI", name: "China", continent: "Asia", flagIcon: "🇨🇳"), for: .Asia)
         countries.add(country: Country(short: "FIN", name: "Finland", continent: "Europe", flagIcon: "🇫🇮"), for: .Europe)
         countries.add(country: Country(short: "GER", name: "Germany", continent: "Europe", flagIcon: "🇩🇪"), for: .Europe)
-        countries.add(country: Country(short: "AUS", name: "Australia", continent: "Australia", flagIcon: "🇦🇺"), for: .Africa)
+        countries.add(country: Country(short: "AUS", name: "Australia", continent: "Australia", flagIcon: "🇦🇺"), for: .Oceania)
         countries.add(country: Country(short: "GRE", name: "Greece", continent: "Europe", flagIcon: "🇬🇷"), for: .Europe)
         countries.add(country: Country(short: "BEL", name: "Belgium", continent: "Europe", flagIcon: "🇧🇪"), for: .Europe)
+        countries.add(country: Country(short: "SOA", name: "South Africa", continent: "Africa", flagIcon: "🇿🇦"), for: .Africa)
+        countries.add(country: Country(short: "EGY", name: "Egypt", continent: "Africa", flagIcon: "🇪🇬"), for: .Africa)
+        countries.add(country: Country(short: "SIN", name: "Singapore", continent: "Africa", flagIcon: "🇸🇬"), for: .Asia)
+        countries.add(country: Country(short: "BRZ", name: "Brazil", continent: "South America", flagIcon: "🇧🇷"), for: .SouthAmerica)
+        countries.add(country: Country(short: "PRU", name: "Peru", continent: "South America", flagIcon: "🇵🇪"), for: .SouthAmerica)
+        countries.add(country: Country(short: "ARG", name: "Argentina", continent: "South America", flagIcon: "🇦🇷"), for: .SouthAmerica)
+        countries.add(country: Country(short: "MEX", name: "Mexico", continent: "Notrh America", flagIcon: "🇲🇽"), for: .NorthAmerica)
+        countries.add(country: Country(short: "CAN", name: "Canada", continent: "Notrh America", flagIcon: "🇨🇦"), for: .NorthAmerica)
 
         let nib = UINib(nibName: "CountryTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentity)
@@ -72,6 +80,10 @@ class CountriesTableViewController: UITableViewController {
                 title = "Europe"
             case .NorthAmerica:
                 title = "North America"
+            case .SouthAmerica:
+                title = "South America"
+            case .Oceania:
+                title = "Oceania (Australia)"
             }
         }
         return title

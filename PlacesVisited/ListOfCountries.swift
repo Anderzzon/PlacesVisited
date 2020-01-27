@@ -11,13 +11,15 @@ import Foundation
 class ListOfCountries {
     
     enum Continents: Int, CaseIterable {
-        case Europe, Asia, NorthAmerica, Africa
+        case Europe, Asia, NorthAmerica, Africa, SouthAmerica, Oceania
     }
     
     private var countriesInEurope: [Country] = []
     private var countriesInAsia: [Country] = []
     private var countriesInNorthAmerica: [Country] = []
     private var countriesInAfrica: [Country] = []
+    private var countriesInSouthAmerica: [Country] = []
+    private var countriesInOceania: [Country] = []
     
     
     var totalNumberOfCountries:Int {
@@ -26,6 +28,8 @@ class ListOfCountries {
         numberOfCountries += countriesInAfrica.count
         numberOfCountries += countriesInNorthAmerica.count
         numberOfCountries += countriesInEurope.count
+        numberOfCountries += countriesInSouthAmerica.count
+        numberOfCountries += countriesInOceania.count
         
         return numberOfCountries
     }
@@ -52,6 +56,16 @@ class ListOfCountries {
                 numberOfCountriesNotVisited += 1
             }
         }
+        for i in 0..<countriesInSouthAmerica.count {
+            if countriesInSouthAmerica[i].visited == false {
+                numberOfCountriesNotVisited += 1
+            }
+        }
+        for i in 0..<countriesInOceania.count {
+            if countriesInOceania[i].visited == false {
+                numberOfCountriesNotVisited += 1
+            }
+        }
         return numberOfCountriesNotVisited
     }
     
@@ -66,6 +80,10 @@ class ListOfCountries {
             countriesInEurope.append(country)
         case .NorthAmerica:
             countriesInNorthAmerica.append(country)
+        case .SouthAmerica:
+            countriesInSouthAmerica.append(country)
+        case .Oceania:
+            countriesInOceania.append(country)
         }
     }
     
@@ -79,6 +97,10 @@ class ListOfCountries {
             return countriesInEurope
         case .NorthAmerica:
             return countriesInNorthAmerica
+        case .SouthAmerica:
+            return countriesInSouthAmerica
+        case .Oceania:
+            return countriesInOceania
         }
     }
     
@@ -113,21 +135,21 @@ class ListOfCountries {
                 }
             }
             return countriesNotVisited
+        case .SouthAmerica:
+            for i in 0..<countriesInSouthAmerica.count {
+                if countriesInSouthAmerica[i].visited == false {
+                    countriesNotVisited.append(countriesInSouthAmerica[i])
+                }
+            }
+            return countriesNotVisited
+        case .Oceania:
+            for i in 0..<countriesInOceania.count {
+                if countriesInOceania[i].visited == false {
+                    countriesNotVisited.append(countriesInOceania[i])
+                }
+            }
+        return countriesNotVisited
         }
     }
-    
-//    func showCountry(index: Int) -> Country? {
-//
-//        if(index >= 0 && index < countries.count) {
-//            return countries[index]
-//        }
-//        return nil
-//    }
-    
-    //Sets a country to visited or reverse that
-//    func visitCountry(index: Int, visit: Bool ) {
-//        countries[index].visited = visit
-//    }
-    
     
 }
