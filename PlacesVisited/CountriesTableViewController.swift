@@ -17,14 +17,17 @@ class CountriesTableViewController: UITableViewController {
     private func continentsForSectionIndex(_ index: Int) -> ListOfCountries.Continents? {
         return ListOfCountries.Continents(rawValue: index)
     }
-
-    @IBOutlet weak var navBar: UINavigationBar!
+    
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
+    @IBAction func SegmentBeenVsWant(_ sender: Any) {
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Set title in nav bar:
-        navBar.topItem?.title = "Countries"
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
         
         countries.add(country: Country(short: "SWE", name: "Sweden", continent: "Europe", flagIcon: "🇸🇪"), for: .Europe)
         countries.add(country: Country(short: "DEN", name: "Denmark", continent: "Europe", flagIcon: "🇩🇰"), for: .Europe)
@@ -66,7 +69,7 @@ class CountriesTableViewController: UITableViewController {
             case .Asia:
                 title = "Asia"
             case .Europe:
-                title = "Asia"
+                title = "Europe"
             case .NorthAmerica:
                 title = "North America"
             }
@@ -86,7 +89,15 @@ class CountriesTableViewController: UITableViewController {
     //Number of rows in each section:
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let continent = continentsForSectionIndex(section) {
-            return countries.listOfCountries(for: continent).count
+            switch segmentControl.selectedSegmentIndex {
+            case 0:
+                return countries.listOfCountries(for: continent).count
+            case 1:
+                return countries.listOfCountriesNotVisited(for: continent).count
+            default:
+                break
+            }
+            
         }
         return 0
     }
@@ -94,67 +105,82 @@ class CountriesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentity, for: indexPath) as! CountryTableViewCell
             
+        switch segmentControl.selectedSegmentIndex {
+        case 0: //All countries
             if let continent = continentsForSectionIndex(indexPath.section) {
                 let items = countries.listOfCountries(for: continent)
                 let item = items[indexPath.row]
                 
+                cell.countryFullNameLabel?.text = item.fullName
+                cell.flagLabel?.text = String(item.flagIcon)
+                
+                configureCheckmark(for: cell, with: item)
+            }
+        case 1: //Countries not visited
+            if let continent = continentsForSectionIndex(indexPath.section) {
+                let items = countries.listOfCountriesNotVisited(for: continent)
+                let item = items[indexPath.row]
                 
                 cell.countryFullNameLabel?.text = item.fullName
                 cell.flagLabel?.text = String(item.flagIcon)
-                //Fix this - Fixed?:
-                configureCheckmark(for: cell, with: item)
+                
+                //configureCheckmark(for: cell, with: item)
+                configureCheckmarkWantTo(for: cell, with: item)
             }
-        
+        default:
+            break
+        }
         return cell
     }
-    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        if let cell = tableView.cellForRow(at: indexPath) {
-//            if countries.showCountry(index: indexPath.row)?.visited == false {
-//                countries.visitCountry(index: indexPath.row, visit: true) //Updates the Country
-//                configureCheckmark(for: cell, at: indexPath)
-//                tableView.deselectRow(at: indexPath, animated: true)
-//            } else {
-//                countries.visitCountry(index: indexPath.row, visit: false) //Updates the Country
-//                configureCheckmark(for: cell, at: indexPath)
-//                tableView.deselectRow(at: indexPath, animated: true)
-//            }
-//        }
-//
-//    }
         override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
             if let cell = tableView.cellForRow(at: indexPath) {
                 if let continent = continentsForSectionIndex(indexPath.section) {
-                    let items = countries.listOfCountries(for: continent)
-                    var item = items[indexPath.row]
                     
-                    //item.toggleVisited()
-                    if item.visited == false {
-                        item.visitCountry(visit: true)
+                    
+                    switch segmentControl.selectedSegmentIndex {
+                    case 0:
+                        let items = countries.listOfCountries(for: continent)
+                        let item = items[indexPath.row]
+                        
+                        item.toggleVisited()
+                        
                         configureCheckmark(for: cell, with: item)
                         tableView.deselectRow(at: indexPath, animated: true)
-                    } else {
-                        item.visitCountry(visit: false)
+                        
+                        print(item.visited)
+                        print(countries.numberOfCountriesNotVisited)
+                    case 1:
+                        let items = countries.listOfCountriesNotVisited(for: continent)
+                        let item = items[indexPath.row]
+                        
+                        item.toggleWantToGo()
+                        
+                        configureCheckmarkWantTo(for: cell, with: item)
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        
+                        print(item.visited)
+                        print(countries.numberOfCountriesNotVisited)
+                    default:
+                        break
                     }
                     
-                    configureCheckmark(for: cell, with: item)
-                    tableView.deselectRow(at: indexPath, animated: true)
-                    print(item.visited)
+                    
+                    //Old visited function
+//                    if item.visited == false {
+//                        item.visitCountry(visit: true)
+//                        configureCheckmark(for: cell, with: item)
+//                        tableView.deselectRow(at: indexPath, animated: true)
+//                    } else {
+//                        item.visitCountry(visit: false)
+//                    }
+                    
+                    
+                    
+                    
                 }
             }
         }
-    
-      //Old configureCheckmark function:
-//    func configureCheckmark(for cell: UITableViewCell, at indexPath: IndexPath) {
-//
-//            if countries.showCountry(index: indexPath.row)?.visited == false {
-//                cell.accessoryType = .none
-//            } else {
-//                cell.accessoryType = .checkmark
-//            }
-//        }
     
     //New configureCheckmark function:
     func configureCheckmark(for cell: UITableViewCell, with item: Country) {
@@ -164,6 +190,17 @@ class CountriesTableViewController: UITableViewController {
         if item.visited == false {
             cell.accessoryType = .none
         } else if item.visited == true {
+            cell.accessoryType = .checkmark
+            }
+    }
+    
+    func configureCheckmarkWantTo(for cell: UITableViewCell, with item: Country) {
+        guard let country = cell as? CountryTableViewCell else {
+            return
+        }
+        if item.wantToGo == false {
+            cell.accessoryType = .none
+        } else if item.wantToGo == true {
             cell.accessoryType = .checkmark
             }
     }

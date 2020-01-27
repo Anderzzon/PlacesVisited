@@ -37,4 +37,12 @@ class Country {
         }
     }
     
+    func toggleWantToGo() {
+        if self.wantToGo == false {
+            wantToGo = true
+        } else if self.wantToGo == true {
+            wantToGo = false
+        }
+    }
+    
 }

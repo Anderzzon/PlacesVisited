@@ -19,17 +19,40 @@ class ListOfCountries {
     private var countriesInNorthAmerica: [Country] = []
     private var countriesInAfrica: [Country] = []
     
-    //var countries = [Country]()
     
-    //computed property
-    var count:Int {
-        var countEnum = 0
-        countEnum += countriesInAsia.count
-        countEnum += countriesInAfrica.count
-        countEnum += countriesInNorthAmerica.count
-        countEnum += countriesInEurope.count
+    var totalNumberOfCountries:Int {
+        var numberOfCountries = 0
+        numberOfCountries += countriesInAsia.count
+        numberOfCountries += countriesInAfrica.count
+        numberOfCountries += countriesInNorthAmerica.count
+        numberOfCountries += countriesInEurope.count
         
-        return countEnum
+        return numberOfCountries
+    }
+    
+    var numberOfCountriesNotVisited:Int {
+        var numberOfCountriesNotVisited = 0
+        for i in 0..<countriesInAsia.count {
+            if countriesInAsia[i].visited == false {
+                numberOfCountriesNotVisited += 1
+            }
+        }
+        for i in 0..<countriesInAfrica.count {
+            if countriesInAfrica[i].visited == false {
+                numberOfCountriesNotVisited += 1
+            }
+        }
+        for i in 0..<countriesInNorthAmerica.count {
+            if countriesInNorthAmerica[i].visited == false {
+                numberOfCountriesNotVisited += 1
+            }
+        }
+        for i in 0..<countriesInEurope.count {
+            if countriesInEurope[i].visited == false {
+                numberOfCountriesNotVisited += 1
+            }
+        }
+        return numberOfCountriesNotVisited
     }
     
     func add(country: Country, for continent: Continents) {
@@ -56,6 +79,40 @@ class ListOfCountries {
             return countriesInEurope
         case .NorthAmerica:
             return countriesInNorthAmerica
+        }
+    }
+    
+    func listOfCountriesNotVisited(for continent: Continents) -> [Country] {
+        var countriesNotVisited: [Country] = []
+        switch continent {
+        case .Africa:
+            for i in 0..<countriesInAfrica.count {
+                if countriesInAfrica[i].visited == false {
+                    countriesNotVisited.append(countriesInAfrica[i])
+                }
+            }
+            return countriesNotVisited
+        case .Asia:
+            for i in 0..<countriesInAsia.count {
+                if countriesInAsia[i].visited == false {
+                    countriesNotVisited.append(countriesInAsia[i])
+                }
+            }
+            return countriesNotVisited
+        case .Europe:
+            for i in 0..<countriesInEurope.count {
+                if countriesInEurope[i].visited == false {
+                    countriesNotVisited.append(countriesInEurope[i])
+                }
+            }
+            return countriesNotVisited
+        case .NorthAmerica:
+            for i in 0..<countriesInNorthAmerica.count {
+                if countriesInNorthAmerica[i].visited == false {
+                    countriesNotVisited.append(countriesInNorthAmerica[i])
+                }
+            }
+            return countriesNotVisited
         }
     }
     

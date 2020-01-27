@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PZg-aC-342">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -26,14 +26,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgm-X7-nMf">
-                                        <rect key="frame" x="0.0" y="109.5" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="109.66666666666666" width="414" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="button1Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i3k-g2-yIx"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ci4-BV-z2W">
-                                        <rect key="frame" x="0.0" y="219.5" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="219.33333333333331" width="414" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="button2Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EQ0-Ku-Pap"/>
@@ -54,14 +54,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juC-KV-EEl">
-                                        <rect key="frame" x="0.0" y="548.5" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="548.66666666666663" width="414" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="button5Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Yb-Ie-u7l"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z57-IV-XsD">
-                                        <rect key="frame" x="0.0" y="658.5" width="414" height="30"/>
+                                        <rect key="frame" x="0.0" y="658.33333333333337" width="414" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="button6Pressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Br-QC-aDa"/>
@@ -143,7 +143,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PercentOfWorld" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47a-nx-2pE">
-                                <rect key="frame" x="70.5" y="424" width="273" height="48"/>
+                                <rect key="frame" x="70.666666666666686" y="424" width="273" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -180,28 +180,22 @@
         <!--Countries-->
         <scene sceneID="JHi-ed-QCK">
             <objects>
-                <tableViewController id="6Nh-zX-9iD" customClass="CountriesTableViewController" customModule="PlacesVisited" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Countries" id="6Nh-zX-9iD" customClass="CountriesTableViewController" customModule="PlacesVisited" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dU2-wP-7VK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="5BY-2J-cjV">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Title" id="eYK-sp-m1Z"/>
-                            </items>
-                        </navigationBar>
+                        <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="countryCell" id="ckg-nA-erV">
-                                <rect key="frame" x="0.0" y="72" width="414" height="47.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="47.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ckg-nA-erV" id="luW-we-Lay">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="47.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="47.333332061767578"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5V-8D-YtT">
-                                            <rect key="frame" x="20" y="11" width="25" height="25.5"/>
+                                            <rect key="frame" x="20" y="10.999999999999998" width="25" height="25.333333333333329"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="Hbh-H0-ioH"/>
                                                 <constraint firstAttribute="height" constant="25" id="QUR-Ls-Aa4"/>
@@ -231,31 +225,67 @@
                             <outlet property="delegate" destination="6Nh-zX-9iD" id="NdV-FY-Ofs"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Countries" image="text.badge.checkmark" catalog="system" id="bu9-BE-PRQ"/>
+                    <navigationItem key="navigationItem" title="Countries" id="eYK-sp-m1Z">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="H5s-tD-l4a">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="7zX-cn-wGt">
+                                <rect key="frame" x="293" y="5.6666666666666679" width="101" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Been"/>
+                                    <segment title="Want"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="SegmentBeenVsWant:" destination="6Nh-zX-9iD" eventType="valueChanged" id="utv-gl-1ug"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="navBar" destination="5BY-2J-cjV" id="Mdf-zv-IfR"/>
+                        <outlet property="segmentControl" destination="7zX-cn-wGt" id="G2O-hu-t5t"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="unf-2A-uKH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1913" y="901"/>
+            <point key="canvasLocation" x="2821.739130434783" y="900.66964285714278"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="p4b-GO-j2w">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nZ4-Ws-nVL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="PZg-aC-342" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q9o-4Z-WQj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="6Nh-zX-9iD" kind="relationship" relationship="viewControllers" id="KXg-mQ-fpD"/>
+                        <segue destination="eEF-b6-pAA" kind="relationship" relationship="viewControllers" id="KXg-mQ-fpD"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nZ4-Ws-nVL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2567" y="119"/>
+            <point key="canvasLocation" x="1835" y="119"/>
+        </scene>
+        <!--Countries-->
+        <scene sceneID="85N-73-EEj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eEF-b6-pAA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Countries" image="text.badge.checkmark" catalog="system" id="bu9-BE-PRQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e7t-EC-5Nf">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6Nh-zX-9iD" kind="relationship" relationship="rootViewController" id="w6V-wF-OE8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FE2-mo-S7e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1911.594202898551" y="900.66964285714278"/>
         </scene>
     </scenes>
     <resources>
