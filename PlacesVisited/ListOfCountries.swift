@@ -34,6 +34,77 @@ class ListOfCountries {
         return numberOfCountries
     }
     
+    var numberOfCountriesVisited:Int {
+        var numberOfCountriesVisited = 0
+        for i in 0..<countriesInAsia.count {
+            if countriesInAsia[i].visited == true {
+                numberOfCountriesVisited += 1
+            }
+        }
+        for i in 0..<countriesInAfrica.count {
+            if countriesInAfrica[i].visited == true {
+                numberOfCountriesVisited += 1
+            }
+        }
+        for i in 0..<countriesInNorthAmerica.count {
+            if countriesInNorthAmerica[i].visited == true {
+                numberOfCountriesVisited += 1
+            }
+        }
+        for i in 0..<countriesInEurope.count {
+            if countriesInEurope[i].visited == true {
+                numberOfCountriesVisited += 1
+            }
+        }
+        for i in 0..<countriesInSouthAmerica.count {
+            if countriesInSouthAmerica[i].visited == true {
+                numberOfCountriesVisited += 1
+            }
+        }
+        for i in 0..<countriesInOceania.count {
+            if countriesInOceania[i].visited == true {
+                numberOfCountriesVisited += 1
+            }
+        }
+        return numberOfCountriesVisited
+    }
+
+    var numberOfCountriesWantToGoTo:Int {
+        var numberOfCountriesWantToGoTo = 0
+        for i in 0..<countriesInAsia.count {
+            if countriesInAsia[i].wantToGo == true && countriesInAsia[i].visited == false {
+                numberOfCountriesWantToGoTo += 1
+            }
+        }
+        for i in 0..<countriesInAfrica.count {
+            if countriesInAfrica[i].wantToGo == true && countriesInAfrica[i].visited == false {
+                numberOfCountriesWantToGoTo += 1
+            }
+        }
+        for i in 0..<countriesInNorthAmerica.count {
+            if countriesInNorthAmerica[i].wantToGo == true && countriesInNorthAmerica[i].visited == false {
+                numberOfCountriesWantToGoTo += 1
+            }
+        }
+        for i in 0..<countriesInEurope.count {
+            if countriesInEurope[i].wantToGo == true && countriesInEurope[i].visited == false {
+                numberOfCountriesWantToGoTo += 1
+            }
+        }
+        for i in 0..<countriesInSouthAmerica.count {
+            if countriesInSouthAmerica[i].wantToGo == true && countriesInSouthAmerica[i].visited == false {
+                numberOfCountriesWantToGoTo += 1
+            }
+        }
+        for i in 0..<countriesInOceania.count {
+            if countriesInOceania[i].wantToGo == true && countriesInOceania[i].visited == false {
+                numberOfCountriesWantToGoTo += 1
+            }
+        }
+        return numberOfCountriesWantToGoTo
+    }
+    
+    //This functions is currently not used:
     var numberOfCountriesNotVisited:Int {
         var numberOfCountriesNotVisited = 0
         for i in 0..<countriesInAsia.count {
@@ -150,6 +221,98 @@ class ListOfCountries {
             }
         return countriesNotVisited
         }
+    }
+    
+    //Computes percentage of world visited
+    func percentOfWorldVisited() -> Double {
+        var percent:Double
+        
+        percent = Double(numberOfCountriesVisited) / Double((numberOfCountriesVisited + numberOfCountriesNotVisited))
+        percent = percent*100
+        percent = Double(round(10*percent)/10)
+        
+        print("You have visited \(percent) % of the world")
+        
+        return percent
+    }
+    
+    func percentOfContinentVisited(for continent: Continents) -> Double {
+        var visited = 0
+        var percent:Double
+        
+        switch continent {
+        case .Africa:
+            for i in 0..<countriesInAfrica.count {
+                if countriesInAfrica[i].visited == true {
+                visited += 1
+                }
+            }
+            percent = Double(visited) / Double((countriesInAfrica.count))
+            percent = percent*100
+            percent = Double(round(10*percent)/10)
+            return percent
+        case .Asia:
+            for i in 0..<countriesInAsia.count {
+                if countriesInAsia[i].visited == true {
+                visited += 1
+                }
+            }
+            percent = Double(visited) / Double((countriesInAsia.count))
+            percent = percent*100
+            percent = Double(round(10*percent)/10)
+            return percent
+        case .Europe:
+            for i in 0..<countriesInEurope.count {
+                if countriesInEurope[i].visited == true {
+                visited += 1
+                }
+            }
+            percent = Double(visited) / Double((countriesInEurope.count))
+            percent = percent*100
+            percent = Double(round(10*percent)/10)
+            return percent
+        case .NorthAmerica:
+            for i in 0..<countriesInNorthAmerica.count {
+                if countriesInNorthAmerica[i].visited == true {
+                visited += 1
+                }
+            }
+            percent = Double(visited) / Double((countriesInNorthAmerica.count))
+            percent = percent*100
+            percent = Double(round(10*percent)/10)
+            return percent
+        case .SouthAmerica:
+            for i in 0..<countriesInSouthAmerica.count {
+                if countriesInSouthAmerica[i].visited == true {
+                visited += 1
+                }
+            }
+            percent = Double(visited) / Double((countriesInSouthAmerica.count))
+            percent = percent*100
+            percent = Double(round(10*percent)/10)
+            return percent
+        case .Oceania:
+            for i in 0..<countriesInOceania.count {
+                if countriesInOceania[i].visited == true {
+                visited += 1
+                }
+            }
+            percent = Double(visited) / Double((countriesInOceania.count))
+            percent = percent*100
+            percent = Double(round(10*percent)/10)
+            return percent
+        }
+    }
+    
+    func bucketListProgress() -> Double {
+        var percent:Double
+        
+        percent = Double(numberOfCountriesVisited) / Double((numberOfCountriesVisited + numberOfCountriesWantToGoTo))
+        percent = percent*100
+        percent = Double(round(10*percent)/10)
+        print("You are \(percent) % on progress of your goal")
+        
+        return percent
     }
     
 }

@@ -71,19 +71,20 @@ class CountriesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var title: String? = nil
         if let continent = continentsForSectionIndex(section) {
+            let percentVisited: Int = Int(countries.percentOfContinentVisited(for: continent))
             switch continent {
             case .Africa:
-                title = "Africa"
+                title = "Africa \(percentVisited)% visited"
             case .Asia:
-                title = "Asia"
+                title = "Asia \(percentVisited)% visited"
             case .Europe:
-                title = "Europe"
+                title = "Europe \(percentVisited)% visited"
             case .NorthAmerica:
-                title = "North America"
+                title = "North America \(percentVisited)% visited"
             case .SouthAmerica:
-                title = "South America"
+                title = "South America \(percentVisited)% visited"
             case .Oceania:
-                title = "Oceania (Australia)"
+                title = "Oceania (Australia) \(percentVisited)% visited"
             }
         }
         return title
@@ -159,9 +160,15 @@ class CountriesTableViewController: UITableViewController {
                         
                         configureCheckmark(for: cell, with: item)
                         tableView.deselectRow(at: indexPath, animated: true)
+                        tableView.reloadData()
+                        
                         
                         print(item.visited)
                         print(countries.numberOfCountriesNotVisited)
+                        var world = countries.percentOfWorldVisited()
+                        var progress = countries.bucketListProgress()
+                        
+                        
                     case 1:
                         let items = countries.listOfCountriesNotVisited(for: continent)
                         let item = items[indexPath.row]
@@ -173,6 +180,9 @@ class CountriesTableViewController: UITableViewController {
                         
                         print(item.visited)
                         print(countries.numberOfCountriesNotVisited)
+                        var world = countries.percentOfWorldVisited()
+                        var progress = countries.bucketListProgress()
+                        
                     default:
                         break
                     }
