@@ -12,37 +12,18 @@ class ViewControllerProgress: UIViewController {
     
     @IBOutlet weak var percentOfWorld: UILabel!
     
-    var recivingArrey: [Country]?
+    var recivingArrey: ListOfCountries?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let percentOfCountriesVisited = percentageOFWorld()
-        percentOfWorld.text = "\(percentOfCountriesVisited) %"
+        percentOfWorld.text = " %"
         
-        //print(recivingArrey![0].visited)
+        print(recivingArrey?.percentOfWorldVisited())
         
     }
     
-    func percentageOFWorld() -> Double {
-        var visitedCountries = 0
-        var percent:Double
-        
-        for index in 1...recivingArrey!.count {
-            if recivingArrey![index-1].visited == true {
-                visitedCountries += 1
-            }
-        }
-        percent = Double(visitedCountries) / Double(recivingArrey!.count)
-        percent = percent*100
-        percent = Double(round(10*percent)/10)
-        
-        print(visitedCountries)
-        print(percent)
-        
-        return percent
-    }
-    
+ 
     
     
 

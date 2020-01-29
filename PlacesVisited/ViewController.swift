@@ -129,7 +129,7 @@ class ViewController: UIViewController {
         if segue.identifier == seguId {
             let destinationVC = segue.destination as! ViewControllerProgress
             
-            destinationVC.recivingArrey = listOfCountries
+            //destinationVC.recivingArrey = listOfCountries
             
         }
     }

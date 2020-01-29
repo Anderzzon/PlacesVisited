@@ -10,6 +10,7 @@ import UIKit
 
 class CountriesTableViewController: UITableViewController {
     
+    //let seguId = "segToViewControllerProgress"
     let cellIdentity = "countryCell"
     var countries = ListOfCountries()
     //var countries: ListOfCountries
@@ -26,6 +27,7 @@ class CountriesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
         
@@ -70,6 +72,8 @@ class CountriesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var title: String? = nil
+        
+        
         if let continent = continentsForSectionIndex(section) {
             let percentVisited: Int = Int(countries.percentOfContinentVisited(for: continent))
             switch continent {
@@ -274,5 +278,15 @@ class CountriesTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == seguId {
+//            let destinationVC = segue.destination as! ViewControllerProgress
+//
+//            destinationVC.recivingArrey = countries
+//
+//        }
+//    }
+    
 
 }
