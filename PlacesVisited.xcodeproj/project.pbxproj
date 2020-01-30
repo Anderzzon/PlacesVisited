@@ -13,14 +13,16 @@
 		03472D2823D9D9EB006443D3 /* CountryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03472D2623D9D9EB006443D3 /* CountryTableViewCell.xib */; };
 		03912D9423D08418008EF805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912D9323D08418008EF805 /* AppDelegate.swift */; };
 		03912D9623D08418008EF805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912D9523D08418008EF805 /* SceneDelegate.swift */; };
-		03912D9823D08418008EF805 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912D9723D08418008EF805 /* ViewController.swift */; };
 		03912D9B23D08418008EF805 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03912D9923D08418008EF805 /* Main.storyboard */; };
 		03912D9D23D0841B008EF805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03912D9C23D0841B008EF805 /* Assets.xcassets */; };
 		03912DA023D0841B008EF805 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03912D9E23D0841B008EF805 /* LaunchScreen.storyboard */; };
 		03912DAB23D0841C008EF805 /* PlacesVisitedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DAA23D0841C008EF805 /* PlacesVisitedTests.swift */; };
 		03912DB623D0841C008EF805 /* PlacesVisitedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DB523D0841C008EF805 /* PlacesVisitedUITests.swift */; };
-		03912DC423D085AA008EF805 /* ViewControllerProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DC323D085AA008EF805 /* ViewControllerProgress.swift */; };
 		03912DC623D08678008EF805 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DC523D08678008EF805 /* Country.swift */; };
+		03D54A6723E37B1200C81CC2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */; };
+		03D54A6923E37B4F00C81CC2 /* TableViewNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */; };
+		03D54A6B23E3835F00C81CC2 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6A23E3835F00C81CC2 /* StatsViewController.swift */; };
+		03E7994A23E1A5E900AC25FE /* PlacesVisited.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03E7994823E1A5E900AC25FE /* PlacesVisited.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +50,6 @@
 		03912D9023D08418008EF805 /* PlacesVisited.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacesVisited.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03912D9323D08418008EF805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03912D9523D08418008EF805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		03912D9723D08418008EF805 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		03912D9A23D08418008EF805 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03912D9C23D0841B008EF805 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03912D9F23D0841B008EF805 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,8 +60,11 @@
 		03912DB123D0841C008EF805 /* PlacesVisitedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlacesVisitedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03912DB523D0841C008EF805 /* PlacesVisitedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesVisitedUITests.swift; sourceTree = "<group>"; };
 		03912DB723D0841C008EF805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03912DC323D085AA008EF805 /* ViewControllerProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProgress.swift; sourceTree = "<group>"; };
 		03912DC523D08678008EF805 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNavigationViewController.swift; sourceTree = "<group>"; };
+		03D54A6A23E3835F00C81CC2 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		03E7994923E1A5E900AC25FE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,10 +117,9 @@
 			children = (
 				03912D9323D08418008EF805 /* AppDelegate.swift */,
 				03912D9523D08418008EF805 /* SceneDelegate.swift */,
-				03912D9723D08418008EF805 /* ViewController.swift */,
-				03912DC323D085AA008EF805 /* ViewControllerProgress.swift */,
 				03472D2123D9BA89006443D3 /* CountriesTableViewController.swift */,
 				03472D2523D9D9EB006443D3 /* CountryTableViewCell.swift */,
+				03D54A6A23E3835F00C81CC2 /* StatsViewController.swift */,
 				03472D2623D9D9EB006443D3 /* CountryTableViewCell.xib */,
 				03472D2323D9BBE8006443D3 /* ListOfCountries.swift */,
 				03912DC523D08678008EF805 /* Country.swift */,
@@ -124,6 +127,9 @@
 				03912D9C23D0841B008EF805 /* Assets.xcassets */,
 				03912D9E23D0841B008EF805 /* LaunchScreen.storyboard */,
 				03912DA123D0841B008EF805 /* Info.plist */,
+				03E7994823E1A5E900AC25FE /* PlacesVisited.xcdatamodeld */,
+				03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */,
+				03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */,
 			);
 			path = PlacesVisited;
 			sourceTree = "<group>";
@@ -278,14 +284,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03912D9823D08418008EF805 /* ViewController.swift in Sources */,
 				03912D9423D08418008EF805 /* AppDelegate.swift in Sources */,
+				03D54A6923E37B4F00C81CC2 /* TableViewNavigationViewController.swift in Sources */,
 				03912D9623D08418008EF805 /* SceneDelegate.swift in Sources */,
+				03D54A6723E37B1200C81CC2 /* MainTabBarController.swift in Sources */,
 				03912DC623D08678008EF805 /* Country.swift in Sources */,
 				03472D2723D9D9EB006443D3 /* CountryTableViewCell.swift in Sources */,
+				03E7994A23E1A5E900AC25FE /* PlacesVisited.xcdatamodeld in Sources */,
 				03472D2223D9BA89006443D3 /* CountriesTableViewController.swift in Sources */,
+				03D54A6B23E3835F00C81CC2 /* StatsViewController.swift in Sources */,
 				03472D2423D9BBE8006443D3 /* ListOfCountries.swift in Sources */,
-				03912DC423D085AA008EF805 /* ViewControllerProgress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +467,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T4JVD9P46;
 				INFOPLIST_FILE = PlacesVisited/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -476,6 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T4JVD9P46;
 				INFOPLIST_FILE = PlacesVisited/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -608,6 +618,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		03E7994823E1A5E900AC25FE /* PlacesVisited.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				03E7994923E1A5E900AC25FE /* Model.xcdatamodel */,
+			);
+			currentVersion = 03E7994923E1A5E900AC25FE /* Model.xcdatamodel */;
+			path = PlacesVisited.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 03912D8823D08418008EF805 /* Project object */;
 }

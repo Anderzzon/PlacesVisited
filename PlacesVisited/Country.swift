@@ -7,22 +7,26 @@
 //
 
 import Foundation
+import CoreData
 
-class Country {
+@objc(Country)
+class Country: NSManagedObject {
     
-    let shortName: String
-    let fullName: String
-    let continent: String
-    let flagIcon: Character
-    var visited = false
-    var wantToGo = false
+    @NSManaged var shortName: String
+    @NSManaged var fullName: String
+    @NSManaged var continent: String
+    @NSManaged var flagIcon: String
+    @NSManaged var visited: Bool
+    @NSManaged var wantToGo: Bool
     
-    init(short:String, name:String, continent:String, flagIcon:Character) {
-        self.shortName = short
-        self.fullName = name
-        self.continent = continent
-        self.flagIcon = flagIcon
-    }
+//    init(short:String, name:String, continent:String, flagIcon:String) {
+//
+//
+//        self.shortName = short
+//        self.fullName = name
+//        self.continent = continent
+//        self.flagIcon = flagIcon
+//    }
     
     //Sets a country to visited or reverse that
     func visitCountry(visit: Bool ) {
@@ -30,11 +34,7 @@ class Country {
     }
     
     func toggleVisited() {
-        if self.visited == false {
-            visited = true
-        } else if self.visited == true {
-            visited = false
-        }
+         visited = !visited
     }
     
     func toggleWantToGo() {

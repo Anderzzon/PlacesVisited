@@ -7,8 +7,16 @@
 //
 
 import Foundation
+import CoreData
 
 class ListOfCountries {
+    
+    var managedContext : NSManagedObjectContext
+    
+    init(context: NSManagedObjectContext) {
+        managedContext = context
+    }
+    
     
     enum Continents: Int, CaseIterable {
         case Europe, Asia, NorthAmerica, Africa, SouthAmerica, Oceania
@@ -21,6 +29,84 @@ class ListOfCountries {
     private var countriesInSouthAmerica: [Country] = []
     private var countriesInOceania: [Country] = []
     
+    func createCountry(fullName:String, shortName:String, continent:String, flagIcon:String) {
+    
+        guard let entity = NSEntityDescription.entity(forEntityName: "Country", in: managedContext) else {return}
+
+        let country = Country(entity: entity, insertInto: managedContext)
+        
+        country.fullName = fullName
+        country.shortName = shortName
+        country.continent = continent
+        country.flagIcon = flagIcon
+        country.visited = false
+        country.wantToGo = false
+        
+      //  do {
+         //   try managedContext.save()
+        switch country.continent {
+        case "Europe":
+            countriesInEurope.append(country)
+            print("Adding country to Europe")
+        case "Asia":
+            countriesInAsia.append(country)
+            print("Adding country to Asia")
+        case "Africa":
+            countriesInAfrica.append(country)
+            print("Adding country to Africa")
+        case "North America":
+            countriesInNorthAmerica.append(country)
+            print("Adding country to North America")
+        case "South America":
+            countriesInSouthAmerica.append(country)
+            print("Adding country to South America")
+        case "Oceania":
+            countriesInOceania.append(country)
+            print("Adding country to Oceania")
+        default:
+            countriesInAsia.append(country)
+            print("appending country to default")
+        }
+//        } catch let error as NSError {
+//            print("Save error \(error)")
+//        }
+    }
+    
+    func loadItems() {
+
+        let fetchAsia = NSFetchRequest<Country>(entityName: "Country")
+        fetchAsia.predicate = NSPredicate(format: "continent == %@", "Asia")
+        
+        let fetchEurope = NSFetchRequest<Country>(entityName: "Country")
+        fetchEurope.predicate = NSPredicate(format: "continent == %@", "Europe")
+        
+
+        do {
+            countriesInAsia = try managedContext.fetch(fetchAsia)
+            countriesInEurope = try managedContext.fetch(fetchEurope)
+        } catch let error as NSError {
+            print("Could not fetch \(error)")
+        }
+    }
+    
+    //remove this function:?
+//    func add(country: Country, for continent: Continents) {
+//        //countries.append(country)
+//        switch continent {
+//        case .Africa:
+//            countriesInAfrica.append(country)
+//        case .Asia:
+//            countriesInAsia.append(country)
+//        case .Europe:
+//            countriesInEurope.append(country)
+//        case .NorthAmerica:
+//            countriesInNorthAmerica.append(country)
+//        case .SouthAmerica:
+//            countriesInSouthAmerica.append(country)
+//        case .Oceania:
+//            countriesInOceania.append(country)
+//        }
+//    }
     
     var totalNumberOfCountries:Int {
         var numberOfCountries = 0
@@ -138,24 +224,6 @@ class ListOfCountries {
             }
         }
         return numberOfCountriesNotVisited
-    }
-    
-    func add(country: Country, for continent: Continents) {
-        //countries.append(country)
-        switch continent {
-        case .Africa:
-            countriesInAfrica.append(country)
-        case .Asia:
-            countriesInAsia.append(country)
-        case .Europe:
-            countriesInEurope.append(country)
-        case .NorthAmerica:
-            countriesInNorthAmerica.append(country)
-        case .SouthAmerica:
-            countriesInSouthAmerica.append(country)
-        case .Oceania:
-            countriesInOceania.append(country)
-        }
     }
     
     func listOfCountries(for continent: Continents) -> [Country] {

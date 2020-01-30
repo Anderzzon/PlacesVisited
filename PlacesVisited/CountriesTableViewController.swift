@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class CountriesTableViewController: UITableViewController {
     
+   
+    
     let cellIdentity = "countryCell"
-    var countries = ListOfCountries()
+    var countries : ListOfCountries!
     //var countries: ListOfCountries
     
     private func continentsForSectionIndex(_ index: Int) -> ListOfCountries.Continents? {
@@ -27,28 +30,43 @@ class CountriesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        //let managedContext = appDelegate!.persistentContainer.viewContext
+        
+        //countries = ListOfCountries(context: managedContext)
+        
+        countries.loadItems()
+        
+     //   countries.createCountry(fullName:"Sweden", shortName:"Swe", continent:"Europe", flagIcon:"🇸🇪")
+      //  countries.createCountry(fullName:"China", shortName:"CHI", continent:"Asia", flagIcon:"🇨🇳")
+        
+        
+        
+        //White text on segment switcher:
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
         
-        countries.add(country: Country(short: "SWE", name: "Sweden", continent: "Europe", flagIcon: "🇸🇪"), for: .Europe)
-        countries.add(country: Country(short: "DEN", name: "Denmark", continent: "Europe", flagIcon: "🇩🇰"), for: .Europe)
-        countries.add(country: Country(short: "USA", name: "USA", continent: "North America", flagIcon: "🇺🇸"), for: .NorthAmerica)
-        countries.add(country: Country(short: "FRA", name: "France", continent: "Europe", flagIcon: "🇫🇷"), for: .Europe)
-        countries.add(country: Country(short: "THI", name: "Thailand", continent: "Asia", flagIcon: "🇹🇭"), for: .Asia)
         
-        countries.add(country: Country(short: "CHI", name: "China", continent: "Asia", flagIcon: "🇨🇳"), for: .Asia)
-        countries.add(country: Country(short: "FIN", name: "Finland", continent: "Europe", flagIcon: "🇫🇮"), for: .Europe)
-        countries.add(country: Country(short: "GER", name: "Germany", continent: "Europe", flagIcon: "🇩🇪"), for: .Europe)
-        countries.add(country: Country(short: "AUS", name: "Australia", continent: "Australia", flagIcon: "🇦🇺"), for: .Oceania)
-        countries.add(country: Country(short: "GRE", name: "Greece", continent: "Europe", flagIcon: "🇬🇷"), for: .Europe)
-        countries.add(country: Country(short: "BEL", name: "Belgium", continent: "Europe", flagIcon: "🇧🇪"), for: .Europe)
-        countries.add(country: Country(short: "SOA", name: "South Africa", continent: "Africa", flagIcon: "🇿🇦"), for: .Africa)
-        countries.add(country: Country(short: "EGY", name: "Egypt", continent: "Africa", flagIcon: "🇪🇬"), for: .Africa)
-        countries.add(country: Country(short: "SIN", name: "Singapore", continent: "Africa", flagIcon: "🇸🇬"), for: .Asia)
-        countries.add(country: Country(short: "BRZ", name: "Brazil", continent: "South America", flagIcon: "🇧🇷"), for: .SouthAmerica)
-        countries.add(country: Country(short: "PRU", name: "Peru", continent: "South America", flagIcon: "🇵🇪"), for: .SouthAmerica)
-        countries.add(country: Country(short: "ARG", name: "Argentina", continent: "South America", flagIcon: "🇦🇷"), for: .SouthAmerica)
-        countries.add(country: Country(short: "MEX", name: "Mexico", continent: "Notrh America", flagIcon: "🇲🇽"), for: .NorthAmerica)
-        countries.add(country: Country(short: "CAN", name: "Canada", continent: "Notrh America", flagIcon: "🇨🇦"), for: .NorthAmerica)
+        
+//        countries.add(country: Country(short: "SWE", name: "Sweden", continent: "Europe", flagIcon: "🇸🇪"), for: .Europe)
+//        countries.add(country: Country(short: "DEN", name: "Denmark", continent: "Europe", flagIcon: "🇩🇰"), for: .Europe)
+//        countries.add(country: Country(short: "USA", name: "USA", continent: "North America", flagIcon: "🇺🇸"), for: .NorthAmerica)
+//        countries.add(country: Country(short: "FRA", name: "France", continent: "Europe", flagIcon: "🇫🇷"), for: .Europe)
+//        countries.add(country: Country(short: "THI", name: "Thailand", continent: "Asia", flagIcon: "🇹🇭"), for: .Asia)
+//
+//        countries.add(country: Country(short: "CHI", name: "China", continent: "Asia", flagIcon: "🇨🇳"), for: .Asia)
+//        countries.add(country: Country(short: "FIN", name: "Finland", continent: "Europe", flagIcon: "🇫🇮"), for: .Europe)
+//        countries.add(country: Country(short: "GER", name: "Germany", continent: "Europe", flagIcon: "🇩🇪"), for: .Europe)
+//        countries.add(country: Country(short: "AUS", name: "Australia", continent: "Australia", flagIcon: "🇦🇺"), for: .Oceania)
+//        countries.add(country: Country(short: "GRE", name: "Greece", continent: "Europe", flagIcon: "🇬🇷"), for: .Europe)
+//        countries.add(country: Country(short: "BEL", name: "Belgium", continent: "Europe", flagIcon: "🇧🇪"), for: .Europe)
+//        countries.add(country: Country(short: "SOA", name: "South Africa", continent: "Africa", flagIcon: "🇿🇦"), for: .Africa)
+//        countries.add(country: Country(short: "EGY", name: "Egypt", continent: "Africa", flagIcon: "🇪🇬"), for: .Africa)
+//        countries.add(country: Country(short: "SIN", name: "Singapore", continent: "Africa", flagIcon: "🇸🇬"), for: .Asia)
+//        countries.add(country: Country(short: "BRZ", name: "Brazil", continent: "South America", flagIcon: "🇧🇷"), for: .SouthAmerica)
+//        countries.add(country: Country(short: "PRU", name: "Peru", continent: "South America", flagIcon: "🇵🇪"), for: .SouthAmerica)
+//        countries.add(country: Country(short: "ARG", name: "Argentina", continent: "South America", flagIcon: "🇦🇷"), for: .SouthAmerica)
+//        countries.add(country: Country(short: "MEX", name: "Mexico", continent: "Notrh America", flagIcon: "🇲🇽"), for: .NorthAmerica)
+//        countries.add(country: Country(short: "CAN", name: "Canada", continent: "Notrh America", flagIcon: "🇨🇦"), for: .NorthAmerica)
 
         let nib = UINib(nibName: "CountryTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentity)
@@ -61,6 +79,12 @@ class CountriesTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        countries.loadItems()
+        tableView.reloadData()
+        
+    }
 
     // MARK: - Table view data source
 
@@ -71,20 +95,20 @@ class CountriesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var title: String? = nil
         if let continent = continentsForSectionIndex(section) {
-            let percentVisited: Int = Int(countries.percentOfContinentVisited(for: continent))
+            //let percentVisited: Int = Int(countries.percentOfContinentVisited(for: continent))
             switch continent {
             case .Africa:
-                title = "Africa \(percentVisited)% visited"
+                title = "Africa"
             case .Asia:
-                title = "Asia \(percentVisited)% visited"
+                title = "Asia"
             case .Europe:
-                title = "Europe \(percentVisited)% visited"
+                title = "Europe"
             case .NorthAmerica:
-                title = "North America \(percentVisited)% visited"
+                title = "North America"
             case .SouthAmerica:
-                title = "South America \(percentVisited)% visited"
+                title = "South America"
             case .Oceania:
-                title = "Oceania (Australia) \(percentVisited)% visited"
+                title = "Oceania (Australia)"
             }
         }
         return title
@@ -227,6 +251,23 @@ class CountriesTableViewController: UITableViewController {
             }
     }
     
+//    func loadCountries() {
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+//
+//        let managedContext = appDelegate.persistentContainer.viewContext
+//
+//        let fetchRequest = NSFetchRequest<Country>(entityName: "Country")
+//
+//        do {
+//            countries = try managedContext.fetch(fetchRequest)
+//        } catch let error as NSError {
+//            print("Could not fetch \(error)")
+//        }
+//    }
+    
+
+    
+
    
     
 
