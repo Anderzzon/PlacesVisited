@@ -45,9 +45,6 @@ class CountriesTableViewController: UITableViewController {
         //White text on segment switcher:
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
         
-        
-        
-//        countries.add(country: Country(short: "SWE", name: "Sweden", continent: "Europe", flagIcon: "🇸🇪"), for: .Europe)
 //        countries.add(country: Country(short: "DEN", name: "Denmark", continent: "Europe", flagIcon: "🇩🇰"), for: .Europe)
 //        countries.add(country: Country(short: "USA", name: "USA", continent: "North America", flagIcon: "🇺🇸"), for: .NorthAmerica)
 //        countries.add(country: Country(short: "FRA", name: "France", continent: "Europe", flagIcon: "🇫🇷"), for: .Europe)
@@ -80,7 +77,7 @@ class CountriesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         countries.loadItems()
         tableView.reloadData()
         
@@ -189,8 +186,8 @@ class CountriesTableViewController: UITableViewController {
                         
                         print(item.visited)
                         print(countries.numberOfCountriesNotVisited)
-                        var world = countries.percentOfWorldVisited()
-                        var progress = countries.bucketListProgress()
+//                        var world = countries.percentOfWorldVisited()
+//                        var progress = countries.bucketListProgress()
                         
                         
                     case 1:
@@ -204,8 +201,8 @@ class CountriesTableViewController: UITableViewController {
                         
                         print(item.visited)
                         print(countries.numberOfCountriesNotVisited)
-                        var world = countries.percentOfWorldVisited()
-                        var progress = countries.bucketListProgress()
+//                        var world = countries.percentOfWorldVisited()
+//                        var progress = countries.bucketListProgress()
                         
                     default:
                         break

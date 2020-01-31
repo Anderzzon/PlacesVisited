@@ -106,10 +106,48 @@
                     <view key="view" contentMode="scaleToFill" id="GqS-8L-xX7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksS-R4-L6P">
+                                <rect key="frame" x="100" y="186" width="214" height="48"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My bucketlist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZJ-Ih-i9O">
+                                <rect key="frame" x="100" y="148" width="214" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ls-lz-zuy">
+                                <rect key="frame" x="100" y="246" width="214" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Dha-Te-uxf" firstAttribute="trailing" secondItem="ksS-R4-L6P" secondAttribute="trailing" constant="100" id="0a1-ZL-Ac8"/>
+                            <constraint firstItem="ksS-R4-L6P" firstAttribute="leading" secondItem="Dha-Te-uxf" secondAttribute="leading" constant="100" id="7qv-b4-zHW"/>
+                            <constraint firstItem="0ls-lz-zuy" firstAttribute="leading" secondItem="Dha-Te-uxf" secondAttribute="leading" constant="100" id="8fF-UD-Zzn"/>
+                            <constraint firstItem="ksS-R4-L6P" firstAttribute="centerX" secondItem="GqS-8L-xX7" secondAttribute="centerX" id="8qt-ZA-bdB"/>
+                            <constraint firstItem="Dha-Te-uxf" firstAttribute="trailing" secondItem="0ls-lz-zuy" secondAttribute="trailing" constant="100" id="943-ol-ZZp"/>
+                            <constraint firstItem="pZJ-Ih-i9O" firstAttribute="centerX" secondItem="GqS-8L-xX7" secondAttribute="centerX" id="C72-DN-Ohc"/>
+                            <constraint firstItem="Dha-Te-uxf" firstAttribute="trailing" secondItem="pZJ-Ih-i9O" secondAttribute="trailing" constant="100" id="Ciu-yA-qqj"/>
+                            <constraint firstItem="0ls-lz-zuy" firstAttribute="top" secondItem="ksS-R4-L6P" secondAttribute="bottom" constant="12" id="JV6-cW-avu"/>
+                            <constraint firstItem="0ls-lz-zuy" firstAttribute="centerX" secondItem="GqS-8L-xX7" secondAttribute="centerX" id="V7X-I1-H01"/>
+                            <constraint firstItem="ksS-R4-L6P" firstAttribute="top" secondItem="pZJ-Ih-i9O" secondAttribute="bottom" constant="14" id="Znl-jd-znW"/>
+                            <constraint firstItem="pZJ-Ih-i9O" firstAttribute="leading" secondItem="Dha-Te-uxf" secondAttribute="leading" constant="100" id="oSZ-pJ-NsF"/>
+                            <constraint firstItem="pZJ-Ih-i9O" firstAttribute="top" secondItem="Dha-Te-uxf" secondAttribute="top" constant="60" id="rYg-lA-A9k"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Dha-Te-uxf"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Progress" image="rosette" catalog="system" id="d1t-Bf-brI"/>
+                    <connections>
+                        <outlet property="bucketListCount" destination="0ls-lz-zuy" id="py7-SK-g2D"/>
+                        <outlet property="percentOfBucketListProgress" destination="ksS-R4-L6P" id="mMn-Cn-nqN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55Y-xV-4Pg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

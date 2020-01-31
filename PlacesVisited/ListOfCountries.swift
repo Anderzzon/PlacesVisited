@@ -80,10 +80,26 @@ class ListOfCountries {
         let fetchEurope = NSFetchRequest<Country>(entityName: "Country")
         fetchEurope.predicate = NSPredicate(format: "continent == %@", "Europe")
         
+        let fetchAfrica = NSFetchRequest<Country>(entityName: "Country")
+        fetchAfrica.predicate = NSPredicate(format: "continent == %@", "Africa")
+        
+        let fetchNorthAmerica = NSFetchRequest<Country>(entityName: "Country")
+        fetchNorthAmerica.predicate = NSPredicate(format: "continent == %@", "North America")
+        
+        let fetchSouthAmerica = NSFetchRequest<Country>(entityName: "Country")
+        fetchSouthAmerica.predicate = NSPredicate(format: "continent == %@", "South America")
+        
+        let fetchOceania = NSFetchRequest<Country>(entityName: "Country")
+        fetchOceania.predicate = NSPredicate(format: "continent == %@", "Oceania")
+        
 
         do {
             countriesInAsia = try managedContext.fetch(fetchAsia)
             countriesInEurope = try managedContext.fetch(fetchEurope)
+            countriesInAfrica = try managedContext.fetch(fetchAfrica)
+            countriesInNorthAmerica = try managedContext.fetch(fetchNorthAmerica)
+            countriesInSouthAmerica = try managedContext.fetch(fetchSouthAmerica)
+            countriesInOceania = try managedContext.fetch(fetchOceania)
         } catch let error as NSError {
             print("Could not fetch \(error)")
         }

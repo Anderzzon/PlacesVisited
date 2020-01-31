@@ -12,7 +12,9 @@ class StatsViewController: UIViewController {
     
     var countries : ListOfCountries!
     
-    @IBOutlet weak var percentOfWorldVisited: UILabel!
+    @IBOutlet weak var percentOfBucketListProgress: UILabel!
+    
+    @IBOutlet weak var bucketListCount: UILabel!
     
     
     private func continentsForSectionIndex(_ index: Int) -> ListOfCountries.Continents? {
@@ -24,14 +26,16 @@ class StatsViewController: UIViewController {
 
         countries.loadItems()
         print(countries.percentOfWorldVisited())
-        countries.createCountry(fullName: "Denmark", shortName: "DEN", continent: "Europe", flagIcon: "🇩🇰")
+        
+        
         // Do any additional setup after loading the view.
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         countries.loadItems()
-        
+        percentOfBucketListProgress.text = "\(countries.bucketListProgress())%"
+        bucketListCount.text = "\(countries.numberOfCountriesWantToGoTo) more to go"
         
         //var percentVisited = countries.percentOfWorldVisited()
         //percentOfWorldVisited.text = "You have visited \(percentVisited) of the world"
