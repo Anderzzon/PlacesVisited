@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PZg-aC-342">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -18,14 +18,14 @@
                         <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="countryCell" id="ckg-nA-erV">
-                                <rect key="frame" x="0.0" y="28" width="414" height="47.333332061767578"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="47.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ckg-nA-erV" id="luW-we-Lay">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="47.333332061767578"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="47.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5V-8D-YtT">
-                                            <rect key="frame" x="20" y="10.999999999999998" width="25" height="25.333333333333329"/>
+                                            <rect key="frame" x="20" y="11" width="25" height="25.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="Hbh-H0-ioH"/>
                                                 <constraint firstAttribute="height" constant="25" id="QUR-Ls-Aa4"/>
@@ -58,7 +58,7 @@
                     <navigationItem key="navigationItem" title="Countries" id="eYK-sp-m1Z">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="H5s-tD-l4a">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="7zX-cn-wGt">
-                                <rect key="frame" x="293" y="5.6666666666666679" width="101" height="33"/>
+                                <rect key="frame" x="271" y="5.5" width="123" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Been"/>
@@ -99,59 +99,82 @@
             </objects>
             <point key="canvasLocation" x="1880" y="106"/>
         </scene>
-        <!--Progress-->
+        <!--Your Progress-->
         <scene sceneID="hfy-HV-ldQ">
             <objects>
-                <viewController id="gZy-yp-Ngg" customClass="StatsViewController" customModule="PlacesVisited" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Your Progress" id="gZy-yp-Ngg" customClass="StatsViewController" customModule="PlacesVisited" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GqS-8L-xX7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksS-R4-L6P">
-                                <rect key="frame" x="100" y="186" width="214" height="48"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My bucketlist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZJ-Ih-i9O">
-                                <rect key="frame" x="100" y="148" width="214" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ls-lz-zuy">
-                                <rect key="frame" x="100" y="246" width="214" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYa-ce-GbU">
+                                <rect key="frame" x="0.0" y="88" width="414" height="414"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksS-R4-L6P">
+                                        <rect key="frame" x="156.5" y="183" width="101" height="48"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                        <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My bucketlist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZJ-Ih-i9O">
+                                        <rect key="frame" x="100" y="148.5" width="214" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ls-lz-zuy">
+                                        <rect key="frame" x="100" y="245" width="214" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="0ls-lz-zuy" firstAttribute="leading" secondItem="wYa-ce-GbU" secondAttribute="leading" constant="100" id="2uq-FZ-Dbq"/>
+                                    <constraint firstAttribute="width" secondItem="wYa-ce-GbU" secondAttribute="height" multiplier="1:1" id="4gN-mn-gcM"/>
+                                    <constraint firstItem="ksS-R4-L6P" firstAttribute="centerX" secondItem="wYa-ce-GbU" secondAttribute="centerX" id="BJw-Gr-2WN"/>
+                                    <constraint firstItem="ksS-R4-L6P" firstAttribute="top" secondItem="pZJ-Ih-i9O" secondAttribute="bottom" constant="14" id="ENr-sa-yUs"/>
+                                    <constraint firstItem="ksS-R4-L6P" firstAttribute="centerY" secondItem="wYa-ce-GbU" secondAttribute="centerY" id="PcX-lz-1xg"/>
+                                    <constraint firstItem="pZJ-Ih-i9O" firstAttribute="centerX" secondItem="wYa-ce-GbU" secondAttribute="centerX" id="SGk-vZ-HJU"/>
+                                    <constraint firstAttribute="trailing" secondItem="0ls-lz-zuy" secondAttribute="trailing" constant="100" id="Y0A-Qj-xVL"/>
+                                    <constraint firstItem="0ls-lz-zuy" firstAttribute="top" secondItem="ksS-R4-L6P" secondAttribute="bottom" constant="14" id="YSz-gP-4vH"/>
+                                    <constraint firstAttribute="trailing" secondItem="pZJ-Ih-i9O" secondAttribute="trailing" constant="100" id="ZUX-OF-GKS"/>
+                                    <constraint firstItem="0ls-lz-zuy" firstAttribute="centerX" secondItem="wYa-ce-GbU" secondAttribute="centerX" id="wHt-CU-R2d"/>
+                                    <constraint firstItem="pZJ-Ih-i9O" firstAttribute="leading" secondItem="wYa-ce-GbU" secondAttribute="leading" constant="100" id="yWq-u5-7KZ"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OeT-wS-h0V">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1ex-3t-tIb">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Your progress" id="Pdm-ON-uNS"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Dha-Te-uxf" firstAttribute="trailing" secondItem="ksS-R4-L6P" secondAttribute="trailing" constant="100" id="0a1-ZL-Ac8"/>
-                            <constraint firstItem="ksS-R4-L6P" firstAttribute="leading" secondItem="Dha-Te-uxf" secondAttribute="leading" constant="100" id="7qv-b4-zHW"/>
-                            <constraint firstItem="0ls-lz-zuy" firstAttribute="leading" secondItem="Dha-Te-uxf" secondAttribute="leading" constant="100" id="8fF-UD-Zzn"/>
-                            <constraint firstItem="ksS-R4-L6P" firstAttribute="centerX" secondItem="GqS-8L-xX7" secondAttribute="centerX" id="8qt-ZA-bdB"/>
-                            <constraint firstItem="Dha-Te-uxf" firstAttribute="trailing" secondItem="0ls-lz-zuy" secondAttribute="trailing" constant="100" id="943-ol-ZZp"/>
-                            <constraint firstItem="pZJ-Ih-i9O" firstAttribute="centerX" secondItem="GqS-8L-xX7" secondAttribute="centerX" id="C72-DN-Ohc"/>
-                            <constraint firstItem="Dha-Te-uxf" firstAttribute="trailing" secondItem="pZJ-Ih-i9O" secondAttribute="trailing" constant="100" id="Ciu-yA-qqj"/>
-                            <constraint firstItem="0ls-lz-zuy" firstAttribute="top" secondItem="ksS-R4-L6P" secondAttribute="bottom" constant="12" id="JV6-cW-avu"/>
-                            <constraint firstItem="0ls-lz-zuy" firstAttribute="centerX" secondItem="GqS-8L-xX7" secondAttribute="centerX" id="V7X-I1-H01"/>
-                            <constraint firstItem="ksS-R4-L6P" firstAttribute="top" secondItem="pZJ-Ih-i9O" secondAttribute="bottom" constant="14" id="Znl-jd-znW"/>
-                            <constraint firstItem="pZJ-Ih-i9O" firstAttribute="leading" secondItem="Dha-Te-uxf" secondAttribute="leading" constant="100" id="oSZ-pJ-NsF"/>
-                            <constraint firstItem="pZJ-Ih-i9O" firstAttribute="top" secondItem="Dha-Te-uxf" secondAttribute="top" constant="60" id="rYg-lA-A9k"/>
+                            <constraint firstItem="wYa-ce-GbU" firstAttribute="trailing" secondItem="Dha-Te-uxf" secondAttribute="trailing" id="PI0-gr-qRm"/>
+                            <constraint firstItem="wYa-ce-GbU" firstAttribute="leading" secondItem="Dha-Te-uxf" secondAttribute="leading" id="nWl-Oq-65x"/>
+                            <constraint firstItem="wYa-ce-GbU" firstAttribute="top" secondItem="Dha-Te-uxf" secondAttribute="top" id="suz-r0-eRP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dha-Te-uxf"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Progress" image="rosette" catalog="system" id="d1t-Bf-brI"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="bucketListCount" destination="0ls-lz-zuy" id="py7-SK-g2D"/>
                         <outlet property="percentOfBucketListProgress" destination="ksS-R4-L6P" id="mMn-Cn-nqN"/>
+                        <outlet property="statsView" destination="wYa-ce-GbU" id="snZ-tK-zMl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55Y-xV-4Pg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="889" y="898"/>
+            <point key="canvasLocation" x="888.40579710144937" y="897.99107142857133"/>
         </scene>
         <!--Countries-->
         <scene sceneID="85N-73-EEj">
