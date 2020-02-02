@@ -13,29 +13,71 @@ class StatsViewController: UIViewController {
     var countries : ListOfCountries!
     let shapeLayer = CAShapeLayer()
     let trackLayer = CAShapeLayer()
+    let countriesVisitedCircleLayer = CAShapeLayer()
+    let bucketListCircleLayer = CAShapeLayer()
+    let percentOfWorldCircleLayer = CAShapeLayer()
+    let smallTrackLayer = CAShapeLayer()
     
     @IBOutlet weak var statsView: UIView!
     
     @IBOutlet weak var percentOfBucketListProgress: UILabel!
-    
     @IBOutlet weak var bucketListCount: UILabel!
+
+    @IBOutlet weak var countriesVisited: UIView!
+    @IBOutlet weak var onYourBucketList: UIView!
+    @IBOutlet weak var percentOfTheWorld: UIView!
+    
+    @IBOutlet weak var numberOfCountriesVisitedLabel: UILabel!
+    @IBOutlet weak var numberOfCountriesOnBucketList: UILabel!
+    @IBOutlet weak var percentOfWorldVisited: UILabel!
     
     
-    private func continentsForSectionIndex(_ index: Int) -> ListOfCountries.Continents? {
-        return ListOfCountries.Continents(rawValue: index)
-    }
+    //Not used:
+//    let countriesVisitedLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = ""
+//        label.textAlignment = .center
+//        label.font = UIFont.boldSystemFont(ofSize: 20)
+//        label.textColor = .orange
+//        return label
+//    } ()
+//
+//    let bucketListLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "Bucket List"
+//        label.textAlignment = .center
+//        label.font = UIFont.boldSystemFont(ofSize: 20)
+//        label.textColor = .orange
+//        return label
+//    } ()
+//
+//    let percentOfWorldLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "% of world"
+//        label.textAlignment = .center
+//        label.font = UIFont.boldSystemFont(ofSize: 20)
+//        label.textColor = .orange
+//        return label
+//    } ()
+    
+    //?:
+//    private func continentsForSectionIndex(_ index: Int) -> ListOfCountries.Continents? {
+//        return ListOfCountries.Continents(rawValue: index)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         countries.loadItems()
-        print(countries.percentOfWorldVisited())
-        createCircle()
+        print(countries.percentOfWorldVisited()) //Bugtest
+        createBigCircle()
     
+        createSmallCircle(progressLayer: countriesVisitedCircleLayer, outletView: countriesVisited)
+        createSmallCircle(progressLayer: bucketListCircleLayer, outletView: onYourBucketList)
+        createSmallCircle(progressLayer: percentOfWorldCircleLayer, outletView: percentOfTheWorld)
+        
     }
 
-    
     override func viewWillAppear(_ animated: Bool) {
         
         countries.loadItems()
@@ -43,12 +85,31 @@ class StatsViewController: UIViewController {
         bucketListCount.text = "\(countries.numberOfCountriesWantToGoTo) more to go"
         
         animateCircle()
+        animatePercentOfWorldCircle()
+        
+        numberOfCountriesVisitedLabel.text = "\(countries.numberOfCountriesVisited)"
+        numberOfCountriesOnBucketList.text = "\(countries.numberOfCountriesWantToGoTo)"
+        percentOfWorldVisited.text = "\(countries.percentOfWorldVisited())%"
+        
+        //Cant get this to align correctly:
+//        view.addSubview(countriesVisitedLabel)
+//        countriesVisitedLabel.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+//        countriesVisitedLabel.center = countriesVisited.center
+//
+//        view.addSubview(bucketListLabel)
+//        bucketListLabel.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+//        bucketListLabel.center = onYourBucketList.center
+//
+//        view.addSubview(percentOfWorldLabel)
+//        percentOfWorldLabel.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+//        percentOfWorldLabel.center = percentOfTheWorld.center
+        
+        adjustNavigationBar() //Sets navigation bar to the correct color
         
     }
     
-    
-    
-    func createCircle() {
+    //Large circle at the top:
+    func createBigCircle() {
         //view.layer.addSublayer(shapeLayer)
         //let center = view.center
         let circularPath = UIBezierPath(arcCenter: .zero, radius: 120, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
@@ -81,6 +142,7 @@ class StatsViewController: UIViewController {
         view.layer.addSublayer(shapeLayer)
     }
     
+    //Animation for the big circle:
     func animateCircle() {
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         let percent = CGFloat(countries.bucketListProgress()/100)
@@ -93,6 +155,78 @@ class StatsViewController: UIViewController {
         basicAnimation.isRemovedOnCompletion = false
         
         shapeLayer.add(basicAnimation, forKey: "basic")
+    }
+    
+    func animatePercentOfWorldCircle() {
+        let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        let percent = CGFloat(countries.percentOfWorldVisited()/100)
+        
+        percentOfWorldCircleLayer.strokeEnd = 0
+        basicAnimation.toValue = percent
+        basicAnimation.duration = 0.8
+        
+        basicAnimation.fillMode = CAMediaTimingFillMode.forwards
+        basicAnimation.isRemovedOnCompletion = false
+        
+        percentOfWorldCircleLayer.add(basicAnimation, forKey: "basic")
+    }
+    
+    //small circles
+    func createSmallCircle(progressLayer: CAShapeLayer, outletView:UIView) {
+        //let center = outletView.center
+        let circularPath = UIBezierPath(arcCenter: .zero, radius: 40, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+        //let circularPath = UIBezierPath(arcCenter: center, radius: 40, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+        
+        smallTrackLayer.path = circularPath.cgPath
+        
+        smallTrackLayer.fillColor = .none
+        smallTrackLayer.strokeColor = UIColor.lightGray.cgColor
+        smallTrackLayer.lineWidth = 3
+        smallTrackLayer.lineCap = CAShapeLayerLineCap.round
+        smallTrackLayer.position.x = outletView.center.x
+        smallTrackLayer.position.y = outletView.center.y-44
+        
+        view.layer.addSublayer(smallTrackLayer)
+        
+        //let circularPathProgress = UIBezierPath(arcCenter: center, radius: 40, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+        progressLayer.path = circularPath.cgPath
+        
+        progressLayer.fillColor = .none
+        progressLayer.strokeColor = UIColor.orange.cgColor
+        progressLayer.lineWidth = 3
+        progressLayer.position.x = outletView.center.x
+        progressLayer.position.y = outletView.center.y-44
+        
+        progressLayer.transform = CATransform3DMakeRotation(-CGFloat.pi/2, 0, 0, 1)
+        
+        progressLayer.strokeEnd = 1
+
+        view.layer.addSublayer(progressLayer)
+    }
+    
+    func adjustNavigationBar() {
+        if #available(iOS 13.0, *) {
+            let app = UIApplication.shared
+            let statusBarHeight: CGFloat = app.statusBarFrame.size.height
+            
+            let statusbarView = UIView()
+            statusbarView.backgroundColor = UIColor.secondarySystemGroupedBackground
+            view.addSubview(statusbarView)
+          
+            statusbarView.translatesAutoresizingMaskIntoConstraints = false
+            statusbarView.heightAnchor
+                .constraint(equalToConstant: statusBarHeight).isActive = true
+            statusbarView.widthAnchor
+                .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
+            statusbarView.topAnchor
+                .constraint(equalTo: view.topAnchor).isActive = true
+            statusbarView.centerXAnchor
+                .constraint(equalTo: view.centerXAnchor).isActive = true
+          
+        } else {
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            statusBar?.backgroundColor = UIColor.lightGray
+        }
     }
 
     /*
