@@ -173,9 +173,7 @@ class StatsViewController: UIViewController {
     
     //small circles
     func createSmallCircle(progressLayer: CAShapeLayer, outletView:UIView) {
-        //let center = outletView.center
         let circularPath = UIBezierPath(arcCenter: .zero, radius: 40, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
-        //let circularPath = UIBezierPath(arcCenter: center, radius: 40, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
         
         smallTrackLayer.path = circularPath.cgPath
         
@@ -188,7 +186,6 @@ class StatsViewController: UIViewController {
         
         view.layer.addSublayer(smallTrackLayer)
         
-        //let circularPathProgress = UIBezierPath(arcCenter: center, radius: 40, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
         progressLayer.path = circularPath.cgPath
         
         progressLayer.fillColor = .none
