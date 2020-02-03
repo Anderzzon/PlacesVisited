@@ -92,6 +92,7 @@ class ListOfCountries {
         let fetchOceania = NSFetchRequest<Country>(entityName: "Country")
         fetchOceania.predicate = NSPredicate(format: "continent == %@", "Oceania")
         
+        let fetchALL = NSFetchRequest<Country>(entityName: "Country")
 
         do {
             countriesInAsia = try managedContext.fetch(fetchAsia)
@@ -100,10 +101,70 @@ class ListOfCountries {
             countriesInNorthAmerica = try managedContext.fetch(fetchNorthAmerica)
             countriesInSouthAmerica = try managedContext.fetch(fetchSouthAmerica)
             countriesInOceania = try managedContext.fetch(fetchOceania)
+            countriesInEurope = try managedContext.fetch(fetchALL)
+            
         } catch let error as NSError {
             print("Could not fetch \(error)")
         }
     }
+    
+    func updateVisit(country: Country, index: Int) {
+        let fetchRequest:NSFetchRequest<Country> = NSFetchRequest.init(entityName: "Country")
+        fetchRequest.predicate = NSPredicate(format: "fullName = %@", "\(country.fullName)")
+        do
+        {
+            let test = try managedContext.fetch(fetchRequest)
+                let objectUpdate = test[index] as! NSManagedObject
+            
+            if country.visited == false {
+            objectUpdate.setValue(true, forKey: "visited")
+                print("Cuntry visit updated to TRUE")
+            } else {
+                objectUpdate.setValue(false, forKey: "visited")
+                print("Cuntry visit updated to FALSE")
+            }
+ 
+            do {
+                try managedContext.save()
+                print("Visited saved!")
+            }
+            catch {
+                print(error)
+            }
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    func updateWantToGo(country: Country, index: Int) {
+           let fetchRequest:NSFetchRequest<Country> = NSFetchRequest.init(entityName: "Country")
+           fetchRequest.predicate = NSPredicate(format: "fullName = %@", "\(country.fullName)")
+           do
+           {
+               let test = try managedContext.fetch(fetchRequest)
+                   let objectUpdate = test[index] as! NSManagedObject
+               
+               if country.wantToGo == false {
+               objectUpdate.setValue(true, forKey: "wantToGo")
+                   print("Cuntry want to go updated to TRUE")
+               } else {
+                   objectUpdate.setValue(false, forKey: "wantToGo")
+                   print("Cuntry want to go updated to FALSE")
+               }
+    
+               do {
+                   try managedContext.save()
+                   print("Want to go saved!")
+               }
+               catch {
+                   print(error)
+               }
+           }
+           catch {
+               print(error)
+           }
+       }
     
     //remove this function:?
 //    func add(country: Country, for continent: Continents) {

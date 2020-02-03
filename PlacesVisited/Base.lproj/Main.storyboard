@@ -62,7 +62,7 @@
                                 <rect key="frame" x="271" y="5.6666666666666679" width="123" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Been"/>
+                                    <segment title="Visited"/>
                                     <segment title="Want"/>
                                 </segments>
                                 <color key="selectedSegmentTintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -74,6 +74,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="navigationBar" destination="eYK-sp-m1Z" id="FXK-Ge-1oT"/>
                         <outlet property="segmentControl" destination="7zX-cn-wGt" id="G2O-hu-t5t"/>
                     </connections>
                 </tableViewController>

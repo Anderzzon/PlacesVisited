@@ -20,11 +20,11 @@ class MainTabBarController: UITabBarController {
            
            countries = ListOfCountries(context: managedContext)
            
-           //countries.loadItems()
+           countries.loadItems()
            
-        countries.createCountry(fullName:"Sweden", shortName:"SWE", continent:"Europe", flagIcon:"🇸🇪")
-        countries.createCountry(fullName: "Denmark", shortName: "DEN", continent: "Europe", flagIcon: "🇩🇰")
-        countries.createCountry(fullName:"China", shortName:"CHI", continent:"Asia", flagIcon:"🇨🇳")
+        //countries.createCountry(fullName:"Sweden", shortName:"SWE", continent:"Europe", flagIcon:"🇸🇪")
+        //countries.createCountry(fullName: "Denmark", shortName: "DEN", continent: "Europe", flagIcon: "🇩🇰")
+        //countries.createCountry(fullName:"China", shortName:"CHI", continent:"Asia", flagIcon:"🇨🇳")
         
         
         guard let viewControllers = viewControllers else {return}

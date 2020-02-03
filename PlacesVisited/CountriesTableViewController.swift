@@ -26,6 +26,8 @@ class CountriesTableViewController: UITableViewController {
     @IBAction func SegmentBeenVsWant(_ sender: Any) {
         tableView.reloadData()
     }
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +37,8 @@ class CountriesTableViewController: UITableViewController {
         
         //countries = ListOfCountries(context: managedContext)
         
-        countries.loadItems()
+        //Not needed?:
+        //countries.loadItems()
         
      //   countries.createCountry(fullName:"Sweden", shortName:"Swe", continent:"Europe", flagIcon:"🇸🇪")
       //  countries.createCountry(fullName:"China", shortName:"CHI", continent:"Asia", flagIcon:"🇨🇳")
@@ -78,8 +81,18 @@ class CountriesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        countries.loadItems()
+        //countries.loadItems()
         tableView.reloadData()
+        
+        //Fix this:
+        switch segmentControl.selectedSegmentIndex {
+            case 0:
+                self.title = "Visited countries"
+            case 1:
+                self.title = "Bucket list"
+            default:
+                self.title = "countries"
+        }
         
     }
 
@@ -146,7 +159,8 @@ class CountriesTableViewController: UITableViewController {
                 let item = items[indexPath.row]
                 
                 cell.countryFullNameLabel?.text = item.fullName
-                cell.flagLabel?.text = String(item.flagIcon)
+                cell.flagLabel?.text = String(indexPath.row)
+                //cell.flagLabel?.text = String(item.flagIcon)
                 
                 configureCheckmark(for: cell, with: item)
             }
@@ -171,21 +185,21 @@ class CountriesTableViewController: UITableViewController {
             if let cell = tableView.cellForRow(at: indexPath) {
                 if let continent = continentsForSectionIndex(indexPath.section) {
                     
-                    
                     switch segmentControl.selectedSegmentIndex {
                     case 0:
                         let items = countries.listOfCountries(for: continent)
                         let item = items[indexPath.row]
                         
-                        item.toggleVisited()
+                        //item.toggleVisited()
+                        countries.updateVisit(country: item, index: indexPath.row)
                         
                         configureCheckmark(for: cell, with: item)
                         tableView.deselectRow(at: indexPath, animated: true)
                         tableView.reloadData()
                         
                         
-                        print(item.visited)
-                        print(countries.numberOfCountriesNotVisited)
+                        print("\(item.fullName) set to: \(item.visited)")
+                        
 //                        var world = countries.percentOfWorldVisited()
 //                        var progress = countries.bucketListProgress()
                         
@@ -194,13 +208,12 @@ class CountriesTableViewController: UITableViewController {
                         let items = countries.listOfCountriesNotVisited(for: continent)
                         let item = items[indexPath.row]
                         
-                        item.toggleWantToGo()
+                        //item.toggleWantToGo()
+                        countries.updateWantToGo(country: item, index: indexPath.row)
                         
                         configureCheckmarkWantTo(for: cell, with: item)
                         tableView.deselectRow(at: indexPath, animated: true)
                         
-                        print(item.visited)
-                        print(countries.numberOfCountriesNotVisited)
 //                        var world = countries.percentOfWorldVisited()
 //                        var progress = countries.bucketListProgress()
                         
