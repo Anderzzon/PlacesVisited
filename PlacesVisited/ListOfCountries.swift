@@ -17,7 +17,6 @@ class ListOfCountries {
         managedContext = context
     }
     
-    
     enum Continents: Int, CaseIterable {
         case Europe, Asia, NorthAmerica, Africa, SouthAmerica, Oceania
     }
@@ -42,8 +41,8 @@ class ListOfCountries {
         country.visited = false
         country.wantToGo = false
         
-      //  do {
-         //   try managedContext.save()
+        do {
+            try managedContext.save()
         switch country.continent {
         case "Europe":
             countriesInEurope.append(country)
@@ -67,9 +66,40 @@ class ListOfCountries {
             countriesInAsia.append(country)
             print("appending country to default")
         }
+        } catch let error as NSError {
+            print("Save error \(error)")
+        }
+    }
+    
+//    func resetAllRecords() // entity = Your_Entity_Name
+//    {
+//        let deleteFetch = NSFetchRequest<Country>(entityName: "Country")
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch as! NSFetchRequest<NSFetchRequestResult>)
+//
+//        do {
+//            try myPersistentStoreCoordinator.executeRequest(deleteRequest, withContext: "name")
 //        } catch let error as NSError {
-//            print("Save error \(error)")
+//            // TODO: handle the error
 //        }
+//    }
+    
+    func deleteData() {
+        let fetchRequest = NSFetchRequest<Country>(entityName: "Country")
+           fetchRequest.returnsObjectsAsFaults = false
+
+           do
+           {
+               let results = try managedContext.fetch(fetchRequest)
+               for managedObject in results
+               {
+                    let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
+                    managedContext.delete(managedObjectData)
+                    try managedContext.save()
+                
+               }
+           } catch let error as NSError {
+               print("Detele all my data in, error : \(error) \(error.userInfo)")
+           }
     }
     
     func loadItems() {
@@ -92,7 +122,7 @@ class ListOfCountries {
         let fetchOceania = NSFetchRequest<Country>(entityName: "Country")
         fetchOceania.predicate = NSPredicate(format: "continent == %@", "Oceania")
         
-        let fetchALL = NSFetchRequest<Country>(entityName: "Country")
+        //let fetchALL = NSFetchRequest<Country>(entityName: "Country")
 
         do {
             countriesInAsia = try managedContext.fetch(fetchAsia)
@@ -101,7 +131,7 @@ class ListOfCountries {
             countriesInNorthAmerica = try managedContext.fetch(fetchNorthAmerica)
             countriesInSouthAmerica = try managedContext.fetch(fetchSouthAmerica)
             countriesInOceania = try managedContext.fetch(fetchOceania)
-            countriesInEurope = try managedContext.fetch(fetchALL)
+            //countriesInEurope = try managedContext.fetch(fetchALL)
             
         } catch let error as NSError {
             print("Could not fetch \(error)")
@@ -114,7 +144,7 @@ class ListOfCountries {
         do
         {
             let test = try managedContext.fetch(fetchRequest)
-                let objectUpdate = test[index] as! NSManagedObject
+                let objectUpdate = test[0] as! NSManagedObject
             
             if country.visited == false {
             objectUpdate.setValue(true, forKey: "visited")
@@ -123,7 +153,6 @@ class ListOfCountries {
                 objectUpdate.setValue(false, forKey: "visited")
                 print("Cuntry visit updated to FALSE")
             }
- 
             do {
                 try managedContext.save()
                 print("Visited saved!")
@@ -143,7 +172,7 @@ class ListOfCountries {
            do
            {
                let test = try managedContext.fetch(fetchRequest)
-                   let objectUpdate = test[index] as! NSManagedObject
+                   let objectUpdate = test[0] as! NSManagedObject
                
                if country.wantToGo == false {
                objectUpdate.setValue(true, forKey: "wantToGo")
@@ -152,7 +181,6 @@ class ListOfCountries {
                    objectUpdate.setValue(false, forKey: "wantToGo")
                    print("Cuntry want to go updated to FALSE")
                }
-    
                do {
                    try managedContext.save()
                    print("Want to go saved!")
@@ -165,6 +193,8 @@ class ListOfCountries {
                print(error)
            }
        }
+    
+
     
     //remove this function:?
 //    func add(country: Country, for continent: Continents) {

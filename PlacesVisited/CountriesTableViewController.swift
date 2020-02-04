@@ -24,6 +24,14 @@ class CountriesTableViewController: UITableViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     @IBAction func SegmentBeenVsWant(_ sender: Any) {
+        switch segmentControl.selectedSegmentIndex {
+            case 0:
+                self.title = "Visited countries"
+            case 1:
+                self.title = "Bucket list"
+            default:
+                self.title = "countries"
+        }
         tableView.reloadData()
     }
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -34,39 +42,14 @@ class CountriesTableViewController: UITableViewController {
         
         //let appDelegate = UIApplication.shared.delegate as? AppDelegate
         //let managedContext = appDelegate!.persistentContainer.viewContext
-        
         //countries = ListOfCountries(context: managedContext)
         
         //Not needed?:
         //countries.loadItems()
         
-     //   countries.createCountry(fullName:"Sweden", shortName:"Swe", continent:"Europe", flagIcon:"🇸🇪")
-      //  countries.createCountry(fullName:"China", shortName:"CHI", continent:"Asia", flagIcon:"🇨🇳")
-        
-        
-        
         //White text on segment switcher:
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
-        
-//        countries.add(country: Country(short: "DEN", name: "Denmark", continent: "Europe", flagIcon: "🇩🇰"), for: .Europe)
-//        countries.add(country: Country(short: "USA", name: "USA", continent: "North America", flagIcon: "🇺🇸"), for: .NorthAmerica)
-//        countries.add(country: Country(short: "FRA", name: "France", continent: "Europe", flagIcon: "🇫🇷"), for: .Europe)
-//        countries.add(country: Country(short: "THI", name: "Thailand", continent: "Asia", flagIcon: "🇹🇭"), for: .Asia)
-//
-//        countries.add(country: Country(short: "CHI", name: "China", continent: "Asia", flagIcon: "🇨🇳"), for: .Asia)
-//        countries.add(country: Country(short: "FIN", name: "Finland", continent: "Europe", flagIcon: "🇫🇮"), for: .Europe)
-//        countries.add(country: Country(short: "GER", name: "Germany", continent: "Europe", flagIcon: "🇩🇪"), for: .Europe)
-//        countries.add(country: Country(short: "AUS", name: "Australia", continent: "Australia", flagIcon: "🇦🇺"), for: .Oceania)
-//        countries.add(country: Country(short: "GRE", name: "Greece", continent: "Europe", flagIcon: "🇬🇷"), for: .Europe)
-//        countries.add(country: Country(short: "BEL", name: "Belgium", continent: "Europe", flagIcon: "🇧🇪"), for: .Europe)
-//        countries.add(country: Country(short: "SOA", name: "South Africa", continent: "Africa", flagIcon: "🇿🇦"), for: .Africa)
-//        countries.add(country: Country(short: "EGY", name: "Egypt", continent: "Africa", flagIcon: "🇪🇬"), for: .Africa)
-//        countries.add(country: Country(short: "SIN", name: "Singapore", continent: "Africa", flagIcon: "🇸🇬"), for: .Asia)
-//        countries.add(country: Country(short: "BRZ", name: "Brazil", continent: "South America", flagIcon: "🇧🇷"), for: .SouthAmerica)
-//        countries.add(country: Country(short: "PRU", name: "Peru", continent: "South America", flagIcon: "🇵🇪"), for: .SouthAmerica)
-//        countries.add(country: Country(short: "ARG", name: "Argentina", continent: "South America", flagIcon: "🇦🇷"), for: .SouthAmerica)
-//        countries.add(country: Country(short: "MEX", name: "Mexico", continent: "Notrh America", flagIcon: "🇲🇽"), for: .NorthAmerica)
-//        countries.add(country: Country(short: "CAN", name: "Canada", continent: "Notrh America", flagIcon: "🇨🇦"), for: .NorthAmerica)
+
 
         let nib = UINib(nibName: "CountryTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentity)
@@ -83,8 +66,7 @@ class CountriesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         //countries.loadItems()
         tableView.reloadData()
-        
-        //Fix this:
+
         switch segmentControl.selectedSegmentIndex {
             case 0:
                 self.title = "Visited countries"
@@ -93,7 +75,6 @@ class CountriesTableViewController: UITableViewController {
             default:
                 self.title = "countries"
         }
-        
     }
 
     // MARK: - Table view data source
@@ -159,8 +140,9 @@ class CountriesTableViewController: UITableViewController {
                 let item = items[indexPath.row]
                 
                 cell.countryFullNameLabel?.text = item.fullName
-                cell.flagLabel?.text = String(indexPath.row)
-                //cell.flagLabel?.text = String(item.flagIcon)
+                //Test:
+                //cell.flagLabel?.text = String(indexPath.row)
+                cell.flagLabel?.text = String(item.flagIcon)
                 
                 configureCheckmark(for: cell, with: item)
             }
@@ -213,6 +195,9 @@ class CountriesTableViewController: UITableViewController {
                         
                         configureCheckmarkWantTo(for: cell, with: item)
                         tableView.deselectRow(at: indexPath, animated: true)
+                        tableView.reloadData()
+                        
+                        print("\(item.fullName) set to: \(item.wantToGo)")
                         
 //                        var world = countries.percentOfWorldVisited()
 //                        var progress = countries.bucketListProgress()

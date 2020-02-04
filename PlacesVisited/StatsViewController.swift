@@ -68,6 +68,8 @@ class StatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        statusBar()
+        
         countries.loadItems()
         print(countries.percentOfWorldVisited()) //Bugtest
         createBigCircle()
@@ -104,7 +106,7 @@ class StatsViewController: UIViewController {
 //        percentOfWorldLabel.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
 //        percentOfWorldLabel.center = percentOfTheWorld.center
         
-        adjustNavigationBar() //Sets navigation bar to the correct color
+        //adjustNavigationBar() //Sets navigation bar to the correct color
         
     }
     
@@ -223,6 +225,18 @@ class StatsViewController: UIViewController {
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
             statusBar?.backgroundColor = UIColor.lightGray
+        }
+    }
+    
+    func statusBar() {
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundColor = UIColor.secondarySystemGroupedBackground
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }
     }
 
