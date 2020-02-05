@@ -68,7 +68,8 @@ class StatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        statusBar()
+        //statusBar()
+        //adjustNavigationBar()
         
         countries.loadItems()
         print(countries.percentOfWorldVisited()) //Bugtest
@@ -209,7 +210,8 @@ class StatsViewController: UIViewController {
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.secondarySystemGroupedBackground
+            let color = UIColor(red: 249/256, green: 248/256, blue: 248/256, alpha: 1)
+            statusbarView.backgroundColor = color
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -224,17 +226,19 @@ class StatsViewController: UIViewController {
           
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = UIColor.lightGray
+            statusBar?.backgroundColor = UIColor.lightText
         }
     }
     
     func statusBar() {
         if #available(iOS 13.0, *) {
+            
+            let color = UIColor(red: 249/256, green: 248/256, blue: 248/256, alpha: 1)
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = UIColor.secondarySystemGroupedBackground
+            navBarAppearance.backgroundColor = color
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }
