@@ -21,6 +21,7 @@ class MainTabBarController: UITabBarController {
            countries = ListOfCountries(context: managedContext)
         
         //countries.deleteData()
+        
         //Run this to create all countries:
         //createDatabase()
         

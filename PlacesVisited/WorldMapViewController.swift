@@ -99,21 +99,25 @@ class WorldMapViewController: UIViewController {
         olandPoints.append(CLLocationCoordinate2DMake(56.424689, 16.390445))
         olandPoints.append(CLLocationCoordinate2DMake(56.420206, 16.405497))
         olandPoints.append(CLLocationCoordinate2DMake(56.270756, 16.396896))
-        let olandPolygon = MKPolygon(coordinates: &olandPoints, count: olandPoints.count)
         
-        let polygon = MKPolygon(coordinates: &points, count: points.count)
+        let olandPolygon = MKPolygon(coordinates: &olandPoints, count: olandPoints.count)
+        let skanePolygon = MKPolygon(coordinates: &points, count: points.count)
+        
         let interiorPolygon = MKPolygon(coordinates: &interiorPoints, count: interiorPoints.count)
         
         let finalPolygon = MKPolygon(coordinates: &points, count: points.count, interiorPolygons: [interiorPolygon])
-        mapView.addOverlay(finalPolygon)
-        mapView.addOverlay(olandPolygon)
+        
+        let combined:[MKPolygon] = [olandPolygon, skanePolygon]
+        
+        let multPolygon = MKMultiPolygon(combined)
+        //mapView.addOverlay(finalPolygon)
+        //mapView.addOverlay(olandPolygon)
+        //mapView.addOverlay(finalPolygon, level: .aboveRoads)
+        mapView.addOverlays(combined, level: .aboveRoads)
         
 
     }
     
-    
-
-
     /*
     // MARK: - Navigation
 
@@ -136,8 +140,5 @@ extension WorldMapViewController: MKMapViewDelegate {
             polyRenderer.lineWidth = 0.3
             
             return polyRenderer
-
     }
-    
-    
 }
