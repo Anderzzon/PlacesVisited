@@ -16,7 +16,14 @@ class WorldMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mapView.delegate = self
+        
+        //Read json:
+        if let json = readJSONFromFile(fileName: "CountriesClean") as? [String : Any] {
+            let c = CountryGeo(json: json )
+            
+        }
         
         let location = CLLocation(latitude: 55.663255, longitude:   13.597545)
         let regionRadius: CLLocationDistance = 5000000.0
@@ -50,7 +57,6 @@ class WorldMapViewController: UIViewController {
         interiorPoints.append(CLLocationCoordinate2DMake(55.699631, 13.554247))
         interiorPoints.append(CLLocationCoordinate2DMake(55.683915, 13.553619))
         interiorPoints.append(CLLocationCoordinate2DMake(55.676655, 13.559500))
-        
         
         points.append(CLLocationCoordinate2DMake(55.406937, 12.888584))
         points.append(CLLocationCoordinate2DMake(55.360394, 13.367504))
@@ -115,8 +121,23 @@ class WorldMapViewController: UIViewController {
         //mapView.addOverlay(finalPolygon, level: .aboveRoads)
         mapView.addOverlays(combined, level: .aboveRoads)
         
-
     }
+    
+    func readJSONFromFile(fileName: String) -> Any? {
+        var json: Any?
+        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+            do {
+                let fileUrl = URL(fileURLWithPath: path)
+                // Getting data from JSON file using the file URL
+                let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
+                json = try? JSONSerialization.jsonObject(with: data)
+            } catch {
+                // Handle error here
+            }
+        }
+        return json
+    }
+    
     
     /*
     // MARK: - Navigation
