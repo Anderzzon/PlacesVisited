@@ -25,18 +25,30 @@ class CountryGeo {
         
         let polygons = coordinates?[0] as? [Any]
         
+        
+        
+        
         for coord in polygons! {
             let c = coord as? [Double]
             
             //let co = CLLocationCoordinate2D(latitude: (c?[0])!, longitude: (c?[1])!)
-            let co = CLLocationCoordinate2DMake((c?[0])!, (c?[1])!)
             
-            points.append(co)
+//            let co = CLLocationCoordinate2DMake((c?[0])!, (c?[1])!)
+            
+            let co = [c?[0], c?[1]]
+            
+            points.append(CLLocationCoordinate2DMake((c?[1])!, (c?[0])!))
+            print(co)
         }
 
         
     }
     
+    func borderPoints() -> MKPolygon {
+
+        let borderPoints = MKPolygon(coordinates: &points, count: points.count)
+        return borderPoints
+    }
     
     
 }
