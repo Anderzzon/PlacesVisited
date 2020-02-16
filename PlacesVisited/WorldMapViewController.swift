@@ -12,6 +12,7 @@ import MapKit
 class WorldMapViewController: UIViewController {
 
     var countries : ListOfCountries!
+    //var countryOverlays: []
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -31,16 +32,45 @@ class WorldMapViewController: UIViewController {
     
     private func produceOverlay() {
         
+        //Öland, test:
+        var olandPoints: [CLLocationCoordinate2D] = []
+        olandPoints.append(CLLocationCoordinate2DMake(56.203388, 16.406799))
+        olandPoints.append(CLLocationCoordinate2DMake(56.234254, 16.476919))
+        olandPoints.append(CLLocationCoordinate2DMake(56.557653, 16.640534))
+        olandPoints.append(CLLocationCoordinate2DMake(56.586625, 16.696046))
+        olandPoints.append(CLLocationCoordinate2DMake(56.801604, 16.786619))
+        olandPoints.append(CLLocationCoordinate2DMake(56.836782, 16.865504))
+        olandPoints.append(CLLocationCoordinate2DMake(57.180413, 17.070023))
+        olandPoints.append(CLLocationCoordinate2DMake(57.284779, 17.061258))
+        olandPoints.append(CLLocationCoordinate2DMake(57.311613, 17.140143))
+        olandPoints.append(CLLocationCoordinate2DMake(57.366799, 17.070023))
+        olandPoints.append(CLLocationCoordinate2DMake(57.286358, 16.956077))
+        olandPoints.append(CLLocationCoordinate2DMake(57.226307, 16.964842))
+        olandPoints.append(CLLocationCoordinate2DMake(56.932553, 16.734028))
+        olandPoints.append(CLLocationCoordinate2DMake(56.881591, 16.715309))
+        olandPoints.append(CLLocationCoordinate2DMake(56.884483, 16.649605))
+        olandPoints.append(CLLocationCoordinate2DMake(56.526536, 16.382762))
+        olandPoints.append(CLLocationCoordinate2DMake(56.424689, 16.390445))
+        olandPoints.append(CLLocationCoordinate2DMake(56.420206, 16.405497))
+        olandPoints.append(CLLocationCoordinate2DMake(56.270756, 16.396896))
+        let olandPolygon = MKPolygon(coordinates: &olandPoints, count: olandPoints.count)
+        
         //Read json:
         if let json = readJSONFromFile(fileName: "CountriesClean") as? [String : Any] {
-            let c = CountryGeo(json: json )
+            let country = CountryGeo(json: json )
             //print(c.name)
             //print(c.points)
 
-            let aruba = MKPolygon(coordinates: &c.points, count: c.points.count)
-            print(c.points)
-
-            mapView.addOverlay(aruba, level: .aboveRoads)
+//            let countryPoints = MKPolygon(coordinates: &country.points, count: country.points.count)
+//
+//            var overlays:[MKPolygon] = []
+//            overlays.append(countryPoints)
+            
+            let overlays = country.polygons
+            
+        
+            mapView.addOverlays(overlays, level: .aboveRoads)
+            
 
 
         }
@@ -85,7 +115,6 @@ class WorldMapViewController: UIViewController {
 //        mapView.addOverlay(arubaPolygon)
         
         var points: [CLLocationCoordinate2D] = []
-        var olandPoints: [CLLocationCoordinate2D] = []
         
         var interiorPoints: [CLLocationCoordinate2D] = []
         
@@ -127,28 +156,7 @@ class WorldMapViewController: UIViewController {
         points.append(CLLocationCoordinate2DMake(55.594018, 12.925559))
         points.append(CLLocationCoordinate2DMake(55.559618, 12.898512))
         
-        //Öland:
-        olandPoints.append(CLLocationCoordinate2DMake(56.203388, 16.406799))
-        olandPoints.append(CLLocationCoordinate2DMake(56.234254, 16.476919))
-        olandPoints.append(CLLocationCoordinate2DMake(56.557653, 16.640534))
-        olandPoints.append(CLLocationCoordinate2DMake(56.586625, 16.696046))
-        olandPoints.append(CLLocationCoordinate2DMake(56.801604, 16.786619))
-        olandPoints.append(CLLocationCoordinate2DMake(56.836782, 16.865504))
-        olandPoints.append(CLLocationCoordinate2DMake(57.180413, 17.070023))
-        olandPoints.append(CLLocationCoordinate2DMake(57.284779, 17.061258))
-        olandPoints.append(CLLocationCoordinate2DMake(57.311613, 17.140143))
-        olandPoints.append(CLLocationCoordinate2DMake(57.366799, 17.070023))
-        olandPoints.append(CLLocationCoordinate2DMake(57.286358, 16.956077))
-        olandPoints.append(CLLocationCoordinate2DMake(57.226307, 16.964842))
-        olandPoints.append(CLLocationCoordinate2DMake(56.932553, 16.734028))
-        olandPoints.append(CLLocationCoordinate2DMake(56.881591, 16.715309))
-        olandPoints.append(CLLocationCoordinate2DMake(56.884483, 16.649605))
-        olandPoints.append(CLLocationCoordinate2DMake(56.526536, 16.382762))
-        olandPoints.append(CLLocationCoordinate2DMake(56.424689, 16.390445))
-        olandPoints.append(CLLocationCoordinate2DMake(56.420206, 16.405497))
-        olandPoints.append(CLLocationCoordinate2DMake(56.270756, 16.396896))
-        
-        let olandPolygon = MKPolygon(coordinates: &olandPoints, count: olandPoints.count)
+
         let skanePolygon = MKPolygon(coordinates: &points, count: points.count)
         
         let interiorPolygon = MKPolygon(coordinates: &interiorPoints, count: interiorPoints.count)
@@ -198,19 +206,12 @@ extension WorldMapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
-        if overlay is MKPolygon {
             let polyRenderer = MKPolygonRenderer(overlay: overlay)
             polyRenderer.strokeColor = UIColor.black
             polyRenderer.fillColor = UIColor.green
             polyRenderer.lineWidth = 0.3
             
             return polyRenderer
-        
-        } else {
-            let polyline = MKPolylineRenderer(overlay: overlay)
-            polyline.strokeColor = UIColor.blue
-            return polyline
-        }
         
         
     }

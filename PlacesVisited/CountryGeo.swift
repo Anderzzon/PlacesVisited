@@ -10,23 +10,24 @@ import Foundation
 import MapKit
 
 class CountryGeo {
-    var name : String?
+    var isoA3 : String?
     var points: [CLLocationCoordinate2D] = []
+    var polygons: [MKPolygon] = []
     
     
     init(json: [String: Any]) {
+        
+        for country in json {
+        
         let property = json["properties"] as? [String : Any]
               
-        name = property?["ADMIN"] as? String
+        isoA3 = property?["ISO_A3"] as? String
         
         let geometry = json["geometry"] as? [String : Any]
         
         let coordinates = geometry?["coordinates"] as? [Any]
         
         let polygons = coordinates?[0] as? [Any]
-        
-        
-        
         
         for coord in polygons! {
             let c = coord as? [Double]
@@ -39,16 +40,17 @@ class CountryGeo {
             
             points.append(CLLocationCoordinate2DMake((c?[1])!, (c?[0])!))
             print(co)
+            
+            print(points)
+            
         }
-
+        let polygon = MKPolygon(coordinates: &points, count: points.count)
         
+        self.polygons.append(polygon)
+        
+        }
     }
     
-    func borderPoints() -> MKPolygon {
-
-        let borderPoints = MKPolygon(coordinates: &points, count: points.count)
-        return borderPoints
-    }
     
     
 }
