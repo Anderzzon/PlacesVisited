@@ -17,39 +17,111 @@ class CountryGeo {
     
     init(json: [String: Any]) {
         
-        for country in json {
-        
         let property = json["properties"] as? [String : Any]
-              
+        
         isoA3 = property?["ISO_A3"] as? String
         
         let geometry = json["geometry"] as? [String : Any]
         
-        let coordinates = geometry?["coordinates"] as? [Any]
+        let type = geometry?["type"] as? String
+        print(type)
         
-        let polygons = coordinates?[0] as? [Any]
-        
-        for coord in polygons! {
-            let c = coord as? [Double]
+        switch type {
+        case "Polygon":
+            let coordinates = geometry?["coordinates"] as? [Any]
             
-            //let co = CLLocationCoordinate2D(latitude: (c?[0])!, longitude: (c?[1])!)
+            let polygons = coordinates?[0] as? [Any]
             
-//            let co = CLLocationCoordinate2DMake((c?[0])!, (c?[1])!)
+            for coord in polygons! {
+                let c = coord as? [Double]
+                
+                //let co = CLLocationCoordinate2D(latitude: (c?[0])!, longitude: (c?[1])!)
+                
+                //            let co = CLLocationCoordinate2DMake((c?[0])!, (c?[1])!)
+                
+                //let co = [c?[0], c?[1]]
+                
+                points.append(CLLocationCoordinate2DMake((c?[1])!, (c?[0])!))
+                //print(co)
+                
+                print(points)
+                
+            }
+            let polygon = MKPolygon(coordinates: &points, count: points.count)
             
-            let co = [c?[0], c?[1]]
+            self.polygons.append(polygon)
+        case "MultiPolygon":
             
-            points.append(CLLocationCoordinate2DMake((c?[1])!, (c?[0])!))
-            print(co)
+
+            let coordinates = geometry?["coordinates"] as! [Any]
             
-            print(points)
             
+            for geo in coordinates {
+                let geo = geo as! [Any]
+                let g2 = geo[0] as! [Any]
+ 
+                var pointsToAdd: [CLLocationCoordinate2D] = []
+                
+                for coord in g2 {
+                    print("Looping coordinates")
+                    
+                    let c = coord as! [Double]
+                    
+                  //  let c2 = c![0] as! [Double]
+                    //let co = [c?[0], c?[1]]
+                    
+                    
+                    pointsToAdd.append(CLLocationCoordinate2DMake((c[1]), (c[0])))
+                    //print(co)
+                    
+                    //print(points)
+                    
+                }
+                let polygon = MKPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count)
+                print("Making MKPolygon")
+                
+                self.polygons.append(polygon)
+                print("Adding MKPolygon to array")
+                
+            }
+            
+            
+            
+            
+            
+            
+            //let multiPolygons = coordinates?[0] as? [Any]
+            
+            //var pointsToAdd: [CLLocationCoordinate2D] = []
+//
+//            for geo in multiPolygons! {
+//                print("Looping polygons")
+//
+//                let polygons = geo as? [Any]
+//
+//                for coord in polygons! {
+//                    print("Looping coordinates")
+//
+//                    let c = coord as? [Double]
+//
+//                    //let co = [c?[0], c?[1]]
+//
+//                    pointsToAdd.append(CLLocationCoordinate2DMake((c?[1])!, (c?[0])!))
+//                    //print(co)
+//
+//                    //print(points)
+//
+//                }
+
+            //}
+        default:
+            break
         }
-        let polygon = MKPolygon(coordinates: &points, count: points.count)
         
-        self.polygons.append(polygon)
         
-        }
+        
     }
+    
     
     
     

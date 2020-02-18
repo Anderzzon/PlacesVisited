@@ -24,6 +24,7 @@
 		03912DAB23D0841C008EF805 /* PlacesVisitedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DAA23D0841C008EF805 /* PlacesVisitedTests.swift */; };
 		03912DB623D0841C008EF805 /* PlacesVisitedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DB523D0841C008EF805 /* PlacesVisitedUITests.swift */; };
 		03912DC623D08678008EF805 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DC523D08678008EF805 /* Country.swift */; };
+		03B014B823FAC47A0060794A /* caymenIslands.json in Resources */ = {isa = PBXBuildFile; fileRef = 03B014B723FAC47A0060794A /* caymenIslands.json */; };
 		03BFB28A23EACD9C00677825 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BFB28923EACD9C00677825 /* MapViewController.swift */; };
 		03D54A6723E37B1200C81CC2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */; };
 		03D54A6923E37B4F00C81CC2 /* TableViewNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */; };
@@ -76,6 +77,7 @@
 		03912DB523D0841C008EF805 /* PlacesVisitedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesVisitedUITests.swift; sourceTree = "<group>"; };
 		03912DB723D0841C008EF805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03912DC523D08678008EF805 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		03B014B723FAC47A0060794A /* caymenIslands.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = caymenIslands.json; sourceTree = "<group>"; };
 		03BFB28923EACD9C00677825 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNavigationViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */,
 				03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */,
 				036E1EBB23F57E0F001250C5 /* CountriesClean.json */,
+				03B014B723FAC47A0060794A /* caymenIslands.json */,
 			);
 			path = PlacesVisited;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				03912DA023D0841B008EF805 /* LaunchScreen.storyboard in Resources */,
 				03912D9D23D0841B008EF805 /* Assets.xcassets in Resources */,
 				036E1EBA23F56F65001250C5 /* countries.json in Resources */,
+				03B014B823FAC47A0060794A /* caymenIslands.json in Resources */,
 				03912D9B23D08418008EF805 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,9 +10,9 @@ import UIKit
 import MapKit
 
 class WorldMapViewController: UIViewController {
-
+    
     var countries : ListOfCountries!
-    //var countryOverlays: []
+    var countryOverlays: [CountryGeo] = []
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -20,11 +20,11 @@ class WorldMapViewController: UIViewController {
         
         mapView.delegate = self
         
-//        let location = CLLocation(latitude: 55.663255, longitude:   13.597545)
-//        let regionRadius: CLLocationDistance = 5000000.0
-//        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-//        mapView.setRegion(region, animated: true)
-
+        //        let location = CLLocation(latitude: 55.663255, longitude:   13.597545)
+        //        let regionRadius: CLLocationDistance = 5000000.0
+        //        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        //        mapView.setRegion(region, animated: true)
+        
         produceOverlay()
         
         // Do any additional setup after loading the view.
@@ -56,63 +56,84 @@ class WorldMapViewController: UIViewController {
         let olandPolygon = MKPolygon(coordinates: &olandPoints, count: olandPoints.count)
         
         //Read json:
-        if let json = readJSONFromFile(fileName: "CountriesClean") as? [String : Any] {
-            let country = CountryGeo(json: json )
-            //print(c.name)
-            //print(c.points)
-
-//            let countryPoints = MKPolygon(coordinates: &country.points, count: country.points.count)
-//
-//            var overlays:[MKPolygon] = []
-//            overlays.append(countryPoints)
+        if let json = readJSONFromFile(fileName: "countries") as? [[String : Any]] {
             
-            let overlays = country.polygons
             
-        
-            mapView.addOverlays(overlays, level: .aboveRoads)
+            for co in json {
+                
+                let country = CountryGeo(json: co )
+                
+                countryOverlays.append(country)
+                print(country)
+                print(countryOverlays.count)
+                
+                //print(c.name)
+                //print(c.points)
+                
+                //            let countryPoints = MKPolygon(coordinates: &country.points, count: country.points.count)
+                //
+                //            var overlays:[MKPolygon] = []
+                //            overlays.append(countryPoints)
+                
+                //let overlays = countryOverlays[0].polygons
+                //mapView.addOverlays(overlays, level: .aboveRoads)
+                
+            }
             
-
-
+            for i in 0 ..< countryOverlays.count {
+                
+                let overlay = countryOverlays[i].polygons
+                print("Antalet lager för \(countryOverlays[i].isoA3) är \(overlay.count)")
+                //let overlay1 = countryOverlays[1].polygons[0]
+                //let overlay2 = countryOverlays[1].polygons[1]
+                //let overlay3 = countryOverlays[1].polygons[2]
+                //mapView.addOverlay(overlay1)
+                //mapView.addOverlay(overlay2)
+                //mapView.addOverlay(overlay3)
+                
+                mapView.addOverlays(overlay, level: .aboveRoads)
+            }
+            
         }
         
-//        var arubaPoints:[CLLocationCoordinate2D] = []
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.577582098000036, -69.996937628999916))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.531724351000051, -69.936390753999945))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.519232489000046, -69.924672003999945))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.497015692000076, -69.915760870999918))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.453558661000045, -69.880197719999842))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.427394924000097, -69.876820441999939))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.417669989000046, -69.888091600999928))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.417792059000107, -69.908802863999938))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.425970770000035, -69.930531378999888))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.440375067000090, -69.945139126999919))
-//
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.440375067000090, -69.924672003999945))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.447211005000014, -69.924672003999945))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.463202216000099, -69.958566860999923))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.522935289000088, -70.027658657999922))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.531154690000079, -70.048085089999887))
-//
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.537176825000088, -70.058094855999883))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.546820380000057, -70.062408006999874))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.556952216000113, -70.060373501999948))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.574042059000064, -70.051096157999893))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.583726304000024, -70.048736131999931))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.600002346000053, -70.052642381999931))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.614243882000054, -70.059641079999921))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.625392971000068, -70.061105923999975))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.632147528000104, -70.048736131999931))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.585516669000100, -70.007150844999870))
-//        arubaPoints.append(CLLocationCoordinate2DMake(12.577582098000036, -69.996937628999916))
-//
-//
-//
-//        let polyline = MKPolyline(coordinates: &arubaPoints, count: arubaPoints.count)
-//        let arubaLine
-//        mapView?.addOverlay(polyline)
+        //        var arubaPoints:[CLLocationCoordinate2D] = []
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.577582098000036, -69.996937628999916))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.531724351000051, -69.936390753999945))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.519232489000046, -69.924672003999945))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.497015692000076, -69.915760870999918))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.453558661000045, -69.880197719999842))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.427394924000097, -69.876820441999939))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.417669989000046, -69.888091600999928))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.417792059000107, -69.908802863999938))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.425970770000035, -69.930531378999888))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.440375067000090, -69.945139126999919))
+        //
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.440375067000090, -69.924672003999945))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.447211005000014, -69.924672003999945))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.463202216000099, -69.958566860999923))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.522935289000088, -70.027658657999922))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.531154690000079, -70.048085089999887))
+        //
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.537176825000088, -70.058094855999883))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.546820380000057, -70.062408006999874))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.556952216000113, -70.060373501999948))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.574042059000064, -70.051096157999893))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.583726304000024, -70.048736131999931))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.600002346000053, -70.052642381999931))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.614243882000054, -70.059641079999921))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.625392971000068, -70.061105923999975))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.632147528000104, -70.048736131999931))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.585516669000100, -70.007150844999870))
+        //        arubaPoints.append(CLLocationCoordinate2DMake(12.577582098000036, -69.996937628999916))
+        //
+        //
+        //
+        //        let polyline = MKPolyline(coordinates: &arubaPoints, count: arubaPoints.count)
+        //        let arubaLine
+        //        mapView?.addOverlay(polyline)
         
-//        let arubaPolygon = MKPolygon(coordinates: &arubaPoints, count: arubaPoints.count)
-//        mapView.addOverlay(arubaPolygon)
+        //        let arubaPolygon = MKPolygon(coordinates: &arubaPoints, count: arubaPoints.count)
+        //        mapView.addOverlay(arubaPolygon)
         
         var points: [CLLocationCoordinate2D] = []
         
@@ -156,7 +177,7 @@ class WorldMapViewController: UIViewController {
         points.append(CLLocationCoordinate2DMake(55.594018, 12.925559))
         points.append(CLLocationCoordinate2DMake(55.559618, 12.898512))
         
-
+        
         let skanePolygon = MKPolygon(coordinates: &points, count: points.count)
         
         let interiorPolygon = MKPolygon(coordinates: &interiorPoints, count: interiorPoints.count)
@@ -191,27 +212,27 @@ class WorldMapViewController: UIViewController {
     
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension WorldMapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
-            let polyRenderer = MKPolygonRenderer(overlay: overlay)
-            polyRenderer.strokeColor = UIColor.black
-            polyRenderer.fillColor = UIColor.green
-            polyRenderer.lineWidth = 0.3
-            
-            return polyRenderer
+        let polyRenderer = MKPolygonRenderer(overlay: overlay)
+        polyRenderer.strokeColor = UIColor.black
+        polyRenderer.fillColor = UIColor.green
+        polyRenderer.lineWidth = 0.3
+        
+        return polyRenderer
         
         
     }
