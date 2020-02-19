@@ -12,7 +12,7 @@ import MapKit
 class CountryGeo {
     var isoA3 : String?
     var points: [CLLocationCoordinate2D] = []
-    var polygons: [MKPolygon] = []
+    var polygons: [CustomPolygon] = []
     
     
     init(json: [String: Any]) {
@@ -47,7 +47,7 @@ class CountryGeo {
                 print(points)
                 
             }
-            let polygon = MKPolygon(coordinates: &points, count: points.count)
+            let polygon = CustomPolygon(coordinates: &points, count: points.count)
             
             self.polygons.append(polygon)
         case "MultiPolygon":
@@ -77,7 +77,7 @@ class CountryGeo {
                     //print(points)
                     
                 }
-                let polygon = MKPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count)
+                let polygon = CustomPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count)
                 print("Making MKPolygon")
                 
                 self.polygons.append(polygon)

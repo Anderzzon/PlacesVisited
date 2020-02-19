@@ -25,6 +25,9 @@
 		03912DB623D0841C008EF805 /* PlacesVisitedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DB523D0841C008EF805 /* PlacesVisitedUITests.swift */; };
 		03912DC623D08678008EF805 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03912DC523D08678008EF805 /* Country.swift */; };
 		03B014B823FAC47A0060794A /* caymenIslands.json in Resources */ = {isa = PBXBuildFile; fileRef = 03B014B723FAC47A0060794A /* caymenIslands.json */; };
+		03B014BC23FD28040060794A /* variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B014BB23FD28040060794A /* variables.swift */; };
+		03B014BE23FD28290060794A /* CONSTANT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B014BD23FD28290060794A /* CONSTANT.swift */; };
+		03B014C023FD3AF60060794A /* CustomPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B014BF23FD3AF60060794A /* CustomPolygon.swift */; };
 		03BFB28A23EACD9C00677825 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BFB28923EACD9C00677825 /* MapViewController.swift */; };
 		03D54A6723E37B1200C81CC2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */; };
 		03D54A6923E37B4F00C81CC2 /* TableViewNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */; };
@@ -78,6 +81,9 @@
 		03912DB723D0841C008EF805 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03912DC523D08678008EF805 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		03B014B723FAC47A0060794A /* caymenIslands.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = caymenIslands.json; sourceTree = "<group>"; };
+		03B014BB23FD28040060794A /* variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = variables.swift; sourceTree = "<group>"; };
+		03B014BD23FD28290060794A /* CONSTANT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CONSTANT.swift; sourceTree = "<group>"; };
+		03B014BF23FD3AF60060794A /* CustomPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPolygon.swift; sourceTree = "<group>"; };
 		03BFB28923EACD9C00677825 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNavigationViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +166,9 @@
 				03912D9923D08418008EF805 /* Main.storyboard */,
 				036E1F0C23F6AC61001250C5 /* JsonTestViewController.swift */,
 				03F278EF23F2D21600FA1980 /* WorldMapViewController.swift */,
+				03B014BF23FD3AF60060794A /* CustomPolygon.swift */,
+				03B014BB23FD28040060794A /* variables.swift */,
+				03B014BD23FD28290060794A /* CONSTANT.swift */,
 				036E1F0E23F6AF27001250C5 /* CountryGeo.swift */,
 				036E1EB923F56F65001250C5 /* countries.json */,
 				03BFB28923EACD9C00677825 /* MapViewController.swift */,
@@ -463,6 +472,7 @@
 				03BFB28A23EACD9C00677825 /* MapViewController.swift in Sources */,
 				03912D9423D08418008EF805 /* AppDelegate.swift in Sources */,
 				03D54A6923E37B4F00C81CC2 /* TableViewNavigationViewController.swift in Sources */,
+				03B014BE23FD28290060794A /* CONSTANT.swift in Sources */,
 				03912D9623D08418008EF805 /* SceneDelegate.swift in Sources */,
 				036E1F0D23F6AC61001250C5 /* JsonTestViewController.swift in Sources */,
 				03F278F023F2D21600FA1980 /* WorldMapViewController.swift in Sources */,
@@ -473,6 +483,8 @@
 				03E7994A23E1A5E900AC25FE /* PlacesVisited.xcdatamodeld in Sources */,
 				03472D2223D9BA89006443D3 /* CountriesTableViewController.swift in Sources */,
 				03D54A6B23E3835F00C81CC2 /* StatsViewController.swift in Sources */,
+				03B014C023FD3AF60060794A /* CustomPolygon.swift in Sources */,
+				03B014BC23FD28040060794A /* variables.swift in Sources */,
 				03472D2423D9BBE8006443D3 /* ListOfCountries.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
