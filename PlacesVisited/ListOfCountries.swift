@@ -29,9 +29,9 @@ class ListOfCountries {
     private var countriesInOceania: [Country] = []
     
     func createCountry(fullName:String, shortName:String, continent:String, flagIcon:String) {
-    
+        
         guard let entity = NSEntityDescription.entity(forEntityName: "Country", in: managedContext) else {return}
-
+        
         let country = Country(entity: entity, insertInto: managedContext)
         
         country.fullName = fullName
@@ -43,29 +43,29 @@ class ListOfCountries {
         
         do {
             try managedContext.save()
-        switch country.continent {
-        case "Europe":
-            countriesInEurope.append(country)
-            print("Adding country to Europe")
-        case "Asia":
-            countriesInAsia.append(country)
-            print("Adding country to Asia")
-        case "Africa":
-            countriesInAfrica.append(country)
-            print("Adding country to Africa")
-        case "North America":
-            countriesInNorthAmerica.append(country)
-            print("Adding country to North America")
-        case "South America":
-            countriesInSouthAmerica.append(country)
-            print("Adding country to South America")
-        case "Oceania":
-            countriesInOceania.append(country)
-            print("Adding country to Oceania")
-        default:
-            countriesInAsia.append(country)
-            print("appending country to default")
-        }
+            switch country.continent {
+            case "Europe":
+                countriesInEurope.append(country)
+                print("Adding country to Europe")
+            case "Asia":
+                countriesInAsia.append(country)
+                print("Adding country to Asia")
+            case "Africa":
+                countriesInAfrica.append(country)
+                print("Adding country to Africa")
+            case "North America":
+                countriesInNorthAmerica.append(country)
+                print("Adding country to North America")
+            case "South America":
+                countriesInSouthAmerica.append(country)
+                print("Adding country to South America")
+            case "Oceania":
+                countriesInOceania.append(country)
+                print("Adding country to Oceania")
+            default:
+                countriesInAsia.append(country)
+                print("appending country to default")
+            }
         } catch let error as NSError {
             print("Save error \(error)")
         }
@@ -193,27 +193,6 @@ class ListOfCountries {
                print(error)
            }
        }
-    
-
-    
-    //remove this function:?
-//    func add(country: Country, for continent: Continents) {
-//        //countries.append(country)
-//        switch continent {
-//        case .Africa:
-//            countriesInAfrica.append(country)
-//        case .Asia:
-//            countriesInAsia.append(country)
-//        case .Europe:
-//            countriesInEurope.append(country)
-//        case .NorthAmerica:
-//            countriesInNorthAmerica.append(country)
-//        case .SouthAmerica:
-//            countriesInSouthAmerica.append(country)
-//        case .Oceania:
-//            countriesInOceania.append(country)
-//        }
-//    }
     
     var totalNumberOfCountries:Int {
         var numberOfCountries = 0

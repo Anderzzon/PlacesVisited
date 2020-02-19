@@ -30,7 +30,7 @@ class CountriesTableViewController: UITableViewController {
             case 1:
                 self.title = "Bucket list"
             default:
-                self.title = "countries"
+                self.title = "Countries"
         }
         tableView.reloadData()
     }

@@ -44,7 +44,7 @@ class CountryGeo {
                 points.append(CLLocationCoordinate2DMake((c?[1])!, (c?[0])!))
                 //print(co)
                 
-                print(points)
+                //print(points)
                 
             }
             let polygon = CustomPolygon(coordinates: &points, count: points.count)
@@ -63,7 +63,7 @@ class CountryGeo {
                 var pointsToAdd: [CLLocationCoordinate2D] = []
                 
                 for coord in g2 {
-                    print("Looping coordinates")
+                    //print("Looping coordinates")
                     
                     let c = coord as! [Double]
                     
@@ -78,10 +78,10 @@ class CountryGeo {
                     
                 }
                 let polygon = CustomPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count)
-                print("Making MKPolygon")
+                //print("Making MKPolygon")
                 
                 self.polygons.append(polygon)
-                print("Adding MKPolygon to array")
+                //print("Adding MKPolygon to array")
                 
             }
             
