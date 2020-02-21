@@ -179,9 +179,10 @@
                     <tabBarItem key="tabBarItem" title="Map" image="questionmark" catalog="system" id="LlH-J8-7oT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KiF-lt-gGW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Vm9-bA-n7V" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="PLX-qJ-OG7">
                     <connections>
-                        <action selector="handleMapTapWithSender:" destination="ldk-gg-PMc" id="lyT-rl-1To"/>
+                        <action selector="mapTaped:" destination="Vm9-bA-n7V" id="ugT-8G-pVK"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

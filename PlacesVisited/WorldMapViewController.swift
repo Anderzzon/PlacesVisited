@@ -15,6 +15,9 @@ class WorldMapViewController: UIViewController {
     var countryOverlays: [CountryGeo] = []
     var mkOverlays: [[MKOverlay]] = []
     
+    var overlayDict = [String: CountryGeo]()
+    var mkOverlaysDict = [String: [MKOverlay]]()
+    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -32,7 +35,8 @@ class WorldMapViewController: UIViewController {
         produceOverlay()
         updateallOverlays()
 
-        renderOverlayToMap()
+        //renderOverlayToMap()
+        renderOverlayToMapFromDict()
         
         //print(countries.listOfCountriesNotVisited(for: .Europe))
         //updateOverlayColors()
@@ -40,15 +44,17 @@ class WorldMapViewController: UIViewController {
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        //renderOverlayToMap()
+    override func viewDidAppear(_ animated: Bool) {
+        renderOverlayToMapFromDict()
     }
+    
     
     //Not used:
     func updateOverlayColors() {
+        
+        
         let visitedOverlay = countryOverlays[0].polygons
         visitedOverlay[0].identifier = "visited"
-        
         
         for overlay in mapView.overlays {
             if let renderer = mapView.renderer(for: overlay) as? MKPolygonRenderer {
@@ -67,23 +73,30 @@ class WorldMapViewController: UIViewController {
                 let country = CountryGeo(json: co )
             
                 countryOverlays.append(country)
-                
+                overlayDict[country.isoA3!] = country
             }
         }
     }
     
     private func produceOverlay() {
-        for i in 0 ..< self.countryOverlays.count {
-            
-            let overlay = self.countryOverlays[i].polygons
-            self.mkOverlays.append(overlay)
+        //Old array loop:
+//        for i in 0 ..< self.countryOverlays.count {
+//
+//            let overlay = self.countryOverlays[i].polygons
+//            self.mkOverlays.append(overlay)
+//        }
+        
+        //New Dictionary loop:
+        for (_, value) in overlayDict {
+            let overlay = value.polygons
+            mkOverlaysDict[value.isoA3!] = overlay
         }
     }
     
     private func updateallOverlays() {
                 let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
                 dispatchQueue.async{
-                    //Time consuming task here
+                    //Time consuming task here:
                     self.updateOverlay(for: .Europe)
                     self.updateOverlay(for: .Asia)
                     self.updateOverlay(for: .SouthAmerica)
@@ -95,59 +108,86 @@ class WorldMapViewController: UIViewController {
     
     private func updateOverlay(for continent: ListOfCountries.Continents) {
         
-        var countries = self.countries.listOfCountries(for: continent)
-        
-        for country in 0 ..< countries.count {
-            let country = countries[country]
-            countries.append(country)
-        }
+        let countriesToLoop = self.countries.listOfCountries(for: continent)
         
         //Loop through countryOverlays and set the overlays identifyer to the correspeonding countrys status:
-        for country in 0 ..< countries.count {
+        for country in countriesToLoop {
             
-            for i in 0 ..< self.countryOverlays.count {
+            //New Dictinoary loop:
+            guard let overlays = overlayDict[country.shortName]?.polygons else { break }
                 
-                let overlay = self.countryOverlays[i].polygons
-                
-                print("Antalet lager för \(self.countryOverlays[i].isoA3) är \(overlay.count)")
-                print("Antalet länder-lager är \(self.countryOverlays.count)")
-                print("i är: \(i)")
-                
-                if self.countryOverlays[i].isoA3 == countries[country].shortName {
+                //if value.isoA3 == countries[country].shortName {
                     var identifier = ""
-                    if countries[country].visited == true {
+                    if country.visited == true {
                         identifier = "visited"
+                        print("Visited: \(country.fullName)")
                         //self.mkOverlays.append(overlay)
-                    } else if countries[country].wantToGo {
+                    } else if country.wantToGo == true {
                         identifier = "wantToGo"
+                        print("Want to go to: \(country.fullName)")
                         //self.mkOverlays.append(overlay)
                     }
-                    for j in 0..<overlay.count {
+                    
+                    for overlay in overlays {
                         //let visitedOverlay = countryOverlays[i].polygons
-                        overlay[j].identifier = identifier
-                        print("\(self.countryOverlays[i].isoA3):s lager är satt till: \(overlay[j].identifier)")
+                        overlay.identifier = identifier
+                        print("Full name: \(overlayDict[country.shortName]?.isoA3) Identifier: \(overlay.identifier)")
                     }
-                    
-                    //self.mapView.addOverlays(overlay, level: .aboveRoads)
-                }
-                    
-                print("Adding layer for country \(self.countryOverlays[i].isoA3)")
-                
-            }
+            
+            //Old array loop:
+//            for i in 0 ..< self.countryOverlays.count {
+//
+//                let overlay = self.countryOverlays[i].polygons
+//
+//                print("Antalet lager för \(self.countryOverlays[i].isoA3) är \(overlay.count)")
+//                print("Antalet länder-lager är \(self.countryOverlays.count)")
+//                print("i är: \(i)")
+//
+//                if self.countryOverlays[i].isoA3 == countries[country].shortName {
+//                    var identifier = ""
+//                    if countries[country].visited == true {
+//                        identifier = "visited"
+//                        //self.mkOverlays.append(overlay)
+//                    } else if countries[country].wantToGo {
+//                        identifier = "wantToGo"
+//                        //self.mkOverlays.append(overlay)
+//                    }
+//                    for j in 0..<overlay.count {
+//                        //let visitedOverlay = countryOverlays[i].polygons
+//                        overlay[j].identifier = identifier
+//                        print("\(self.countryOverlays[i].isoA3):s lager är satt till: \(overlay[j].identifier)")
+//                    }
+//                }
+//                print("Adding layer for country \(self.countryOverlays[i].isoA3)")
+//            }
             
         }
     }
     
     func renderOverlayToMap() {
-//        let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
-//        dispatchQueue.async{
-            //Time consuming task here
-            for i in 0 ..< self.mkOverlays.count {
-                let overlay = self.mkOverlays[i]
+            //Old array loop:
+//            for i in 0 ..< self.mkOverlays.count {
+//                let overlay = self.mkOverlays[i]
+//
+//                self.mapView.addOverlays(overlay, level: .aboveRoads)
+//        }
+        
+    }
+    func renderOverlayToMapFromDict() {
+            //New dictionary loop:
+        for (_, value) in mkOverlaysDict {
+            let overlay = value
+            
+            self.mapView.addOverlays(overlay, level: .aboveRoads)
+            
+            guard let overlays = overlayDict["SWE"]?.polygons else { break }
+            for layer in overlays {
+                //print("\(overlayDict["SWE"]?.isoA3) has the identifier: \(layer.identifier)")
                 
-                self.mapView.addOverlays(overlay, level: .aboveRoads)
-            //}
+            }
+            
         }
+        
     }
     
     func readJSONFromFile(fileName: String) -> Any? {
@@ -167,17 +207,24 @@ class WorldMapViewController: UIViewController {
     
     func configureColor(of renderer: MKPolygonRenderer, for overlay: MKOverlay) {
         let fillColor: UIColor
+        var alphaComponent: CGFloat = 0.8
         if let polygon = overlay as? CustomPolygon, polygon.identifier == "visited" {
             fillColor = .green
+            alphaComponent = 0.8
         } else if let polygon = overlay as? CustomPolygon, polygon.identifier == "wantToGo" {
             fillColor = .yellow
+            alphaComponent = 0.8
         } else {
             fillColor = .red
-            fillColor.withAlphaComponent(0.0)
+            alphaComponent = 0.3
         }
-        renderer.fillColor = fillColor.withAlphaComponent(0.8)
+        renderer.fillColor = fillColor.withAlphaComponent(alphaComponent)
     }
 
+    @IBAction func mapTaped(_ sender: UITapGestureRecognizer) {
+        print("Tapped")
+    }
+    
     
     
     /*
