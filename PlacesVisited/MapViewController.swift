@@ -41,11 +41,15 @@ class MapViewController: UIViewController, MGLMapViewDelegate {
     
     var mapView: MGLMapView!
     var contoursLayer: MGLStyleLayer?
-    let url = URL(string: "mapbox://styles/westervind/ck69b1m1r0pbp1ipepz3yfxt4")
+    var url = URL(string: "mapbox://styles/westervind/ck69b1m1r0pbp1ipepz3yfxt4")
+    
     let layerIdentifier = "ne_10m_admin_0_sovereignty-b1inen"
      
     override func viewDidLoad() {
     super.viewDidLoad()
+        if true {
+            url = URL(string: "mapbox://styles/westervind/ck6c4o4wc0pgo1ioxjvczo82m")
+        }
      
     mapView = MGLMapView(frame: view.bounds, styleURL: url)
     mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

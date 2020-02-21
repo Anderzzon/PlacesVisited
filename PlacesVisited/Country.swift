@@ -19,15 +19,6 @@ class Country: NSManagedObject {
     @NSManaged var visited: Bool
     @NSManaged var wantToGo: Bool
     
-//    init(short:String, name:String, continent:String, flagIcon:String) {
-//
-//
-//        self.shortName = short
-//        self.fullName = name
-//        self.continent = continent
-//        self.flagIcon = flagIcon
-//    }
-    
     //Sets a country to visited or reverse that
     func visitCountry(visit: Bool ) {
         visited = visit

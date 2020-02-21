@@ -48,6 +48,7 @@ class CountryGeo {
                 
             }
             let polygon = CustomPolygon(coordinates: &points, count: points.count)
+            //let polygon = CustomPolygon(coordinates: &points, count: 3)
             
             self.polygons.append(polygon)
         case "MultiPolygon":
@@ -78,9 +79,12 @@ class CountryGeo {
                     
                 }
                 let polygon = CustomPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count)
+                //let polygon = CustomPolygon(coordinates: &pointsToAdd, count: 3)
                 //print("Making MKPolygon")
+                if pointsToAdd.count > 80 {
                 
                 self.polygons.append(polygon)
+                }
                 //print("Adding MKPolygon to array")
                 
             }
