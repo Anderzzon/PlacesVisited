@@ -40,6 +40,7 @@ class ListOfCountries {
         country.flagIcon = flagIcon
         country.visited = false
         country.wantToGo = false
+        country.updateMap = false
         
         do {
             try managedContext.save()
@@ -370,6 +371,54 @@ class ListOfCountries {
         case .Oceania:
             for i in 0..<countriesInOceania.count {
                 if countriesInOceania[i].visited == false {
+                    countriesNotVisited.append(countriesInOceania[i])
+                }
+            }
+        return countriesNotVisited
+        }
+    }
+    
+    func listOfCountriesToUpdate(for continent: Continents) -> [Country] {
+        var countriesNotVisited: [Country] = []
+        switch continent {
+        case .Africa:
+            for i in 0..<countriesInAfrica.count {
+                if countriesInAfrica[i].updateMap == true {
+                    countriesNotVisited.append(countriesInAfrica[i])
+                }
+            }
+            return countriesNotVisited
+        case .Asia:
+            for i in 0..<countriesInAsia.count {
+                if countriesInAsia[i].updateMap == true {
+                    countriesNotVisited.append(countriesInAsia[i])
+                }
+            }
+            return countriesNotVisited
+        case .Europe:
+            for i in 0..<countriesInEurope.count {
+                if countriesInEurope[i].updateMap == true {
+                    countriesNotVisited.append(countriesInEurope[i])
+                }
+            }
+            return countriesNotVisited
+        case .NorthAmerica:
+            for i in 0..<countriesInNorthAmerica.count {
+                if countriesInNorthAmerica[i].updateMap == true {
+                    countriesNotVisited.append(countriesInNorthAmerica[i])
+                }
+            }
+            return countriesNotVisited
+        case .SouthAmerica:
+            for i in 0..<countriesInSouthAmerica.count {
+                if countriesInSouthAmerica[i].updateMap == true {
+                    countriesNotVisited.append(countriesInSouthAmerica[i])
+                }
+            }
+            return countriesNotVisited
+        case .Oceania:
+            for i in 0..<countriesInOceania.count {
+                if countriesInOceania[i].updateMap == true {
                     countriesNotVisited.append(countriesInOceania[i])
                 }
             }

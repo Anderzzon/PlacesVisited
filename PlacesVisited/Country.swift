@@ -18,6 +18,7 @@ class Country: NSManagedObject {
     @NSManaged var flagIcon: String
     @NSManaged var visited: Bool
     @NSManaged var wantToGo: Bool
+    @NSManaged var updateMap: Bool
     
     //Sets a country to visited or reverse that
     func visitCountry(visit: Bool ) {

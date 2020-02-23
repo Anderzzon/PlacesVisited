@@ -24,14 +24,14 @@ class CountriesTableViewController: UITableViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     @IBAction func SegmentBeenVsWant(_ sender: Any) {
-        switch segmentControl.selectedSegmentIndex {
-            case 0:
-                self.title = "Visited countries"
-            case 1:
-                self.title = "Bucket list"
-            default:
-                self.title = "Countries"
-        }
+//        switch segmentControl.selectedSegmentIndex {
+//            case 0:
+//                self.title = "Visited countries"
+//            case 1:
+//                self.title = "Bucket list"
+//            default:
+//                self.title = "Countries"
+//        }
         tableView.reloadData()
     }
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -67,14 +67,14 @@ class CountriesTableViewController: UITableViewController {
         //countries.loadItems()
         tableView.reloadData()
 
-        switch segmentControl.selectedSegmentIndex {
-            case 0:
-                self.title = "Visited countries"
-            case 1:
-                self.title = "Bucket list"
-            default:
-                self.title = "countries"
-        }
+//        switch segmentControl.selectedSegmentIndex {
+//            case 0:
+//                self.title = "Visited countries"
+//            case 1:
+//                self.title = "Bucket list"
+//            default:
+//                self.title = "countries"
+//        }
     }
 
     // MARK: - Table view data source
@@ -176,9 +176,8 @@ class CountriesTableViewController: UITableViewController {
                         countries.updateVisit(country: item, index: indexPath.row)
                         
                         configureCheckmark(for: cell, with: item)
+                        item.updateMap = true
                         tableView.deselectRow(at: indexPath, animated: true)
-                        tableView.reloadData()
-                        
                         
                         print("\(item.fullName) set to: \(item.visited)")
                         
@@ -194,6 +193,7 @@ class CountriesTableViewController: UITableViewController {
                         countries.updateWantToGo(country: item, index: indexPath.row)
                         
                         configureCheckmarkWantTo(for: cell, with: item)
+                        item.updateMap = true
                         tableView.deselectRow(at: indexPath, animated: true)
                         tableView.reloadData()
                         
@@ -205,20 +205,6 @@ class CountriesTableViewController: UITableViewController {
                     default:
                         break
                     }
-                    
-                    
-                    //Old visited function
-//                    if item.visited == false {
-//                        item.visitCountry(visit: true)
-//                        configureCheckmark(for: cell, with: item)
-//                        tableView.deselectRow(at: indexPath, animated: true)
-//                    } else {
-//                        item.visitCountry(visit: false)
-//                    }
-                    
-                    
-                    
-                    
                 }
             }
         }

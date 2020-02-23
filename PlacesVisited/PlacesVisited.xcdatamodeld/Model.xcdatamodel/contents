@@ -5,10 +5,11 @@
         <attribute name="flagIcon" optional="YES" attributeType="String"/>
         <attribute name="fullName" optional="YES" attributeType="String"/>
         <attribute name="shortName" optional="YES" attributeType="String"/>
+        <attribute name="updateMap" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="visited" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="wantToGo" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Country" positionX="-54" positionY="-9" width="128" height="133"/>
+        <element name="Country" positionX="-54" positionY="-9" width="128" height="148"/>
     </elements>
 </model>

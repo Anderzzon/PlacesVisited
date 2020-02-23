@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
 class MainTabBarController: UITabBarController {
 
     var countries : ListOfCountries!
-    var countryOverlays: [CountryGeo] = []
+    var countriesToUpdate: [Country] = []
+    var overlayDict = [String: CountryGeo]()
+    var mkOverlaysDict = [String: [MKOverlay]]()
     
     
     override func viewDidLoad() {
@@ -30,6 +33,9 @@ class MainTabBarController: UITabBarController {
         
         //load countries from database if there is any:
         countries.loadItems()
+        readJson()
+        produceOverlay()
+        createAllOverlays()
         
         guard let viewControllers = viewControllers else {return}
         
@@ -48,10 +54,93 @@ class MainTabBarController: UITabBarController {
             
             if let worldMapViewController = viewController as? WorldMapViewController {
                 worldMapViewController.countries = countries
+                worldMapViewController.overlayDict = overlayDict
+                worldMapViewController.mkOverlaysDict = mkOverlaysDict
+                
             }
         }
         
     }
+    
+    //Test:
+    func readJSONFromFile(fileName: String) -> Any? {
+        var json: Any?
+        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+            do {
+                let fileUrl = URL(fileURLWithPath: path)
+                // Getting data from JSON file using the file URL
+                let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
+                json = try? JSONSerialization.jsonObject(with: data)
+            } catch {
+                // Handle error here
+            }
+        }
+        return json
+    }
+    private func readJson() {
+        //Read json:
+        if let json = readJSONFromFile(fileName: "allCountries") as? [[String : Any]] {
+
+            //Loop through json and append countries to array of countryOverlays:
+            for co in json {
+                
+                let country = CountryGeo(json: co )
+            
+                //countryOverlays.append(country)
+                overlayDict[country.isoA3!] = country
+            }
+        }
+    }
+    private func produceOverlay() {
+        for (_, value) in overlayDict {
+            let overlay = value.polygons
+            mkOverlaysDict[value.isoA3!] = overlay
+        }
+    }
+    private func createAllOverlays() {
+                let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
+                dispatchQueue.async{
+                    //Time consuming task here:
+                    self.createOverlays(for: .Europe)
+                    self.createOverlays(for: .Asia)
+                    self.createOverlays(for: .SouthAmerica)
+                    self.createOverlays(for: .NorthAmerica)
+                    self.createOverlays(for: .Oceania)
+                    self.createOverlays(for: .Africa)
+        }
+    }
+    
+    private func createOverlays(for continent: ListOfCountries.Continents) {
+        
+        let countriesToLoop = self.countries.listOfCountries(for: continent)
+        
+        //Loop through countryOverlays and set the overlays identifyer to the correspeonding countrys status:
+        for country in countriesToLoop {
+            
+            //New Dictinoary loop:
+            guard let overlays = overlayDict[country.shortName]?.polygons else { break }
+            
+            //if value.isoA3 == countries[country].shortName {
+            var identifier = ""
+            if country.visited == true {
+                identifier = "visited"
+                print("Visited: \(country.fullName)")
+                //self.mkOverlays.append(overlay)
+            } else if country.wantToGo == true {
+                identifier = "wantToGo"
+                print("Want to go to: \(country.fullName)")
+                //self.mkOverlays.append(overlay)
+            }
+            
+            for overlay in overlays {
+                //let visitedOverlay = countryOverlays[i].polygons
+                overlay.identifier = identifier
+                print("Full name: \(overlayDict[country.shortName]?.isoA3) Identifier: \(overlay.identifier)")
+            }
+        }
+    }
+    
+    
     
     func createDatabase() {
         
@@ -182,17 +271,17 @@ class MainTabBarController: UITabBarController {
         countries.createCountry(fullName: "Australia", shortName: "AUS", continent: "Oceania", flagIcon: "🇦🇺")
         countries.createCountry(fullName: "Fiji", shortName: "FJI", continent: "Oceania", flagIcon: "🇫🇯")
         countries.createCountry(fullName: "Kiribati", shortName: "KIR", continent: "Oceania", flagIcon: "🇰🇮")
-        countries.createCountry(fullName: "Marshall Islands", shortName: "MHL", continent: "Ocenaia", flagIcon: "🇲🇭")
+        countries.createCountry(fullName: "Marshall Islands", shortName: "MHL", continent: "Oceania", flagIcon: "🇲🇭")
         countries.createCountry(fullName: "Micronesia", shortName: "FSM", continent: "Oceania", flagIcon: "🇫🇲")
         countries.createCountry(fullName: "Nauru", shortName: "NRU", continent: "Oceania", flagIcon: "🇳🇷")
-        countries.createCountry(fullName: "New Zealand", shortName: "NZL", continent: "Ocenaia", flagIcon: "🇳🇿")
-        countries.createCountry(fullName: "Palau", shortName: "PLW", continent: "Ocenaia", flagIcon: "🇵🇼")
+        countries.createCountry(fullName: "New Zealand", shortName: "NZL", continent: "Oceania", flagIcon: "🇳🇿")
+        countries.createCountry(fullName: "Palau", shortName: "PLW", continent: "Oceania", flagIcon: "🇵🇼")
         countries.createCountry(fullName: "Papua New Guinea", shortName: "PNG", continent: "Ocenaia", flagIcon: "🇵🇬")
         countries.createCountry(fullName: "Samoa", shortName: "WSM", continent: "Ocenaia", flagIcon: "🇼🇸")
         countries.createCountry(fullName: "Solomon Islands", shortName: "SLB", continent: "Oceania", flagIcon: "🇸🇧")
         countries.createCountry(fullName: "Tonga", shortName: "TON", continent: "Oceania", flagIcon: "🇹🇴")
         countries.createCountry(fullName: "Tuvalu", shortName: "TUV", continent: "Oceania", flagIcon: "🇹🇻")
-        countries.createCountry(fullName: "Vanuatu", shortName: "VUT", continent: "Ocenaia", flagIcon: "🇻🇺")
+        countries.createCountry(fullName: "Vanuatu", shortName: "VUT", continent: "Oceania", flagIcon: "🇻🇺")
         
         //Africa
         countries.createCountry(fullName: "Algeria", shortName: "DZA", continent: "Africa", flagIcon: "🇩🇿")

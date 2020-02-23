@@ -12,11 +12,14 @@ import MapKit
 class WorldMapViewController: UIViewController {
     
     var countries : ListOfCountries!
-    var countryOverlays: [CountryGeo] = []
-    var mkOverlays: [[MKOverlay]] = []
+//    var countryOverlays: [CountryGeo] = []
+//    var mkOverlays: [[MKOverlay]] = []
     
-    var overlayDict = [String: CountryGeo]()
-    var mkOverlaysDict = [String: [MKOverlay]]()
+    var overlayDict : Dictionary<String, CountryGeo>!
+    var mkOverlaysDict : Dictionary<String, [MKOverlay]>!
+    //var overlayDict = [String: CountryGeo]()
+    //var mkOverlaysDict = [String: [MKOverlay]]()
+    
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -31,31 +34,21 @@ class WorldMapViewController: UIViewController {
                 mapView.setRegion(region, animated: true)
         mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 2500000.0, maxCenterCoordinateDistance: 100000000.0), animated: true)
         
-        readJson()
-        produceOverlay()
-        updateallOverlays()
-
-        //renderOverlayToMap()
-        renderOverlayToMapFromDict()
-        
-        //print(countries.listOfCountriesNotVisited(for: .Europe))
-        //updateOverlayColors()
-        print("Number of MKLayers: \(mkOverlays.count)")
+        //readJson()
+        //produceOverlay()
+        //createAllOverlays()
+        renderOverlayToMap()
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        updateOverlayColors(for: .Europe)
-        updateOverlayColors(for: .Africa)
+        updateAllOverlayColors()
     }
-    
-    
-    //
     
     //Update overlays if any change has accured:
     func updateOverlayColors(for continent: ListOfCountries.Continents) {
         
-        let countriesToLoop = self.countries.listOfCountries(for: continent)
+        let countriesToLoop = self.countries.listOfCountriesToUpdate(for: continent)
         
         //Loop through countryOverlays and set the overlays identifyer to the correspeonding countrys status:
         for country in countriesToLoop {
@@ -81,8 +74,17 @@ class WorldMapViewController: UIViewController {
                     configureColor(of: renderer, for: overlay)
                 }
             }
+            country.updateMap = false
         }
-        
+    }
+    
+    private func updateAllOverlayColors() {
+            self.updateOverlayColors(for: .Europe)
+            self.updateOverlayColors(for: .Africa)
+            self.updateOverlayColors(for: .Asia)
+            self.updateOverlayColors(for: .NorthAmerica)
+            self.updateOverlayColors(for: .SouthAmerica)
+            self.updateOverlayColors(for: .Oceania)
     }
     
     private func readJson() {
@@ -94,41 +96,34 @@ class WorldMapViewController: UIViewController {
                 
                 let country = CountryGeo(json: co )
             
-                countryOverlays.append(country)
+                //countryOverlays.append(country)
                 overlayDict[country.isoA3!] = country
             }
         }
     }
     
+    //Generate all overlays and add the to the dicionary of MKOverlays
     private func produceOverlay() {
-        //Old array loop:
-//        for i in 0 ..< self.countryOverlays.count {
-//
-//            let overlay = self.countryOverlays[i].polygons
-//            self.mkOverlays.append(overlay)
-//        }
-        
-        //New Dictionary loop:
         for (_, value) in overlayDict {
             let overlay = value.polygons
             mkOverlaysDict[value.isoA3!] = overlay
         }
     }
     
-    private func updateallOverlays() {
+    private func createAllOverlays() {
                 let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
                 dispatchQueue.async{
                     //Time consuming task here:
-                    self.updateOverlay(for: .Europe)
-                    self.updateOverlay(for: .Asia)
-                    self.updateOverlay(for: .SouthAmerica)
-                    self.updateOverlay(for: .NorthAmerica)
-                    self.updateOverlay(for: .Oceania)
-                    self.updateOverlay(for: .Africa)
+                    self.createOverlays(for: .Europe)
+                    self.createOverlays(for: .Asia)
+                    self.createOverlays(for: .SouthAmerica)
+                    self.createOverlays(for: .NorthAmerica)
+                    self.createOverlays(for: .Oceania)
+                    self.createOverlays(for: .Africa)
         }
     }
     
-    private func updateOverlay(for continent: ListOfCountries.Continents) {
+    private func createOverlays(for continent: ListOfCountries.Continents) {
         
         let countriesToLoop = self.countries.listOfCountries(for: continent)
         
@@ -137,46 +132,34 @@ class WorldMapViewController: UIViewController {
             
             //New Dictinoary loop:
             guard let overlays = overlayDict[country.shortName]?.polygons else { break }
-                
-                //if value.isoA3 == countries[country].shortName {
-                    var identifier = ""
-                    if country.visited == true {
-                        identifier = "visited"
-                        print("Visited: \(country.fullName)")
-                        //self.mkOverlays.append(overlay)
-                    } else if country.wantToGo == true {
-                        identifier = "wantToGo"
-                        print("Want to go to: \(country.fullName)")
-                        //self.mkOverlays.append(overlay)
-                    }
-                    
-                    for overlay in overlays {
-                        //let visitedOverlay = countryOverlays[i].polygons
-                        overlay.identifier = identifier
-                        print("Full name: \(overlayDict[country.shortName]?.isoA3) Identifier: \(overlay.identifier)")
-                    }
             
+            //if value.isoA3 == countries[country].shortName {
+            var identifier = ""
+            if country.visited == true {
+                identifier = "visited"
+                print("Visited: \(country.fullName)")
+                //self.mkOverlays.append(overlay)
+            } else if country.wantToGo == true {
+                identifier = "wantToGo"
+                print("Want to go to: \(country.fullName)")
+                //self.mkOverlays.append(overlay)
+            }
             
+            for overlay in overlays {
+                //let visitedOverlay = countryOverlays[i].polygons
+                overlay.identifier = identifier
+                print("Full name: \(overlayDict[country.shortName]?.isoA3) Identifier: \(overlay.identifier)")
+            }
         }
     }
     
     func renderOverlayToMap() {
-            //Old array loop:
-//            for i in 0 ..< self.mkOverlays.count {
-//                let overlay = self.mkOverlays[i]
-//
-//                self.mapView.addOverlays(overlay, level: .aboveRoads)
-//        }
-        
-    }
-    
-    func renderOverlayToMapFromDict() {
             //New dictionary loop:
         for (_, value) in mkOverlaysDict {
             let overlay = value
             
             self.mapView.addOverlays(overlay, level: .aboveRoads)
-            
+            print("Rendering overlay")
         }
         
     }
@@ -197,17 +180,19 @@ class WorldMapViewController: UIViewController {
     }
     
     func configureColor(of renderer: MKPolygonRenderer, for overlay: MKOverlay) {
+        //let visitedColor = UIColor(red: 61/256, green: 255/256, blue: 123/256, alpha: 1.0)
+        let visitedColor = UIColor(named: "VisitedColor")
         let fillColor: UIColor
         var alphaComponent: CGFloat = 0.8
         if let polygon = overlay as? CustomPolygon, polygon.identifier == "visited" {
-            fillColor = .green
-            alphaComponent = 0.8
+            fillColor = visitedColor!
+            alphaComponent = 1.0
         } else if let polygon = overlay as? CustomPolygon, polygon.identifier == "wantToGo" {
-            fillColor = .yellow
-            alphaComponent = 0.8
+            fillColor = .orange
+            alphaComponent = 1.0
         } else {
             fillColor = .red
-            alphaComponent = 0.3
+            alphaComponent = 0.0
         }
         renderer.fillColor = fillColor.withAlphaComponent(alphaComponent)
     }
