@@ -45,22 +45,44 @@ class WorldMapViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        renderOverlayToMapFromDict()
+        updateOverlayColors(for: .Europe)
+        updateOverlayColors(for: .Africa)
     }
     
     
-    //Not used:
-    func updateOverlayColors() {
+    //
+    
+    //Update overlays if any change has accured:
+    func updateOverlayColors(for continent: ListOfCountries.Continents) {
         
+        let countriesToLoop = self.countries.listOfCountries(for: continent)
         
-        let visitedOverlay = countryOverlays[0].polygons
-        visitedOverlay[0].identifier = "visited"
-        
-        for overlay in mapView.overlays {
-            if let renderer = mapView.renderer(for: overlay) as? MKPolygonRenderer {
-                configureColor(of: renderer, for: overlay)
+        //Loop through countryOverlays and set the overlays identifyer to the correspeonding countrys status:
+        for country in countriesToLoop {
+            
+            guard let overlays = overlayDict[country.shortName]?.polygons else { break }
+            
+            var identifier = ""
+            if country.visited == true {
+                identifier = "visited"
+                print("Visited: \(country.fullName)")
+            } else if country.wantToGo == true {
+                identifier = "wantToGo"
+                print("Want to go to: \(country.fullName)")
+            }
+            
+            //Loop through every individual overlay of the country:
+            for overlay in overlays {
+                overlay.identifier = identifier
+            }
+            
+            for overlay in mapView.overlays {
+                if let renderer = mapView.renderer(for: overlay) as? MKPolygonRenderer {
+                    configureColor(of: renderer, for: overlay)
+                }
             }
         }
+        
     }
     
     private func readJson() {
@@ -134,32 +156,6 @@ class WorldMapViewController: UIViewController {
                         print("Full name: \(overlayDict[country.shortName]?.isoA3) Identifier: \(overlay.identifier)")
                     }
             
-            //Old array loop:
-//            for i in 0 ..< self.countryOverlays.count {
-//
-//                let overlay = self.countryOverlays[i].polygons
-//
-//                print("Antalet lager för \(self.countryOverlays[i].isoA3) är \(overlay.count)")
-//                print("Antalet länder-lager är \(self.countryOverlays.count)")
-//                print("i är: \(i)")
-//
-//                if self.countryOverlays[i].isoA3 == countries[country].shortName {
-//                    var identifier = ""
-//                    if countries[country].visited == true {
-//                        identifier = "visited"
-//                        //self.mkOverlays.append(overlay)
-//                    } else if countries[country].wantToGo {
-//                        identifier = "wantToGo"
-//                        //self.mkOverlays.append(overlay)
-//                    }
-//                    for j in 0..<overlay.count {
-//                        //let visitedOverlay = countryOverlays[i].polygons
-//                        overlay[j].identifier = identifier
-//                        print("\(self.countryOverlays[i].isoA3):s lager är satt till: \(overlay[j].identifier)")
-//                    }
-//                }
-//                print("Adding layer for country \(self.countryOverlays[i].isoA3)")
-//            }
             
         }
     }
@@ -173,18 +169,13 @@ class WorldMapViewController: UIViewController {
 //        }
         
     }
+    
     func renderOverlayToMapFromDict() {
             //New dictionary loop:
         for (_, value) in mkOverlaysDict {
             let overlay = value
             
             self.mapView.addOverlays(overlay, level: .aboveRoads)
-            
-            guard let overlays = overlayDict["SWE"]?.polygons else { break }
-            for layer in overlays {
-                //print("\(overlayDict["SWE"]?.isoA3) has the identifier: \(layer.identifier)")
-                
-            }
             
         }
         
@@ -220,11 +211,6 @@ class WorldMapViewController: UIViewController {
         }
         renderer.fillColor = fillColor.withAlphaComponent(alphaComponent)
     }
-
-    @IBAction func mapTaped(_ sender: UITapGestureRecognizer) {
-        print("Tapped")
-    }
-    
     
     
     /*
