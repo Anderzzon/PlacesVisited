@@ -14,7 +14,6 @@ class CountryGeo {
     var points: [CLLocationCoordinate2D] = []
     var polygons: [CustomPolygon] = []
     
-    
     init(json: [String: Any]) {
         
         let property = json["properties"] as? [String : Any]
@@ -24,7 +23,6 @@ class CountryGeo {
         let geometry = json["geometry"] as? [String : Any]
         
         let type = geometry?["type"] as? String
-        print(type)
         
         switch type {
         case "Polygon":
@@ -32,19 +30,10 @@ class CountryGeo {
             
             let polygons = coordinates?[0] as? [Any]
             
-            for coord in polygons! {
-                let c = coord as? [Double]
+            for coordinate in polygons! {
+                let lngLat = coordinate as? [Double]
                 
-                //let co = CLLocationCoordinate2D(latitude: (c?[0])!, longitude: (c?[1])!)
-                
-                //            let co = CLLocationCoordinate2DMake((c?[0])!, (c?[1])!)
-                
-                //let co = [c?[0], c?[1]]
-                
-                points.append(CLLocationCoordinate2DMake((c?[1])!, (c?[0])!))
-                //print(co)
-                
-                //print(points)
+                points.append(CLLocationCoordinate2DMake((lngLat?[1])!, (lngLat?[0])!))
                 
             }
             let polygon = CustomPolygon(coordinates: &points, count: points.count)
@@ -53,29 +42,19 @@ class CountryGeo {
             self.polygons.append(polygon)
         case "MultiPolygon":
             
-
             let coordinates = geometry?["coordinates"] as! [Any]
             
-            
-            for geo in coordinates {
-                let geo = geo as! [Any]
-                let g2 = geo[0] as! [Any]
+            for geografic in coordinates {
+                let geo = geografic as! [Any]
+                let arrayOfCoordinates = geo[0] as! [Any]
  
                 var pointsToAdd: [CLLocationCoordinate2D] = []
                 
-                for coord in g2 {
-                    //print("Looping coordinates")
+                for coordinate in arrayOfCoordinates {
                     
-                    let c = coord as! [Double]
+                    let lngLat = coordinate as! [Double]
                     
-                  //  let c2 = c![0] as! [Double]
-                    //let co = [c?[0], c?[1]]
-                    
-                    
-                    pointsToAdd.append(CLLocationCoordinate2DMake((c[1]), (c[0])))
-                    //print(co)
-                    
-                    //print(points)
+                    pointsToAdd.append(CLLocationCoordinate2DMake((lngLat[1]), (lngLat[0])))
                     
                 }
                 let polygon = CustomPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count)

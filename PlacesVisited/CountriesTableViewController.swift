@@ -32,6 +32,7 @@ class CountriesTableViewController: UITableViewController {
 //            default:
 //                self.title = "Countries"
 //        }
+
         tableView.reloadData()
     }
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -64,7 +65,7 @@ class CountriesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //countries.loadItems()
+        
         tableView.reloadData()
 
 //        switch segmentControl.selectedSegmentIndex {
@@ -75,6 +76,10 @@ class CountriesTableViewController: UITableViewController {
 //            default:
 //                self.title = "countries"
 //        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        countries.loadItems()
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -135,6 +140,7 @@ class CountriesTableViewController: UITableViewController {
             
         switch segmentControl.selectedSegmentIndex {
         case 0: //All countries
+ 
             if let continent = continentsForSectionIndex(indexPath.section) {
                 let items = countries.listOfCountries(for: continent)
                 let item = items[indexPath.row]
@@ -178,12 +184,9 @@ class CountriesTableViewController: UITableViewController {
                         configureCheckmark(for: cell, with: item)
                         item.updateMap = true
                         tableView.deselectRow(at: indexPath, animated: true)
+                        tableView.reloadData()
                         
                         print("\(item.fullName) set to: \(item.visited)")
-                        
-//                        var world = countries.percentOfWorldVisited()
-//                        var progress = countries.bucketListProgress()
-                        
                         
                     case 1:
                         let items = countries.listOfCountriesNotVisited(for: continent)

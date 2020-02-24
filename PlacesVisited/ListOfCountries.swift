@@ -132,7 +132,6 @@ class ListOfCountries {
             countriesInNorthAmerica = try managedContext.fetch(fetchNorthAmerica)
             countriesInSouthAmerica = try managedContext.fetch(fetchSouthAmerica)
             countriesInOceania = try managedContext.fetch(fetchOceania)
-            //countriesInEurope = try managedContext.fetch(fetchALL)
             
         } catch let error as NSError {
             print("Could not fetch \(error)")

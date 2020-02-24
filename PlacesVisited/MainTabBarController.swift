@@ -23,19 +23,24 @@ class MainTabBarController: UITabBarController {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
            let managedContext = appDelegate!.persistentContainer.viewContext
            
-           countries = ListOfCountries(context: managedContext)
+        countries = ListOfCountries(context: managedContext)
+        countries.loadItems()
+        let numberOfItems = countries.totalNumberOfCountries
+        print("Number of countries: \(numberOfItems)")
+        
+        if numberOfItems < 1 {
+            //Run this to create all countries:
+            createDatabase()
+        }
         
         //Run this to delete all:
         //countries.deleteData()
         
-        //Run this to create all countries:
-        //createDatabase()
-        
         //load countries from database if there is any:
         countries.loadItems()
-        readJson()
-        produceOverlay()
-        createAllOverlays()
+        
+        
+        prepareMap()
         
         guard let viewControllers = viewControllers else {return}
         
@@ -56,10 +61,17 @@ class MainTabBarController: UITabBarController {
                 worldMapViewController.countries = countries
                 worldMapViewController.overlayDict = overlayDict
                 worldMapViewController.mkOverlaysDict = mkOverlaysDict
-                
             }
         }
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+    }
+    
+    func prepareMap() {
+        readJson()
+        produceOverlay()
+        createAllOverlays()
     }
     
     //Test:
@@ -72,11 +84,12 @@ class MainTabBarController: UITabBarController {
                 let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
                 json = try? JSONSerialization.jsonObject(with: data)
             } catch {
-                // Handle error here
+                print(error)
             }
         }
         return json
     }
+    
     private func readJson() {
         //Read json:
         if let json = readJSONFromFile(fileName: "allCountries") as? [[String : Any]] {
@@ -139,8 +152,6 @@ class MainTabBarController: UITabBarController {
             }
         }
     }
-    
-    
     
     func createDatabase() {
         
@@ -276,8 +287,8 @@ class MainTabBarController: UITabBarController {
         countries.createCountry(fullName: "Nauru", shortName: "NRU", continent: "Oceania", flagIcon: "🇳🇷")
         countries.createCountry(fullName: "New Zealand", shortName: "NZL", continent: "Oceania", flagIcon: "🇳🇿")
         countries.createCountry(fullName: "Palau", shortName: "PLW", continent: "Oceania", flagIcon: "🇵🇼")
-        countries.createCountry(fullName: "Papua New Guinea", shortName: "PNG", continent: "Ocenaia", flagIcon: "🇵🇬")
-        countries.createCountry(fullName: "Samoa", shortName: "WSM", continent: "Ocenaia", flagIcon: "🇼🇸")
+        countries.createCountry(fullName: "Papua New Guinea", shortName: "PNG", continent: "Oceania", flagIcon: "🇵🇬")
+        countries.createCountry(fullName: "Samoa", shortName: "WSM", continent: "Oceania", flagIcon: "🇼🇸")
         countries.createCountry(fullName: "Solomon Islands", shortName: "SLB", continent: "Oceania", flagIcon: "🇸🇧")
         countries.createCountry(fullName: "Tonga", shortName: "TON", continent: "Oceania", flagIcon: "🇹🇴")
         countries.createCountry(fullName: "Tuvalu", shortName: "TUV", continent: "Oceania", flagIcon: "🇹🇻")

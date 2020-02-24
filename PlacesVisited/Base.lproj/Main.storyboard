@@ -188,21 +188,6 @@
             </objects>
             <point key="canvasLocation" x="3097.1014492753625" y="96.428571428571431"/>
         </scene>
-        <!--Json Test View Controller-->
-        <scene sceneID="OM8-Vv-Pk3">
-            <objects>
-                <viewController id="WJP-Pe-bks" customClass="JsonTestViewController" customModule="PlacesVisited" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="doU-zD-08r">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="NnK-SB-CAC"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YJR-76-r4i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-805" y="796"/>
-        </scene>
         <!--Your Progress-->
         <scene sceneID="hfy-HV-ldQ">
             <objects>
