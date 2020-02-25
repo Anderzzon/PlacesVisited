@@ -105,22 +105,31 @@ class ListOfCountries {
     
     func loadItems() {
 
+        let sortDescriptor = NSSortDescriptor(key: "fullName", ascending: true)
+        
         let fetchAsia = NSFetchRequest<Country>(entityName: "Country")
+        fetchAsia.sortDescriptors = [sortDescriptor]
         fetchAsia.predicate = NSPredicate(format: "continent == %@", "Asia")
+        //fetchAsia.sortDescriptors = [NSSortDescriptor(key: "Country", ascending: true)]
         
         let fetchEurope = NSFetchRequest<Country>(entityName: "Country")
+        fetchEurope.sortDescriptors = [sortDescriptor]
         fetchEurope.predicate = NSPredicate(format: "continent == %@", "Europe")
         
         let fetchAfrica = NSFetchRequest<Country>(entityName: "Country")
+        fetchAfrica.sortDescriptors = [sortDescriptor]
         fetchAfrica.predicate = NSPredicate(format: "continent == %@", "Africa")
         
         let fetchNorthAmerica = NSFetchRequest<Country>(entityName: "Country")
+        fetchNorthAmerica.sortDescriptors = [sortDescriptor]
         fetchNorthAmerica.predicate = NSPredicate(format: "continent == %@", "North America")
         
         let fetchSouthAmerica = NSFetchRequest<Country>(entityName: "Country")
+        fetchSouthAmerica.sortDescriptors = [sortDescriptor]
         fetchSouthAmerica.predicate = NSPredicate(format: "continent == %@", "South America")
         
         let fetchOceania = NSFetchRequest<Country>(entityName: "Country")
+        fetchOceania.sortDescriptors = [sortDescriptor]
         fetchOceania.predicate = NSPredicate(format: "continent == %@", "Oceania")
         
         //let fetchALL = NSFetchRequest<Country>(entityName: "Country")

@@ -31,40 +31,6 @@ class StatsViewController: UIViewController {
     @IBOutlet weak var numberOfCountriesOnBucketList: UILabel!
     @IBOutlet weak var percentOfWorldVisited: UILabel!
     
-    
-    //Not used:
-//    let countriesVisitedLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = ""
-//        label.textAlignment = .center
-//        label.font = UIFont.boldSystemFont(ofSize: 20)
-//        label.textColor = .orange
-//        return label
-//    } ()
-//
-//    let bucketListLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Bucket List"
-//        label.textAlignment = .center
-//        label.font = UIFont.boldSystemFont(ofSize: 20)
-//        label.textColor = .orange
-//        return label
-//    } ()
-//
-//    let percentOfWorldLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "% of world"
-//        label.textAlignment = .center
-//        label.font = UIFont.boldSystemFont(ofSize: 20)
-//        label.textColor = .orange
-//        return label
-//    } ()
-    
-    //?:
-//    private func continentsForSectionIndex(_ index: Int) -> ListOfCountries.Continents? {
-//        return ListOfCountries.Continents(rawValue: index)
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,21 +59,6 @@ class StatsViewController: UIViewController {
         numberOfCountriesVisitedLabel.text = "\(countries.numberOfCountriesVisited)"
         numberOfCountriesOnBucketList.text = "\(countries.numberOfCountriesWantToGoTo)"
         percentOfWorldVisited.text = "\(countries.percentOfWorldVisited())%"
-        
-        //Cant get this to align correctly:
-//        view.addSubview(countriesVisitedLabel)
-//        countriesVisitedLabel.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-//        countriesVisitedLabel.center = countriesVisited.center
-//
-//        view.addSubview(bucketListLabel)
-//        bucketListLabel.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-//        bucketListLabel.center = onYourBucketList.center
-//
-//        view.addSubview(percentOfWorldLabel)
-//        percentOfWorldLabel.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-//        percentOfWorldLabel.center = percentOfTheWorld.center
-        
-        //adjustNavigationBar() //Sets navigation bar to the correct color
         
     }
     
