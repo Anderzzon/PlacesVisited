@@ -9,25 +9,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CountryTableViewCell" customModule="PlacesVisited" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CountryTableViewCell" customModule="Places_Visited" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXw-Mg-yv1">
-                        <rect key="frame" x="22" y="11" width="25" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="25" id="UR6-Ei-oS0"/>
-                            <constraint firstAttribute="height" constant="25" id="bnb-Vg-Cxj"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXw-Mg-yv1">
+                        <rect key="frame" x="0.0" y="0.0" width="46" height="44"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1O-an-uQI">
-                        <rect key="frame" x="57" y="11" width="223" height="21"/>
+                        <rect key="frame" x="57" y="11" width="223" height="22"/>
                         <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -35,12 +31,13 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="hXw-Mg-yv1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="4MA-9r-lkz"/>
+                    <constraint firstItem="hXw-Mg-yv1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="4MA-9r-lkz"/>
                     <constraint firstAttribute="trailing" secondItem="e1O-an-uQI" secondAttribute="trailing" constant="40" id="BCQ-G8-F7p"/>
-                    <constraint firstItem="hXw-Mg-yv1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="VvB-L0-2T6"/>
+                    <constraint firstItem="e1O-an-uQI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="57" id="GjW-PY-K42"/>
+                    <constraint firstAttribute="bottom" secondItem="hXw-Mg-yv1" secondAttribute="bottom" id="Ljf-eV-GcX"/>
+                    <constraint firstItem="hXw-Mg-yv1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VvB-L0-2T6"/>
                     <constraint firstAttribute="bottom" secondItem="e1O-an-uQI" secondAttribute="bottom" constant="11" id="fVM-Vi-TIl"/>
-                    <constraint firstItem="e1O-an-uQI" firstAttribute="leading" secondItem="hXw-Mg-yv1" secondAttribute="trailing" constant="10" id="iKo-JN-z9a"/>
-                    <constraint firstAttribute="bottom" secondItem="hXw-Mg-yv1" secondAttribute="bottom" constant="11" id="mbE-Fs-FKO"/>
+                    <constraint firstItem="e1O-an-uQI" firstAttribute="leading" secondItem="hXw-Mg-yv1" secondAttribute="trailing" constant="11" id="vCO-SI-t4A"/>
                     <constraint firstItem="e1O-an-uQI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="w0N-xm-acO"/>
                 </constraints>
             </tableViewCellContentView>

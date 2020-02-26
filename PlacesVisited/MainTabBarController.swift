@@ -52,10 +52,17 @@ class MainTabBarController: UITabBarController {
                     countriesTableViewController.countries = countries
                 }
             }
+            if let statsViewNavigationViewController = viewController as? StatsViewNavigationViewController {
                 
-                if let statsViewController = viewController as? StatsViewController {
+                if let statsViewController = statsViewNavigationViewController.viewControllers.first as? StatsViewController {
                     statsViewController.countries = countries
                 }
+                
+            }
+                
+//                if let statsViewController = viewController as? StatsViewController {
+//                    statsViewController.countries = countries
+//                }
             
             if let worldMapViewController = viewController as? WorldMapViewController {
                 worldMapViewController.countries = countries

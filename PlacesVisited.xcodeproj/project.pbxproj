@@ -26,6 +26,7 @@
 		03B014B823FAC47A0060794A /* caymenIslands.json in Resources */ = {isa = PBXBuildFile; fileRef = 03B014B723FAC47A0060794A /* caymenIslands.json */; };
 		03B014C023FD3AF60060794A /* CustomPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B014BF23FD3AF60060794A /* CustomPolygon.swift */; };
 		03B014C423FDE5450060794A /* allCountries.json in Resources */ = {isa = PBXBuildFile; fileRef = 03B014C323FDE5450060794A /* allCountries.json */; };
+		03B014C8240550A40060794A /* StatsViewNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B014C7240550A30060794A /* StatsViewNavigationViewController.swift */; };
 		03BFB28A23EACD9C00677825 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BFB28923EACD9C00677825 /* MapViewController.swift */; };
 		03D54A6723E37B1200C81CC2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */; };
 		03D54A6923E37B4F00C81CC2 /* TableViewNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */; };
@@ -80,6 +81,7 @@
 		03B014B723FAC47A0060794A /* caymenIslands.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = caymenIslands.json; sourceTree = "<group>"; };
 		03B014BF23FD3AF60060794A /* CustomPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPolygon.swift; sourceTree = "<group>"; };
 		03B014C323FDE5450060794A /* allCountries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allCountries.json; sourceTree = "<group>"; };
+		03B014C7240550A30060794A /* StatsViewNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewNavigationViewController.swift; sourceTree = "<group>"; };
 		03BFB28923EACD9C00677825 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNavigationViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				03E7994823E1A5E900AC25FE /* PlacesVisited.xcdatamodeld */,
 				03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */,
 				03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */,
+				03B014C7240550A30060794A /* StatsViewNavigationViewController.swift */,
 				036E1EBB23F57E0F001250C5 /* CountriesClean.json */,
 				03B014B723FAC47A0060794A /* caymenIslands.json */,
 				03B014C323FDE5450060794A /* allCountries.json */,
@@ -465,6 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03BFB28A23EACD9C00677825 /* MapViewController.swift in Sources */,
+				03B014C8240550A40060794A /* StatsViewNavigationViewController.swift in Sources */,
 				03912D9423D08418008EF805 /* AppDelegate.swift in Sources */,
 				03D54A6923E37B4F00C81CC2 /* TableViewNavigationViewController.swift in Sources */,
 				03912D9623D08418008EF805 /* SceneDelegate.swift in Sources */,
