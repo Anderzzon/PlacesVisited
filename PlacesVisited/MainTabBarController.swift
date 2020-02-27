@@ -59,10 +59,6 @@ class MainTabBarController: UITabBarController {
                 }
                 
             }
-                
-//                if let statsViewController = viewController as? StatsViewController {
-//                    statsViewController.countries = countries
-//                }
             
             if let worldMapViewController = viewController as? WorldMapViewController {
                 worldMapViewController.countries = countries
@@ -111,6 +107,8 @@ class MainTabBarController: UITabBarController {
             }
         }
     }
+    
+    //Generate all overlays and add the to the dicionary of MKOverlays:
     private func produceOverlay() {
         for (_, value) in overlayDict {
             let overlay = value.polygons
@@ -130,6 +128,7 @@ class MainTabBarController: UITabBarController {
         }
     }
     
+    
     private func createOverlays(for continent: ListOfCountries.Continents) {
         
         let countriesToLoop = self.countries.listOfCountries(for: continent)
@@ -137,25 +136,23 @@ class MainTabBarController: UITabBarController {
         //Loop through countryOverlays and set the overlays identifyer to the correspeonding countrys status:
         for country in countriesToLoop {
             
-            //New Dictinoary loop:
             guard let overlays = overlayDict[country.shortName]?.polygons else { break }
             
-            //if value.isoA3 == countries[country].shortName {
             var identifier = ""
             if country.visited == true {
                 identifier = "visited"
-                print("Visited: \(country.fullName)")
+                //print("Visited: \(country.fullName)")
                 //self.mkOverlays.append(overlay)
             } else if country.wantToGo == true {
                 identifier = "wantToGo"
-                print("Want to go to: \(country.fullName)")
+                //print("Want to go to: \(country.fullName)")
                 //self.mkOverlays.append(overlay)
             }
             
             for overlay in overlays {
-                //let visitedOverlay = countryOverlays[i].polygons
+                
                 overlay.identifier = identifier
-                print("Full name: \(overlayDict[country.shortName]?.isoA3) Identifier: \(overlay.identifier)")
+                //print("Full name: \(overlayDict[country.shortName]?.isoA3) Identifier: \(overlay.identifier)")
             }
         }
     }

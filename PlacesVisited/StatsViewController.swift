@@ -182,7 +182,9 @@ class StatsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         countries.loadItems()
-        percentBigLabel.text = "\(countries.bucketListProgress())%"
+        if countries.bucketListProgress() > 0 {
+            percentBigLabel.text = "\(countries.bucketListProgress())%"
+        }
         leftToGoLabel.text = "\(countries.numberOfCountriesWantToGoTo) more to go"
         
         animateCircle()

@@ -60,7 +60,7 @@ class CountryGeo {
                 let polygon = CustomPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count)
                 //let polygon = CustomPolygon(coordinates: &pointsToAdd, count: 3)
                 //print("Making MKPolygon")
-                if pointsToAdd.count > 80 {
+                if pointsToAdd.count > 70 {
                 
                 self.polygons.append(polygon)
                 }

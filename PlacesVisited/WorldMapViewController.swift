@@ -34,11 +34,7 @@ class WorldMapViewController: UIViewController {
                 mapView.setRegion(region, animated: true)
         mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 2500000.0, maxCenterCoordinateDistance: 100000000.0), animated: true)
         
-        //readJson()
-        //produceOverlay()
-        //createAllOverlays()
         renderOverlayToMap()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,7 +67,7 @@ class WorldMapViewController: UIViewController {
             
             for overlay in mapView.overlays {
                 if let renderer = mapView.renderer(for: overlay) as? MKPolygonRenderer {
-                    configureColor(of: renderer, for: overlay)
+                    configureColorForOverlays(of: renderer, for: overlay)
                 }
             }
             country.updateMap = false
@@ -87,72 +83,6 @@ class WorldMapViewController: UIViewController {
             self.updateOverlayColors(for: .Oceania)
     }
     
-    private func readJson() {
-        //Read json:
-        if let json = readJSONFromFile(fileName: "allCountries") as? [[String : Any]] {
-
-            //Loop through json and append countries to array of countryOverlays:
-            for co in json {
-                
-                let country = CountryGeo(json: co )
-            
-                //countryOverlays.append(country)
-                overlayDict[country.isoA3!] = country
-            }
-        }
-    }
-    
-    //Generate all overlays and add the to the dicionary of MKOverlays
-    private func produceOverlay() {
-        for (_, value) in overlayDict {
-            let overlay = value.polygons
-            mkOverlaysDict[value.isoA3!] = overlay
-        }
-    }
-    
-    private func createAllOverlays() {
-                let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
-                dispatchQueue.async{
-                    //Time consuming task here:
-                    self.createOverlays(for: .Europe)
-                    self.createOverlays(for: .Asia)
-                    self.createOverlays(for: .SouthAmerica)
-                    self.createOverlays(for: .NorthAmerica)
-                    self.createOverlays(for: .Oceania)
-                    self.createOverlays(for: .Africa)
-        }
-    }
-    
-    private func createOverlays(for continent: ListOfCountries.Continents) {
-        
-        let countriesToLoop = self.countries.listOfCountries(for: continent)
-        
-        //Loop through countryOverlays and set the overlays identifyer to the correspeonding countrys status:
-        for country in countriesToLoop {
-            
-            //New Dictinoary loop:
-            guard let overlays = overlayDict[country.shortName]?.polygons else { break }
-            
-            //if value.isoA3 == countries[country].shortName {
-            var identifier = ""
-            if country.visited == true {
-                identifier = "visited"
-                print("Visited: \(country.fullName)")
-                //self.mkOverlays.append(overlay)
-            } else if country.wantToGo == true {
-                identifier = "wantToGo"
-                print("Want to go to: \(country.fullName)")
-                //self.mkOverlays.append(overlay)
-            }
-            
-            for overlay in overlays {
-                //let visitedOverlay = countryOverlays[i].polygons
-                overlay.identifier = identifier
-                print("Full name: \(overlayDict[country.shortName]?.isoA3) Identifier: \(overlay.identifier)")
-            }
-        }
-    }
-    
     func renderOverlayToMap() {
             //New dictionary loop:
         for (_, value) in mkOverlaysDict {
@@ -164,22 +94,7 @@ class WorldMapViewController: UIViewController {
         
     }
     
-    func readJSONFromFile(fileName: String) -> Any? {
-        var json: Any?
-        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
-            do {
-                let fileUrl = URL(fileURLWithPath: path)
-                // Getting data from JSON file using the file URL
-                let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
-                json = try? JSONSerialization.jsonObject(with: data)
-            } catch {
-                // Handle error here
-            }
-        }
-        return json
-    }
-    
-    func configureColor(of renderer: MKPolygonRenderer, for overlay: MKOverlay) {
+    func configureColorForOverlays(of renderer: MKPolygonRenderer, for overlay: MKOverlay) {
         //let visitedColor = UIColor(red: 61/256, green: 255/256, blue: 123/256, alpha: 1.0)
         let visitedColor = UIColor(named: "VisitedColor")
         let fillColor: UIColor
@@ -218,7 +133,7 @@ extension WorldMapViewController: MKMapViewDelegate {
         renderer.strokeColor = UIColor.black
         //renderer.fillColor = UIColor.green
         //renderer.fillColor = variables.fillColor
-        configureColor(of: renderer, for: overlay)
+        configureColorForOverlays(of: renderer, for: overlay)
         renderer.lineWidth = 0.3
         
         //print("rendering layer")
