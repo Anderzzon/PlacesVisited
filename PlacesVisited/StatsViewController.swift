@@ -136,9 +136,6 @@ class StatsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //statusBar()
-        //adjustNavigationBar()
-        
         //Load Country objects:
         countries.loadItems()
         

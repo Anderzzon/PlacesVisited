@@ -58,54 +58,16 @@ class CountryGeo {
                     
                 }
                 let polygon = CustomPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count)
-                //let polygon = CustomPolygon(coordinates: &pointsToAdd, count: 3)
                 //print("Making MKPolygon")
                 if pointsToAdd.count > 70 {
                 
                 self.polygons.append(polygon)
                 }
                 //print("Adding MKPolygon to array")
-                
             }
-            
-            
-            
-            
-            
-            
-            //let multiPolygons = coordinates?[0] as? [Any]
-            
-            //var pointsToAdd: [CLLocationCoordinate2D] = []
-//
-//            for geo in multiPolygons! {
-//                print("Looping polygons")
-//
-//                let polygons = geo as? [Any]
-//
-//                for coord in polygons! {
-//                    print("Looping coordinates")
-//
-//                    let c = coord as? [Double]
-//
-//                    //let co = [c?[0], c?[1]]
-//
-//                    pointsToAdd.append(CLLocationCoordinate2DMake((c?[1])!, (c?[0])!))
-//                    //print(co)
-//
-//                    //print(points)
-//
-//                }
 
-            //}
         default:
             break
         }
-        
-        
-        
     }
-    
-    
-    
-    
 }

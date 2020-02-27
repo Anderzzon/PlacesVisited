@@ -16,7 +16,6 @@ class MainTabBarController: UITabBarController {
     var overlayDict = [String: CountryGeo]()
     var mkOverlaysDict = [String: [MKOverlay]]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,7 +38,6 @@ class MainTabBarController: UITabBarController {
         //load countries from database if there is any:
         countries.loadItems()
         
-        
         prepareMap()
         
         guard let viewControllers = viewControllers else {return}
@@ -52,12 +50,12 @@ class MainTabBarController: UITabBarController {
                     countriesTableViewController.countries = countries
                 }
             }
+            
             if let statsViewNavigationViewController = viewController as? StatsViewNavigationViewController {
                 
                 if let statsViewController = statsViewNavigationViewController.viewControllers.first as? StatsViewController {
                     statsViewController.countries = countries
                 }
-                
             }
             
             if let worldMapViewController = viewController as? WorldMapViewController {
@@ -68,17 +66,13 @@ class MainTabBarController: UITabBarController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-    }
-    
-    func prepareMap() {
-        readJson()
+    private func prepareMap() {
+        parseJSON()
         produceOverlay()
         createAllOverlays()
     }
     
-    //Test:
-    func readJSONFromFile(fileName: String) -> Any? {
+    private func readJSONFromFile(fileName: String) -> Any? {
         var json: Any?
         if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
             do {
@@ -93,7 +87,7 @@ class MainTabBarController: UITabBarController {
         return json
     }
     
-    private func readJson() {
+    private func parseJSON() {
         //Read json:
         if let json = readJSONFromFile(fileName: "allCountries") as? [[String : Any]] {
 
@@ -115,19 +109,19 @@ class MainTabBarController: UITabBarController {
             mkOverlaysDict[value.isoA3!] = overlay
         }
     }
+    
     private func createAllOverlays() {
-                let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
-                dispatchQueue.async{
-                    //Time consuming task here:
-                    self.createOverlays(for: .Europe)
-                    self.createOverlays(for: .Asia)
-                    self.createOverlays(for: .SouthAmerica)
-                    self.createOverlays(for: .NorthAmerica)
-                    self.createOverlays(for: .Oceania)
-                    self.createOverlays(for: .Africa)
+        let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
+        dispatchQueue.async{
+            //Time consuming task here:
+            self.createOverlays(for: .Europe)
+            self.createOverlays(for: .Asia)
+            self.createOverlays(for: .SouthAmerica)
+            self.createOverlays(for: .NorthAmerica)
+            self.createOverlays(for: .Oceania)
+            self.createOverlays(for: .Africa)
         }
     }
-    
     
     private func createOverlays(for continent: ListOfCountries.Continents) {
         
@@ -158,7 +152,6 @@ class MainTabBarController: UITabBarController {
     }
     
     func createDatabase() {
-        
         //Europe:
         countries.createCountry(fullName: "Albania", shortName: "ALB", continent: "Europe", flagIcon: "🇦🇱")
         countries.createCountry(fullName: "Andorra", shortName: "AND", continent: "Europe", flagIcon: "🇦🇩")
@@ -367,10 +360,8 @@ class MainTabBarController: UITabBarController {
         countries.createCountry(fullName: "Suriname", shortName: "SUR", continent: "South America", flagIcon: "🇸🇷")
         countries.createCountry(fullName: "Uruguay", shortName: "URY", continent: "South America", flagIcon: "🇺🇾")
         countries.createCountry(fullName: "Venezuela", shortName: "VEN", continent: "South America", flagIcon: "🇻🇪")
-        
     }
   
-
     /*
     // MARK: - Navigation
 

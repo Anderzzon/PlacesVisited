@@ -21,20 +21,12 @@ class Country: NSManagedObject {
     @NSManaged var updateMap: Bool
     
     //Sets a country to visited or reverse that
-    func visitCountry(visit: Bool ) {
-        visited = visit
-    }
-    
     func toggleVisited() {
          visited = !visited
     }
     
     func toggleWantToGo() {
-        if self.wantToGo == false {
-            wantToGo = true
-        } else if self.wantToGo == true {
-            wantToGo = false
-        }
+        wantToGo = !wantToGo
     }
     
 }

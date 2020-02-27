@@ -72,18 +72,6 @@ class ListOfCountries {
         }
     }
     
-//    func resetAllRecords() // entity = Your_Entity_Name
-//    {
-//        let deleteFetch = NSFetchRequest<Country>(entityName: "Country")
-//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch as! NSFetchRequest<NSFetchRequestResult>)
-//
-//        do {
-//            try myPersistentStoreCoordinator.executeRequest(deleteRequest, withContext: "name")
-//        } catch let error as NSError {
-//            // TODO: handle the error
-//        }
-//    }
-    
     func deleteData() {
         let fetchRequest = NSFetchRequest<Country>(entityName: "Country")
            fetchRequest.returnsObjectsAsFaults = false
@@ -110,7 +98,6 @@ class ListOfCountries {
         let fetchAsia = NSFetchRequest<Country>(entityName: "Country")
         fetchAsia.sortDescriptors = [sortDescriptor]
         fetchAsia.predicate = NSPredicate(format: "continent == %@", "Asia")
-        //fetchAsia.sortDescriptors = [NSSortDescriptor(key: "Country", ascending: true)]
         
         let fetchEurope = NSFetchRequest<Country>(entityName: "Country")
         fetchEurope.sortDescriptors = [sortDescriptor]
@@ -217,33 +204,34 @@ class ListOfCountries {
     
     var numberOfCountriesVisited:Int {
         var numberOfCountriesVisited = 0
-        for i in 0..<countriesInAsia.count {
-            if countriesInAsia[i].visited == true {
+        
+        for country in countriesInAsia {
+            if country.visited == true {
                 numberOfCountriesVisited += 1
             }
         }
-        for i in 0..<countriesInAfrica.count {
-            if countriesInAfrica[i].visited == true {
+        for country in countriesInAfrica {
+            if country.visited == true {
                 numberOfCountriesVisited += 1
             }
         }
-        for i in 0..<countriesInNorthAmerica.count {
-            if countriesInNorthAmerica[i].visited == true {
+        for country in countriesInNorthAmerica {
+            if country.visited == true {
                 numberOfCountriesVisited += 1
             }
         }
-        for i in 0..<countriesInEurope.count {
-            if countriesInEurope[i].visited == true {
+        for country in countriesInEurope {
+            if country.visited == true {
                 numberOfCountriesVisited += 1
             }
         }
-        for i in 0..<countriesInSouthAmerica.count {
-            if countriesInSouthAmerica[i].visited == true {
+        for country in countriesInSouthAmerica {
+            if country.visited == true {
                 numberOfCountriesVisited += 1
             }
         }
-        for i in 0..<countriesInOceania.count {
-            if countriesInOceania[i].visited == true {
+        for country in countriesInOceania {
+            if country.visited == true {
                 numberOfCountriesVisited += 1
             }
         }
@@ -252,73 +240,37 @@ class ListOfCountries {
 
     var numberOfCountriesWantToGoTo:Int {
         var numberOfCountriesWantToGoTo = 0
-        for i in 0..<countriesInAsia.count {
-            if countriesInAsia[i].wantToGo == true && countriesInAsia[i].visited == false {
+        for country in countriesInAsia {
+            if country.wantToGo == true && country.visited == false {
                 numberOfCountriesWantToGoTo += 1
             }
         }
-        for i in 0..<countriesInAfrica.count {
-            if countriesInAfrica[i].wantToGo == true && countriesInAfrica[i].visited == false {
+        for country in countriesInAfrica {
+            if country.wantToGo == true && country.visited == false {
                 numberOfCountriesWantToGoTo += 1
             }
         }
-        for i in 0..<countriesInNorthAmerica.count {
-            if countriesInNorthAmerica[i].wantToGo == true && countriesInNorthAmerica[i].visited == false {
+        for country in countriesInNorthAmerica {
+            if country.wantToGo == true && country.visited == false {
                 numberOfCountriesWantToGoTo += 1
             }
         }
-        for i in 0..<countriesInEurope.count {
-            if countriesInEurope[i].wantToGo == true && countriesInEurope[i].visited == false {
+        for country in countriesInEurope {
+            if country.wantToGo == true && country.visited == false {
                 numberOfCountriesWantToGoTo += 1
             }
         }
-        for i in 0..<countriesInSouthAmerica.count {
-            if countriesInSouthAmerica[i].wantToGo == true && countriesInSouthAmerica[i].visited == false {
+        for country in countriesInSouthAmerica {
+            if country.wantToGo == true && country.visited == false {
                 numberOfCountriesWantToGoTo += 1
             }
         }
-        for i in 0..<countriesInOceania.count {
-            if countriesInOceania[i].wantToGo == true && countriesInOceania[i].visited == false {
+        for country in countriesInOceania {
+            if country.wantToGo == true && country.visited == false {
                 numberOfCountriesWantToGoTo += 1
             }
         }
         return numberOfCountriesWantToGoTo
-    }
-    
-    //This functions is currently not used:
-    var numberOfCountriesNotVisited:Int {
-        var numberOfCountriesNotVisited = 0
-        for i in 0..<countriesInAsia.count {
-            if countriesInAsia[i].visited == false {
-                numberOfCountriesNotVisited += 1
-            }
-        }
-        for i in 0..<countriesInAfrica.count {
-            if countriesInAfrica[i].visited == false {
-                numberOfCountriesNotVisited += 1
-            }
-        }
-        for i in 0..<countriesInNorthAmerica.count {
-            if countriesInNorthAmerica[i].visited == false {
-                numberOfCountriesNotVisited += 1
-            }
-        }
-        for i in 0..<countriesInEurope.count {
-            if countriesInEurope[i].visited == false {
-                numberOfCountriesNotVisited += 1
-            }
-        }
-        for i in 0..<countriesInSouthAmerica.count {
-            if countriesInSouthAmerica[i].visited == false {
-                numberOfCountriesNotVisited += 1
-            }
-        }
-        for i in 0..<countriesInOceania.count {
-            if countriesInOceania[i].visited == false {
-                numberOfCountriesNotVisited += 1
-            }
-        }
-        return numberOfCountriesNotVisited
     }
     
     func listOfCountries(for continent: Continents) -> [Country] {
@@ -342,44 +294,44 @@ class ListOfCountries {
         var countriesNotVisited: [Country] = []
         switch continent {
         case .Africa:
-            for i in 0..<countriesInAfrica.count {
-                if countriesInAfrica[i].visited == false {
-                    countriesNotVisited.append(countriesInAfrica[i])
+            for country in countriesInAfrica {
+                if country.visited == false {
+                    countriesNotVisited.append(country)
                 }
             }
             return countriesNotVisited
         case .Asia:
-            for i in 0..<countriesInAsia.count {
-                if countriesInAsia[i].visited == false {
-                    countriesNotVisited.append(countriesInAsia[i])
+            for country in countriesInAsia {
+                if country.visited == false {
+                    countriesNotVisited.append(country)
                 }
             }
             return countriesNotVisited
         case .Europe:
-            for i in 0..<countriesInEurope.count {
-                if countriesInEurope[i].visited == false {
-                    countriesNotVisited.append(countriesInEurope[i])
+            for country in countriesInEurope {
+                if country.visited == false {
+                    countriesNotVisited.append(country)
                 }
             }
             return countriesNotVisited
         case .NorthAmerica:
-            for i in 0..<countriesInNorthAmerica.count {
-                if countriesInNorthAmerica[i].visited == false {
-                    countriesNotVisited.append(countriesInNorthAmerica[i])
+            for country in countriesInNorthAmerica {
+                if country.visited == false {
+                    countriesNotVisited.append(country)
                 }
             }
             return countriesNotVisited
         case .SouthAmerica:
-            for i in 0..<countriesInSouthAmerica.count {
-                if countriesInSouthAmerica[i].visited == false {
-                    countriesNotVisited.append(countriesInSouthAmerica[i])
+            for country in countriesInSouthAmerica {
+                if country.visited == false {
+                    countriesNotVisited.append(country)
                 }
             }
             return countriesNotVisited
         case .Oceania:
-            for i in 0..<countriesInOceania.count {
-                if countriesInOceania[i].visited == false {
-                    countriesNotVisited.append(countriesInOceania[i])
+            for country in countriesInOceania {
+                if country.visited == false {
+                    countriesNotVisited.append(country)
                 }
             }
         return countriesNotVisited
@@ -387,50 +339,50 @@ class ListOfCountries {
     }
     
     func listOfCountriesToUpdate(for continent: Continents) -> [Country] {
-        var countriesNotVisited: [Country] = []
+        var countriesToUpdate: [Country] = []
         switch continent {
         case .Africa:
-            for i in 0..<countriesInAfrica.count {
-                if countriesInAfrica[i].updateMap == true {
-                    countriesNotVisited.append(countriesInAfrica[i])
+            for country in countriesInAfrica {
+                if country.updateMap == true {
+                    countriesToUpdate.append(country)
                 }
             }
-            return countriesNotVisited
+            return countriesToUpdate
         case .Asia:
-            for i in 0..<countriesInAsia.count {
-                if countriesInAsia[i].updateMap == true {
-                    countriesNotVisited.append(countriesInAsia[i])
+            for country in countriesInAsia {
+                if country.updateMap == true {
+                    countriesToUpdate.append(country)
                 }
             }
-            return countriesNotVisited
+            return countriesToUpdate
         case .Europe:
-            for i in 0..<countriesInEurope.count {
-                if countriesInEurope[i].updateMap == true {
-                    countriesNotVisited.append(countriesInEurope[i])
+            for country in countriesInEurope {
+                if country.updateMap == true {
+                    countriesToUpdate.append(country)
                 }
             }
-            return countriesNotVisited
+            return countriesToUpdate
         case .NorthAmerica:
-            for i in 0..<countriesInNorthAmerica.count {
-                if countriesInNorthAmerica[i].updateMap == true {
-                    countriesNotVisited.append(countriesInNorthAmerica[i])
+            for country in countriesInNorthAmerica {
+                if country.updateMap == true {
+                    countriesToUpdate.append(country)
                 }
             }
-            return countriesNotVisited
+            return countriesToUpdate
         case .SouthAmerica:
-            for i in 0..<countriesInSouthAmerica.count {
-                if countriesInSouthAmerica[i].updateMap == true {
-                    countriesNotVisited.append(countriesInSouthAmerica[i])
+            for country in countriesInSouthAmerica {
+                if country.updateMap == true {
+                    countriesToUpdate.append(country)
                 }
             }
-            return countriesNotVisited
+            return countriesToUpdate
         case .Oceania:
-            for i in 0..<countriesInOceania.count {
-                if countriesInOceania[i].updateMap == true {
-                    countriesNotVisited.append(countriesInOceania[i])
+            for country in countriesInOceania {
+                if country.updateMap == true {
+                    countriesToUpdate.append(country)
                 }
             }
-        return countriesNotVisited
+        return countriesToUpdate
         }
     }
     
@@ -438,81 +390,13 @@ class ListOfCountries {
     func percentOfWorldVisited() -> Double {
         var percent:Double
         
-        percent = Double(numberOfCountriesVisited) / Double((numberOfCountriesVisited + numberOfCountriesNotVisited))
+        percent = Double(numberOfCountriesVisited) / Double((totalNumberOfCountries))
         percent = percent*100
         percent = Double(round(10*percent)/10)
         
         print("You have visited \(percent) % of the world")
         
         return percent
-    }
-    
-    func percentOfContinentVisited(for continent: Continents) -> Double {
-        var visited = 0
-        var percent:Double
-        
-        switch continent {
-        case .Africa:
-            for i in 0..<countriesInAfrica.count {
-                if countriesInAfrica[i].visited == true {
-                visited += 1
-                }
-            }
-            percent = Double(visited) / Double((countriesInAfrica.count))
-            percent = percent*100
-            percent = Double(round(10*percent)/10)
-            return percent
-        case .Asia:
-            for i in 0..<countriesInAsia.count {
-                if countriesInAsia[i].visited == true {
-                visited += 1
-                }
-            }
-            percent = Double(visited) / Double((countriesInAsia.count))
-            percent = percent*100
-            percent = Double(round(10*percent)/10)
-            return percent
-        case .Europe:
-            for i in 0..<countriesInEurope.count {
-                if countriesInEurope[i].visited == true {
-                visited += 1
-                }
-            }
-            percent = Double(visited) / Double((countriesInEurope.count))
-            percent = percent*100
-            percent = Double(round(10*percent)/10)
-            return percent
-        case .NorthAmerica:
-            for i in 0..<countriesInNorthAmerica.count {
-                if countriesInNorthAmerica[i].visited == true {
-                visited += 1
-                }
-            }
-            percent = Double(visited) / Double((countriesInNorthAmerica.count))
-            percent = percent*100
-            percent = Double(round(10*percent)/10)
-            return percent
-        case .SouthAmerica:
-            for i in 0..<countriesInSouthAmerica.count {
-                if countriesInSouthAmerica[i].visited == true {
-                visited += 1
-                }
-            }
-            percent = Double(visited) / Double((countriesInSouthAmerica.count))
-            percent = percent*100
-            percent = Double(round(10*percent)/10)
-            return percent
-        case .Oceania:
-            for i in 0..<countriesInOceania.count {
-                if countriesInOceania[i].visited == true {
-                visited += 1
-                }
-            }
-            percent = Double(visited) / Double((countriesInOceania.count))
-            percent = percent*100
-            percent = Double(round(10*percent)/10)
-            return percent
-        }
     }
     
     func bucketListProgress() -> Double {

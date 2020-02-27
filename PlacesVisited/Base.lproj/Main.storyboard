@@ -11,7 +11,7 @@
         <!--Countries-->
         <scene sceneID="JHi-ed-QCK">
             <objects>
-                <tableViewController title="Countries" id="6Nh-zX-9iD" customClass="CountriesTableViewController" customModule="Places_Visited" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Countries" id="6Nh-zX-9iD" customClass="CountriesTableViewController" customModule="Visited_Countries" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dU2-wP-7VK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,35 +20,11 @@
                         <color key="separatorColor" systemColor="secondarySystemGroupedBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="countryCell" id="ckg-nA-erV">
-                                <rect key="frame" x="0.0" y="28" width="414" height="47.333332061767578"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ckg-nA-erV" id="luW-we-Lay">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="47.333332061767578"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5V-8D-YtT">
-                                            <rect key="frame" x="20" y="10.999999999999998" width="25" height="25.333333333333329"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="Hbh-H0-ioH"/>
-                                                <constraint firstAttribute="height" constant="25" id="QUR-Ls-Aa4"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8I-tj-kxh">
-                                            <rect key="frame" x="72" y="13" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="E5V-8D-YtT" firstAttribute="top" secondItem="luW-we-Lay" secondAttribute="topMargin" id="0Ob-eE-TGJ"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="E5V-8D-YtT" secondAttribute="bottom" id="Scy-o0-dpI"/>
-                                        <constraint firstItem="E5V-8D-YtT" firstAttribute="leading" secondItem="luW-we-Lay" secondAttribute="leadingMargin" id="tvJ-Hb-YSr"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -58,7 +34,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Countries" id="eYK-sp-m1Z">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="H5s-tD-l4a">
+                        <barButtonItem key="rightBarButtonItem" id="H5s-tD-l4a">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="7zX-cn-wGt">
                                 <rect key="frame" x="271" y="5.6666666666666679" width="123" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -86,7 +62,7 @@
         <!--Map-->
         <scene sceneID="JGC-4Z-xPo">
             <objects>
-                <viewController id="Vfd-UD-dfP" customClass="WorldMapViewController" customModule="Places_Visited" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Vfd-UD-dfP" customClass="WorldMapViewController" customModule="Visited_Countries" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O9I-hH-Fc8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -154,7 +130,7 @@
         <!--Map-->
         <scene sceneID="p4b-GO-j2w">
             <objects>
-                <tabBarController title="Map" id="PZg-aC-342" customClass="MainTabBarController" customModule="Places_Visited" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController title="Map" id="PZg-aC-342" customClass="MainTabBarController" customModule="Visited_Countries" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q9o-4Z-WQj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -180,51 +156,10 @@
             </objects>
             <point key="canvasLocation" x="1880" y="106"/>
         </scene>
-        <!--Map-->
-        <scene sceneID="MIA-WY-S2t">
-            <objects>
-                <viewController id="ldk-gg-PMc" customClass="MapViewController" customModule="Places_Visited" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Xuw-YV-q1C">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiU-Wa-Gm3" customClass="MGLMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <gestureRecognizers/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="styleURL__" value="mapbox://styles/westervind/ck6962l3i1ykp1is5yxcgd9oe"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="PLX-qJ-OG7" appends="YES" id="K0H-ZQ-mv9"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="IiU-Wa-Gm3" firstAttribute="trailing" secondItem="rci-MT-45J" secondAttribute="trailing" id="R5r-gt-TV2"/>
-                            <constraint firstItem="IiU-Wa-Gm3" firstAttribute="top" secondItem="Xuw-YV-q1C" secondAttribute="top" id="WGN-MN-dVl"/>
-                            <constraint firstItem="IiU-Wa-Gm3" firstAttribute="leading" secondItem="rci-MT-45J" secondAttribute="leading" id="j3V-b2-SL3"/>
-                            <constraint firstItem="IiU-Wa-Gm3" firstAttribute="bottom" secondItem="rci-MT-45J" secondAttribute="bottom" id="vxP-Qd-aMz"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="rci-MT-45J"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="questionmark" catalog="system" id="LlH-J8-7oT"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KiF-lt-gGW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="Vm9-bA-n7V" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="PLX-qJ-OG7">
-                    <connections>
-                        <action selector="mapTaped:" destination="Vm9-bA-n7V" id="ugT-8G-pVK"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="3097.1014492753625" y="96.428571428571431"/>
-        </scene>
         <!--Your Progress-->
         <scene sceneID="hfy-HV-ldQ">
             <objects>
-                <viewController title="Your Progress" id="gZy-yp-Ngg" customClass="StatsViewController" customModule="Places_Visited" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Your Progress" id="gZy-yp-Ngg" customClass="StatsViewController" customModule="Visited_Countries" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GqS-8L-xX7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -241,7 +176,7 @@
         <!--Countries-->
         <scene sceneID="85N-73-EEj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eEF-b6-pAA" customClass="TableViewNavigationViewController" customModule="Places_Visited" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eEF-b6-pAA" customClass="TableViewNavigationViewController" customModule="Visited_Countries" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Countries" image="text.badge.checkmark" catalog="system" id="bu9-BE-PRQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e7t-EC-5Nf">
@@ -260,7 +195,7 @@
         <!--Progress-->
         <scene sceneID="9K5-FO-NQM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PWK-dD-RcX" customClass="StatsViewNavigationViewController" customModule="Places_Visited" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PWK-dD-RcX" customClass="StatsViewNavigationViewController" customModule="Visited_Countries" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Progress" image="rosette" catalog="system" id="d1t-Bf-brI">
                         <color key="badgeColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                     </tabBarItem>
@@ -282,7 +217,6 @@
     </scenes>
     <resources>
         <image name="map" catalog="system" width="64" height="56"/>
-        <image name="questionmark" catalog="system" width="48" height="64"/>
         <image name="rosette" catalog="system" width="50" height="64"/>
         <image name="text.badge.checkmark" catalog="system" width="64" height="54"/>
         <namedColor name="NavBar">

@@ -12,14 +12,9 @@ import MapKit
 class WorldMapViewController: UIViewController {
     
     var countries : ListOfCountries!
-//    var countryOverlays: [CountryGeo] = []
-//    var mkOverlays: [[MKOverlay]] = []
     
     var overlayDict : Dictionary<String, CountryGeo>!
     var mkOverlaysDict : Dictionary<String, [MKOverlay]>!
-    //var overlayDict = [String: CountryGeo]()
-    //var mkOverlaysDict = [String: [MKOverlay]]()
-    
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -28,10 +23,10 @@ class WorldMapViewController: UIViewController {
         
         mapView.delegate = self
         
-                let location = CLLocation(latitude: 55.663255, longitude:   13.597545)
-                let regionRadius: CLLocationDistance = 5000000.0
-                let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-                mapView.setRegion(region, animated: true)
+        let location = CLLocation(latitude: 55.663255, longitude:   13.597545)
+        let regionRadius: CLLocationDistance = 5000000.0
+        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(region, animated: true)
         mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: 2500000.0, maxCenterCoordinateDistance: 100000000.0), animated: true)
         
         renderOverlayToMap()
@@ -84,18 +79,15 @@ class WorldMapViewController: UIViewController {
     }
     
     func renderOverlayToMap() {
-            //New dictionary loop:
         for (_, value) in mkOverlaysDict {
             let overlay = value
             
             self.mapView.addOverlays(overlay, level: .aboveRoads)
             print("Rendering overlay")
         }
-        
     }
     
     func configureColorForOverlays(of renderer: MKPolygonRenderer, for overlay: MKOverlay) {
-        //let visitedColor = UIColor(red: 61/256, green: 255/256, blue: 123/256, alpha: 1.0)
         let visitedColor = UIColor(named: "VisitedColor")
         let fillColor: UIColor
         var alphaComponent: CGFloat = 0.8
@@ -131,12 +123,9 @@ extension WorldMapViewController: MKMapViewDelegate {
         
         let renderer = MKPolygonRenderer(overlay: overlay)
         renderer.strokeColor = UIColor.black
-        //renderer.fillColor = UIColor.green
-        //renderer.fillColor = variables.fillColor
         configureColorForOverlays(of: renderer, for: overlay)
         renderer.lineWidth = 0.3
         
-        //print("rendering layer")
         return renderer
         
     }

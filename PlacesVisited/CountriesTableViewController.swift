@@ -45,9 +45,6 @@ class CountriesTableViewController: UITableViewController {
         //let managedContext = appDelegate!.persistentContainer.viewContext
         //countries = ListOfCountries(context: managedContext)
         
-        //Not needed?:
-        //countries.loadItems()
-        
         //White text on segment switcher:
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
 
@@ -68,14 +65,6 @@ class CountriesTableViewController: UITableViewController {
         
         tableView.reloadData()
 
-//        switch segmentControl.selectedSegmentIndex {
-//            case 0:
-//                self.title = "Visited countries"
-//            case 1:
-//                self.title = "Bucket list"
-//            default:
-//                self.title = "countries"
-//        }
     }
     override func viewDidAppear(_ animated: Bool) {
         countries.loadItems()
@@ -91,7 +80,6 @@ class CountriesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var title: String? = nil
         if let continent = continentsForSectionIndex(section) {
-            //let percentVisited: Int = Int(countries.percentOfContinentVisited(for: continent))
             switch continent {
             case .Africa:
                 title = "Africa"
@@ -130,7 +118,6 @@ class CountriesTableViewController: UITableViewController {
             default:
                 break
             }
-            
         }
         return 0
     }
@@ -235,26 +222,6 @@ class CountriesTableViewController: UITableViewController {
             }
     }
     
-//    func loadCountries() {
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-//
-//        let managedContext = appDelegate.persistentContainer.viewContext
-//
-//        let fetchRequest = NSFetchRequest<Country>(entityName: "Country")
-//
-//        do {
-//            countries = try managedContext.fetch(fetchRequest)
-//        } catch let error as NSError {
-//            print("Could not fetch \(error)")
-//        }
-//    }
-    
-
-    
-
-   
-    
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
