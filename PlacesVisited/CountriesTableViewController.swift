@@ -62,7 +62,7 @@ class CountriesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        countries.loadItems()
         tableView.reloadData()
 
     }

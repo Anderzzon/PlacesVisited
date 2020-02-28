@@ -134,16 +134,16 @@ class ListOfCountries {
         }
     }
     
-    func updateVisit(country: Country, index: Int) {
+    func updateVisit(country: Country, index: Int?) {
         let fetchRequest:NSFetchRequest<Country> = NSFetchRequest.init(entityName: "Country")
         fetchRequest.predicate = NSPredicate(format: "fullName = %@", "\(country.fullName)")
         do
         {
             let test = try managedContext.fetch(fetchRequest)
-                let objectUpdate = test[0] as! NSManagedObject
+            let objectUpdate = test[0] as! NSManagedObject
             
             if country.visited == false {
-            objectUpdate.setValue(true, forKey: "visited")
+                objectUpdate.setValue(true, forKey: "visited")
                 print("Cuntry visit updated to TRUE")
             } else {
                 objectUpdate.setValue(false, forKey: "visited")
@@ -162,7 +162,8 @@ class ListOfCountries {
         }
     }
     
-    func updateWantToGo(country: Country, index: Int) {
+    
+    func updateWantToGo(country: Country, index: Int?) {
            let fetchRequest:NSFetchRequest<Country> = NSFetchRequest.init(entityName: "Country")
            fetchRequest.predicate = NSPredicate(format: "fullName = %@", "\(country.fullName)")
            do

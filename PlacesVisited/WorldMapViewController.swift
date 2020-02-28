@@ -12,6 +12,7 @@ import MapKit
 class WorldMapViewController: UIViewController {
     
     var countries : ListOfCountries!
+    var countryToUpdate : String?
     
     var overlayDict : Dictionary<String, CountryGeo>!
     var mkOverlaysDict : Dictionary<String, [MKOverlay]>!
@@ -103,6 +104,86 @@ class WorldMapViewController: UIViewController {
         }
         renderer.fillColor = fillColor.withAlphaComponent(alphaComponent)
     }
+    
+    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            let locationInView = sender.location(in: mapView)
+            let tappedCoordinate = mapView.convert(locationInView , toCoordinateFrom: mapView)
+            
+            var point = MKMapPoint(tappedCoordinate)
+            var mapRect = MKMapRect(x: point.x, y: point.y, width: 0, height: 0)
+            
+            let countriesToLoop = self.countries.listOfCountriesToUpdate(for: .Europe)
+            
+            for (_, value) in overlayDict {
+                let overlay = value.polygons
+                mkOverlaysDict[value.isoA3!] = overlay
+                
+                for polygon in overlay as! [MKPolygon] {
+                    let renderer = MKPolygonRenderer(polygon: polygon)
+                    let mapPoint = MKMapPoint(tappedCoordinate)
+                    let viewPoint = renderer.point(for: mapPoint)
+                    if renderer.path.contains(viewPoint) {
+                        
+                        let countriesToLoop = self.countries.listOfCountries(for: .Europe)
+                        for country in countriesToLoop {
+                            if value.isoA3 == country.shortName {
+                                let alert = UIAlertController(title: "Update \(country.fullName)", message: nil, preferredStyle: .actionSheet)
+                                alert.view.tintColor = .orange
+                                alert.view.largeContentTitle = title
+                                
+                                
+                                let visitButton = UIAlertAction(title: "Visit", style: .default) {
+                                    (action) in
+                                    self.countries.updateVisit(country: country, index: nil)
+                                    country.updateMap = true
+                                    self.updateAllOverlayColors()
+                                    
+                                }
+                                let wantToGoButton = UIAlertAction(title: "Want to go", style: .default) {
+                                    (action) in
+                                    self.countries.updateWantToGo(country: country, index: nil)
+                                    country.updateMap = true
+                                    self.updateAllOverlayColors()
+                                }
+                                let cancel = UIAlertAction(title: "Cancel", style: .destructive)
+                                
+                                alert.addAction(visitButton)
+                                alert.addAction(wantToGoButton)
+                                alert.addAction(cancel)
+                                self.present(alert, animated: true)
+                                
+                                countryToUpdate = value.isoA3
+                                //performSegue(withIdentifier: "CountryDetailSegue", sender: self)
+                            }
+                                                  
+                        }
+                        
+                        //performSegue(withIdentifier: "CountryDetailSegue", sender: self)
+                        
+                        print("\(value.isoA3)")
+                    }
+//                    if polygon.intersects(mapRect) {
+//                        print("\(value.isoA3)")
+//                    }
+                    
+                }
+
+            }
+            print(tappedCoordinate)
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CountryDetailSegue" {
+            if let countryDetailViewController = segue.destination as? CountryDetailViewController {
+                countryDetailViewController.countryToUpdate = countryToUpdate
+                countryDetailViewController.countries = countries
+            }
+        }
+    }
+    
     
     
     /*
