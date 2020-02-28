@@ -33,13 +33,18 @@ class WorldMapViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        updateAllOverlayColors()
+        updateOverlayColors()
     }
     
-    //Update overlays if any change has accured:
-    func updateOverlayColors(for continent: ListOfCountries.Continents) {
+    //Update overlays if any changes have accured:
+    func updateOverlayColors() {
         
-        let countriesToLoop = self.countries.listOfCountriesToUpdate(for: continent)
+        var countriesToLoop = self.countries.listOfCountriesToUpdate(for: .Europe)
+        countriesToLoop += self.countries.listOfCountriesToUpdate(for: .Asia)
+        countriesToLoop += self.countries.listOfCountriesToUpdate(for: .Africa)
+        countriesToLoop += self.countries.listOfCountriesToUpdate(for: .NorthAmerica)
+        countriesToLoop += self.countries.listOfCountriesToUpdate(for: .SouthAmerica)
+        countriesToLoop += self.countries.listOfCountriesToUpdate(for: .Oceania)
         
         //Loop through countryOverlays and set the overlays identifyer to the correspeonding countrys status:
         for country in countriesToLoop {
@@ -69,15 +74,7 @@ class WorldMapViewController: UIViewController {
         }
     }
     
-    private func updateAllOverlayColors() {
-            self.updateOverlayColors(for: .Europe)
-            self.updateOverlayColors(for: .Africa)
-            self.updateOverlayColors(for: .Asia)
-            self.updateOverlayColors(for: .NorthAmerica)
-            self.updateOverlayColors(for: .SouthAmerica)
-            self.updateOverlayColors(for: .Oceania)
-    }
-    
+    //Add all ovrlays to the mapview:
     func renderOverlayToMap() {
         for (_, value) in mkOverlaysDict {
             let overlay = value
@@ -87,6 +84,7 @@ class WorldMapViewController: UIViewController {
         }
     }
     
+    //Set the color and alphaComponent for all layers:
     func configureColorForOverlays(of renderer: MKPolygonRenderer, for overlay: MKOverlay) {
         let visitedColor = UIColor(named: "VisitedColor")
         let fillColor: UIColor
@@ -104,6 +102,60 @@ class WorldMapViewController: UIViewController {
         renderer.fillColor = fillColor.withAlphaComponent(alphaComponent)
     }
     
+    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            let locationInView = sender.location(in: mapView)
+            let tappedCoordinate = mapView.convert(locationInView , toCoordinateFrom: mapView)
+            
+            for (_, value) in overlayDict {
+                let overlay = value.polygons
+                mkOverlaysDict[value.isoA3!] = overlay
+                
+                for polygon in overlay as! [MKPolygon] {
+                    let renderer = MKPolygonRenderer(polygon: polygon)
+                    let mapPoint = MKMapPoint(tappedCoordinate)
+                    let viewPoint = renderer.point(for: mapPoint)
+                    if renderer.path.contains(viewPoint) {
+                        
+                        var countriesToLoop = self.countries.listOfCountries(for: .Europe)
+                        countriesToLoop += self.countries.listOfCountries(for: .Asia)
+                        countriesToLoop += self.countries.listOfCountries(for: .Africa)
+                        countriesToLoop += self.countries.listOfCountries(for: .NorthAmerica)
+                        countriesToLoop += self.countries.listOfCountries(for: .SouthAmerica)
+                        countriesToLoop += self.countries.listOfCountries(for: .Oceania)
+                        
+                        for country in countriesToLoop {
+                            if value.isoA3 == country.shortName {
+                                let alert = UIAlertController(title: "Update \(country.fullName)", message: nil, preferredStyle: .actionSheet)
+                                alert.view.tintColor = .orange
+                                alert.view.largeContentTitle = title
+                                
+                                let visitButton = UIAlertAction(title: "Visit", style: .default) {
+                                    (action) in
+                                    self.countries.updateVisit(country: country, index: nil)
+                                    country.updateMap = true
+                                    self.updateOverlayColors()
+                                }
+                                let wantToGoButton = UIAlertAction(title: "Want to go", style: .default) {
+                                    (action) in
+                                    self.countries.updateWantToGo(country: country, index: nil)
+                                    country.updateMap = true
+                                    self.updateOverlayColors()
+                                }
+                                let cancel = UIAlertAction(title: "Cancel", style: .destructive)
+                                
+                                alert.addAction(visitButton)
+                                alert.addAction(wantToGoButton)
+                                alert.addAction(cancel)
+                                self.present(alert, animated: true)
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     /*
      // MARK: - Navigation
@@ -127,9 +179,5 @@ extension WorldMapViewController: MKMapViewDelegate {
         renderer.lineWidth = 0.3
         
         return renderer
-        
     }
-    
 }
-
-

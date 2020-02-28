@@ -141,7 +141,6 @@ class StatsViewController: UIViewController {
         
         print(countries.percentOfWorldVisited()) //Bugtest
         
-        //Add views:
         view.addSubview(bigCircleView)
         bigCircleView.addSubview(percentBigLabel)
         bigCircleView.addSubview(myBucketListLabel)
@@ -160,7 +159,8 @@ class StatsViewController: UIViewController {
         view.addSubview(countriesVisitedTextLabel)
         view.addSubview(bucketListTextLabel)
         view.addSubview(percentOfWorldTextLabel)
-
+        
+        //For manual constraints:
         bigCircleView.translatesAutoresizingMaskIntoConstraints = false
         countriesVisitedView.translatesAutoresizingMaskIntoConstraints = false
         onYourBucketListView.translatesAutoresizingMaskIntoConstraints = false
@@ -173,9 +173,8 @@ class StatsViewController: UIViewController {
         createSmallCircle(progressLayer: percentOfWorldCircleLayer, outletView: percentOfTheWorldView)
         
         setupLayout()
-        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         
         countries.loadItems()
@@ -219,14 +218,13 @@ class StatsViewController: UIViewController {
         
         shapeLayer.position.x = bigCircleView.center.x + 125
         shapeLayer.position.y = bigCircleView.center.y + 125
-    
+        
         shapeLayer.transform = CATransform3DMakeRotation(-CGFloat.pi/2, 0, 0, 1)
         
         shapeLayer.strokeEnd = 0
         bigCircleView.layer.addSublayer(shapeLayer)
     }
     
-    //Animation for the big circle:
     func animateCircle() {
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         let percent = CGFloat(countries.bucketListProgress()/100)
@@ -255,7 +253,6 @@ class StatsViewController: UIViewController {
         percentOfWorldCircleLayer.add(basicAnimation, forKey: "basic")
     }
     
-    //small circles
     func createSmallCircle(progressLayer: CAShapeLayer, outletView:UIView) {
         let circularPath = UIBezierPath(arcCenter: .zero, radius: 40, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
         
@@ -281,7 +278,7 @@ class StatsViewController: UIViewController {
         progressLayer.transform = CATransform3DMakeRotation(-CGFloat.pi/2, 0, 0, 1)
         
         progressLayer.strokeEnd = 1
-
+        
         outletView.layer.addSublayer(progressLayer)
     }
     
@@ -407,15 +404,15 @@ class StatsViewController: UIViewController {
         percentOfWorldVisitedLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

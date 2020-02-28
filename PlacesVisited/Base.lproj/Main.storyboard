@@ -123,9 +123,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQg-e4-LcT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="xGu-wy-ALs"/>
+                <tapGestureRecognizer id="xGu-wy-ALs">
+                    <connections>
+                        <action selector="tapGesture:" destination="Vfd-UD-dfP" id="LFh-Bd-tgu"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="640.57971014492762" y="105.80357142857143"/>
+            <point key="canvasLocation" x="555" y="86"/>
         </scene>
         <!--Map-->
         <scene sceneID="p4b-GO-j2w">

@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class MainTabBarController: UITabBarController {
-
+    
     var countries : ListOfCountries!
     var countriesToUpdate: [Country] = []
     var overlayDict = [String: CountryGeo]()
@@ -18,10 +18,10 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-           let managedContext = appDelegate!.persistentContainer.viewContext
-           
+        let managedContext = appDelegate!.persistentContainer.viewContext
+        
         countries = ListOfCountries(context: managedContext)
         countries.loadItems()
         let numberOfItems = countries.totalNumberOfCountries
@@ -90,13 +90,12 @@ class MainTabBarController: UITabBarController {
     private func parseJSON() {
         //Read json:
         if let json = readJSONFromFile(fileName: "allCountries") as? [[String : Any]] {
-
+            
             //Loop through json and append countries to array of countryOverlays:
             for co in json {
                 
                 let country = CountryGeo(json: co )
-            
-                //countryOverlays.append(country)
+                
                 overlayDict[country.isoA3!] = country
             }
         }
@@ -135,12 +134,8 @@ class MainTabBarController: UITabBarController {
             var identifier = ""
             if country.visited == true {
                 identifier = "visited"
-                //print("Visited: \(country.fullName)")
-                //self.mkOverlays.append(overlay)
             } else if country.wantToGo == true {
                 identifier = "wantToGo"
-                //print("Want to go to: \(country.fullName)")
-                //self.mkOverlays.append(overlay)
             }
             
             for overlay in overlays {
@@ -361,15 +356,15 @@ class MainTabBarController: UITabBarController {
         countries.createCountry(fullName: "Uruguay", shortName: "URY", continent: "South America", flagIcon: "🇺🇾")
         countries.createCountry(fullName: "Venezuela", shortName: "VEN", continent: "South America", flagIcon: "🇻🇪")
     }
-  
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
