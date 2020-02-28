@@ -8,88 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Country Detail View Controller-->
-        <scene sceneID="2Sw-Bl-sgR">
-            <objects>
-                <viewController id="ZWR-qR-RqY" customClass="CountryDetailViewController" customModule="Visited_Countries" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vg8-Mj-xPu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conuntry name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBa-sk-8ow">
-                                <rect key="frame" x="22" y="60" width="370" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="NbY-hE-gp0"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAo-Q8-gv5">
-                                <rect key="frame" x="182" y="645" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="DHs-Jh-cyv"/>
-                                    <constraint firstAttribute="height" constant="50" id="EqS-KU-PBa"/>
-                                </constraints>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button" image="xmark.circle.fill" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="42"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButton:" destination="ZWR-qR-RqY" eventType="touchUpInside" id="51B-he-qIU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGK-fI-Y6g">
-                                <rect key="frame" x="57" y="168" width="300" height="50"/>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="ISl-Ny-iLs"/>
-                                    <constraint firstAttribute="height" constant="50" id="ytj-lB-QC8"/>
-                                </constraints>
-                                <state key="normal" title="Visited"/>
-                                <connections>
-                                    <action selector="visitButton:" destination="ZWR-qR-RqY" eventType="touchUpInside" id="aOz-Hf-dOB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjx-ss-91K">
-                                <rect key="frame" x="57" y="240" width="300" height="50"/>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="IHH-iV-RzF"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="MDL-vd-QYG"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Q89-67-TD0"/>
-                                    <constraint firstAttribute="height" constant="50" id="tBb-mu-Cac"/>
-                                </constraints>
-                                <state key="normal" title="Want to go"/>
-                                <connections>
-                                    <action selector="wantToGoButton:" destination="ZWR-qR-RqY" eventType="touchUpInside" id="wc2-dW-xz4"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="CBa-sk-8ow" firstAttribute="top" secondItem="wcO-9l-F1j" secondAttribute="top" constant="60" id="6PV-IC-B6N"/>
-                            <constraint firstItem="CBa-sk-8ow" firstAttribute="leading" secondItem="wcO-9l-F1j" secondAttribute="leading" constant="22" id="M2S-Ns-ahR"/>
-                            <constraint firstItem="wcO-9l-F1j" firstAttribute="bottom" secondItem="dAo-Q8-gv5" secondAttribute="bottom" constant="113" id="QGG-Gy-11P"/>
-                            <constraint firstItem="CBa-sk-8ow" firstAttribute="centerX" secondItem="Vg8-Mj-xPu" secondAttribute="centerX" id="RWj-RY-IeW"/>
-                            <constraint firstItem="fGK-fI-Y6g" firstAttribute="top" secondItem="CBa-sk-8ow" secondAttribute="bottom" constant="78" id="RaM-Cs-EKD"/>
-                            <constraint firstItem="fGK-fI-Y6g" firstAttribute="centerX" secondItem="Vg8-Mj-xPu" secondAttribute="centerX" id="dxT-wo-mrV"/>
-                            <constraint firstItem="wcO-9l-F1j" firstAttribute="trailing" secondItem="CBa-sk-8ow" secondAttribute="trailing" constant="22" id="hIK-jH-v9B"/>
-                            <constraint firstItem="dAo-Q8-gv5" firstAttribute="centerX" secondItem="Vg8-Mj-xPu" secondAttribute="centerX" id="j8y-IG-8c8"/>
-                            <constraint firstItem="gjx-ss-91K" firstAttribute="top" secondItem="fGK-fI-Y6g" secondAttribute="bottom" constant="22" id="kAl-rr-YQl"/>
-                            <constraint firstItem="gjx-ss-91K" firstAttribute="centerX" secondItem="Vg8-Mj-xPu" secondAttribute="centerX" id="mmP-5b-KlY"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="wcO-9l-F1j"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="DZY-6z-P7I"/>
-                    <connections>
-                        <outlet property="countryName" destination="CBa-sk-8ow" id="c9K-ZP-qxh"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fIt-bE-dSY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-304" y="106"/>
-        </scene>
         <!--Countries-->
         <scene sceneID="JHi-ed-QCK">
             <objects>
@@ -202,7 +120,6 @@
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="mbV-bW-5vU"/>
                     <connections>
                         <outlet property="mapView" destination="HRY-7V-CjV" id="dcO-1m-3Ng"/>
-                        <segue destination="ZWR-qR-RqY" kind="presentation" identifier="CountryDetailSegue" id="D0c-SR-O91"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQg-e4-LcT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -306,7 +223,6 @@
         <image name="map" catalog="system" width="64" height="56"/>
         <image name="rosette" catalog="system" width="50" height="64"/>
         <image name="text.badge.checkmark" catalog="system" width="64" height="54"/>
-        <image name="xmark.circle.fill" catalog="system" width="64" height="60"/>
         <namedColor name="NavBar">
             <color red="0.97647058823529409" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

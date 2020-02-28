@@ -27,7 +27,6 @@
 		03B014C023FD3AF60060794A /* CustomPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B014BF23FD3AF60060794A /* CustomPolygon.swift */; };
 		03B014C423FDE5450060794A /* allCountries.json in Resources */ = {isa = PBXBuildFile; fileRef = 03B014C323FDE5450060794A /* allCountries.json */; };
 		03B014C8240550A40060794A /* StatsViewNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B014C7240550A30060794A /* StatsViewNavigationViewController.swift */; };
-		03B014CB240867440060794A /* CountryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B014CA240867430060794A /* CountryDetailViewController.swift */; };
 		03D54A6723E37B1200C81CC2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */; };
 		03D54A6923E37B4F00C81CC2 /* TableViewNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */; };
 		03D54A6B23E3835F00C81CC2 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D54A6A23E3835F00C81CC2 /* StatsViewController.swift */; };
@@ -82,7 +81,6 @@
 		03B014BF23FD3AF60060794A /* CustomPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPolygon.swift; sourceTree = "<group>"; };
 		03B014C323FDE5450060794A /* allCountries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allCountries.json; sourceTree = "<group>"; };
 		03B014C7240550A30060794A /* StatsViewNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewNavigationViewController.swift; sourceTree = "<group>"; };
-		03B014CA240867430060794A /* CountryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailViewController.swift; sourceTree = "<group>"; };
 		03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNavigationViewController.swift; sourceTree = "<group>"; };
 		03D54A6A23E3835F00C81CC2 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 				03912DA123D0841B008EF805 /* Info.plist */,
 				03E7994823E1A5E900AC25FE /* PlacesVisited.xcdatamodeld */,
 				03D54A6623E37B1200C81CC2 /* MainTabBarController.swift */,
-				03B014CA240867430060794A /* CountryDetailViewController.swift */,
 				03D54A6823E37B4F00C81CC2 /* TableViewNavigationViewController.swift */,
 				03B014C7240550A30060794A /* StatsViewNavigationViewController.swift */,
 				036E1EBB23F57E0F001250C5 /* CountriesClean.json */,
@@ -434,7 +431,6 @@
 				03B014C8240550A40060794A /* StatsViewNavigationViewController.swift in Sources */,
 				03912D9423D08418008EF805 /* AppDelegate.swift in Sources */,
 				03D54A6923E37B4F00C81CC2 /* TableViewNavigationViewController.swift in Sources */,
-				03B014CB240867440060794A /* CountryDetailViewController.swift in Sources */,
 				03912D9623D08418008EF805 /* SceneDelegate.swift in Sources */,
 				03F278F023F2D21600FA1980 /* WorldMapViewController.swift in Sources */,
 				03D54A6723E37B1200C81CC2 /* MainTabBarController.swift in Sources */,
