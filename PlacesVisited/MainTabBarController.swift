@@ -19,23 +19,21 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.selectedIndex = 1 //Sets statsViewController as first screen
+        
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         let managedContext = appDelegate!.persistentContainer.viewContext
         
         countries = ListOfCountries(context: managedContext)
         countries.loadItems()
         let numberOfItems = countries.totalNumberOfCountries
-        print("Number of countries: \(numberOfItems)")
+
         
         if numberOfItems < 1 {
             //Run this to create all countries:
             createDatabase()
         }
-        
-        //Run this to delete all:
-        //countries.deleteData()
-        
-        //load countries from database if there is any:
+
         countries.loadItems()
         
         prepareMap()
@@ -81,7 +79,7 @@ class MainTabBarController: UITabBarController {
                 let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
                 json = try? JSONSerialization.jsonObject(with: data)
             } catch {
-                print(error)
+
             }
         }
         return json
@@ -141,7 +139,7 @@ class MainTabBarController: UITabBarController {
             for overlay in overlays {
                 
                 overlay.identifier = identifier
-                //print("Full name: \(overlayDict[country.shortName]?.isoA3) Identifier: \(overlay.identifier)")
+
             }
         }
     }

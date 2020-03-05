@@ -139,8 +139,6 @@ class StatsViewController: UIViewController {
         //Load Country objects:
         countries.loadItems()
         
-        print(countries.percentOfWorldVisited()) //Bugtest
-        
         view.addSubview(bigCircleView)
         bigCircleView.addSubview(percentBigLabel)
         bigCircleView.addSubview(myBucketListLabel)
@@ -228,7 +226,6 @@ class StatsViewController: UIViewController {
     func animateCircle() {
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         let percent = CGFloat(countries.bucketListProgress()/100)
-        print(percent)
         shapeLayer.strokeEnd = 0
         basicAnimation.toValue = percent
         basicAnimation.duration = 0.8

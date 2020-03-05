@@ -47,28 +47,21 @@ class ListOfCountries {
             switch country.continent {
             case "Europe":
                 countriesInEurope.append(country)
-                //print("Adding country to Europe")
             case "Asia":
                 countriesInAsia.append(country)
-                //print("Adding country to Asia")
             case "Africa":
                 countriesInAfrica.append(country)
-                //print("Adding country to Africa")
             case "North America":
                 countriesInNorthAmerica.append(country)
-                //print("Adding country to North America")
             case "South America":
                 countriesInSouthAmerica.append(country)
-                //print("Adding country to South America")
             case "Oceania":
                 countriesInOceania.append(country)
-                //print("Adding country to Oceania")
             default:
                 countriesInAsia.append(country)
-                //print("appending country to default")
             }
         } catch let error as NSError {
-            print("Save error \(error)")
+
         }
     }
     
@@ -87,7 +80,7 @@ class ListOfCountries {
                 
             }
         } catch let error as NSError {
-            print("Detele all my data in, error : \(error) \(error.userInfo)")
+
         }
     }
     
@@ -130,7 +123,7 @@ class ListOfCountries {
             countriesInOceania = try managedContext.fetch(fetchOceania)
             
         } catch let error as NSError {
-            print("Could not fetch \(error)")
+            
         }
     }
     
@@ -144,21 +137,18 @@ class ListOfCountries {
             
             if country.visited == false {
                 objectUpdate.setValue(true, forKey: "visited")
-                //print("Cuntry visit updated to TRUE")
             } else {
                 objectUpdate.setValue(false, forKey: "visited")
-                //print("Cuntry visit updated to FALSE")
             }
             do {
                 try managedContext.save()
-                //print("Visited saved!")
             }
             catch {
-                print(error)
+                
             }
         }
         catch {
-            print(error)
+            
         }
     }
     
@@ -173,21 +163,16 @@ class ListOfCountries {
             
             if country.wantToGo == false {
                 objectUpdate.setValue(true, forKey: "wantToGo")
-                //print("Cuntry want to go updated to TRUE")
             } else {
                 objectUpdate.setValue(false, forKey: "wantToGo")
-                //print("Cuntry want to go updated to FALSE")
             }
             do {
                 try managedContext.save()
-                //print("Want to go saved!")
             }
             catch {
-                print(error)
             }
         }
         catch {
-            print(error)
         }
     }
     
@@ -395,8 +380,6 @@ class ListOfCountries {
         percent = percent*100
         percent = Double(round(10*percent)/10)
         
-        print("You have visited \(percent) % of the world")
-        
         return percent
     }
     
@@ -406,7 +389,6 @@ class ListOfCountries {
         percent = Double(numberOfCountriesVisited) / Double((numberOfCountriesVisited + numberOfCountriesWantToGoTo))
         percent = percent*100
         percent = Double(round(10*percent)/10)
-        print("You are \(percent) % on progress of your goal")
         
         return percent
     }

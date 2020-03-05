@@ -54,10 +54,8 @@ class WorldMapViewController: UIViewController {
             var identifier = ""
             if country.visited == true {
                 identifier = "visited"
-                print("Visited: \(country.fullName)")
             } else if country.wantToGo == true {
                 identifier = "wantToGo"
-                print("Want to go to: \(country.fullName)")
             }
             
             //Loop through every individual overlay of the country:
@@ -80,7 +78,6 @@ class WorldMapViewController: UIViewController {
             let overlay = value
             
             self.mapView.addOverlays(overlay, level: .aboveRoads)
-            print("Rendering overlay")
         }
     }
     
@@ -126,21 +123,50 @@ class WorldMapViewController: UIViewController {
                         
                         for country in countriesToLoop {
                             if value.isoA3 == country.shortName {
-                                let alert = UIAlertController(title: "Update \(country.fullName)", message: nil, preferredStyle: .actionSheet)
+                                let alert = UIAlertController(title: "Update status of \(country.fullName)", message: nil, preferredStyle: .actionSheet)
                                 alert.view.tintColor = .orange
                                 alert.view.largeContentTitle = title
+
+                                var visitTitle = ""
+                                var wantToGoTitle = ""
+                                if country.visited == false {
+                                    visitTitle = "Visited"
+                                } else if country.visited == true {
+                                    visitTitle = "Not visited"
+                                }
+                                if country.wantToGo == false {
+                                    wantToGoTitle = "Want to go"
+                                } else if country.wantToGo == true {
+                                    wantToGoTitle = "Don't want to go"
+                                }
+                                if country.visited == true && country.wantToGo == true {
+                                    visitTitle = "Not visited"
+                                    wantToGoTitle = "Want to go"
+                                }
                                 
-                                let visitButton = UIAlertAction(title: "Visit", style: .default) {
+                                let visitButton = UIAlertAction(title: visitTitle, style: .default) {
                                     (action) in
                                     self.countries.updateVisit(country: country, index: nil)
                                     country.updateMap = true
                                     self.updateOverlayColors()
                                 }
-                                let wantToGoButton = UIAlertAction(title: "Want to go", style: .default) {
+                                let wantToGoButton = UIAlertAction(title: wantToGoTitle, style: .default) {
                                     (action) in
-                                    self.countries.updateWantToGo(country: country, index: nil)
-                                    country.updateMap = true
-                                    self.updateOverlayColors()
+                                    if country.visited == false {
+                                        self.countries.updateWantToGo(country: country, index: nil)
+                                          country.updateMap = true
+                                          self.updateOverlayColors()
+                                    } else if country.visited == true && country.wantToGo == true {
+                                        self.countries.updateVisit(country: country, index: nil)
+                                          country.updateMap = true
+                                          self.updateOverlayColors()
+                                    } else {
+                                        self.countries.updateWantToGo(country: country, index: nil)
+                                        self.countries.updateVisit(country: country, index: nil)
+                                          country.updateMap = true
+                                          self.updateOverlayColors()
+                                    }
+  
                                 }
                                 let cancel = UIAlertAction(title: "Cancel", style: .destructive)
                                 

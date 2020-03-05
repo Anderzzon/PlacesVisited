@@ -23,7 +23,6 @@ class Country: NSManagedObject {
     //Sets a country to visited or reverse that
     func toggleVisited() {
          visited = !visited
-        print("Visited uodated")
     }
     
     func toggleWantToGo() {

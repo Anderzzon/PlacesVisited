@@ -148,8 +148,6 @@ class CountriesTableViewController: UITableViewController {
                     tableView.deselectRow(at: indexPath, animated: true)
                     tableView.reloadData()
                     
-                    print("\(item.fullName) set to: \(item.visited)")
-                    
                 case 1:
                     let items = countries.listOfCountriesNotVisited(for: continent)
                     let item = items[indexPath.row]
@@ -160,8 +158,6 @@ class CountriesTableViewController: UITableViewController {
                     item.updateMap = true
                     tableView.deselectRow(at: indexPath, animated: true)
                     tableView.reloadData()
-                    
-                    print("\(item.fullName) set to: \(item.wantToGo)")
                     
                 default:
                     break
