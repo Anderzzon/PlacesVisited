@@ -1,0 +1,5 @@
+# Xcode user-specific data (local breakpoints, window layout, scheme selections)
+xcuserdata/
+
+# CocoaPods build artifacts
+Pods/
