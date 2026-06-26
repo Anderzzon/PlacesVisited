@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CountryRowView: View {
-    let country: Country
+    @ObservedObject var country: Country
     let mode: RowMode
 
     enum RowMode {
@@ -14,9 +14,9 @@ struct CountryRowView: View {
             Text(country.fullName)
             Spacer()
             if mode == .visited, country.visited {
-                Image(systemName: "checkmark.circle.fill").foregroundColor(.orange)
+                Image(systemName: "figure.walk.circle.fill").foregroundColor(.orange)
             } else if mode == .wantToGo, country.wantToGo {
-                Image(systemName: "heart.fill").foregroundColor(.orange)
+                Image(systemName: "bookmark.fill").foregroundColor(.orange)
             }
         }
     }
