@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 @objc(Country)
-class Country: NSManagedObject {
+class Country: NSManagedObject, Identifiable {
     
     @NSManaged var shortName: String
     @NSManaged var fullName: String
@@ -19,7 +19,10 @@ class Country: NSManagedObject {
     @NSManaged var visited: Bool
     @NSManaged var wantToGo: Bool
     @NSManaged var updateMap: Bool
+    @NSManaged var firstVisited: Date?
     
+    var id: NSManagedObjectID { objectID }
+
     //Sets a country to visited or reverse that
     func toggleVisited() {
          visited = !visited

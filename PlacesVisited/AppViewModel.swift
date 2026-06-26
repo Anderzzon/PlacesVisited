@@ -168,6 +168,23 @@ class AppViewModel: ObservableObject {
     }
     
     
+    func saveCountryStatus(country: Country, visited: Bool, wantToGo: Bool, firstVisited: Date?) {
+        let fetchRequest: NSFetchRequest<Country> = NSFetchRequest.init(entityName: "Country")
+        fetchRequest.predicate = NSPredicate(format: "fullName = %@", country.fullName)
+        do {
+            let results = try managedContext.fetch(fetchRequest)
+            guard let objectUpdate = results.first as? NSManagedObject else { return }
+            objectUpdate.setValue(visited, forKey: "visited")
+            objectUpdate.setValue(wantToGo, forKey: "wantToGo")
+            objectUpdate.setValue(visited ? firstVisited : nil, forKey: "firstVisited")
+            objectUpdate.setValue(true, forKey: "updateMap")
+            try managedContext.save()
+            loadItems()
+        } catch {
+            print(error)
+        }
+    }
+
     func updateWantToGo(country: Country, index: Int?) {
         let fetchRequest:NSFetchRequest<Country> = NSFetchRequest.init(entityName: "Country")
         fetchRequest.predicate = NSPredicate(format: "fullName = %@", "\(country.fullName)")

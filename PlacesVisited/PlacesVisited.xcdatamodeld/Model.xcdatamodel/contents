@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19A583" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Country" representedClassName="Country" syncable="YES">
         <attribute name="continent" optional="YES" attributeType="String"/>
+        <attribute name="firstVisited" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="flagIcon" optional="YES" attributeType="String"/>
         <attribute name="fullName" optional="YES" attributeType="String"/>
         <attribute name="shortName" optional="YES" attributeType="String"/>

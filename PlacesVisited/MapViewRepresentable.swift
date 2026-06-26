@@ -6,10 +6,9 @@ struct MapViewRepresentable: UIViewRepresentable {
     @EnvironmentObject var countries: AppViewModel
     @EnvironmentObject var mapDataStore: MapDataStore
     @Binding var selectedCountry: Country?
-    @Binding var showingDialog: Bool
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(selectedCountry: $selectedCountry, showingDialog: $showingDialog)
+        Coordinator(selectedCountry: $selectedCountry)
     }
 
     func makeUIView(context: Context) -> MKMapView {
@@ -52,7 +51,6 @@ struct MapViewRepresentable: UIViewRepresentable {
 
     class Coordinator: NSObject, MKMapViewDelegate {
         @Binding var selectedCountry: Country?
-        @Binding var showingDialog: Bool
 
         weak var mapView: MKMapView?
         var countries: AppViewModel?
@@ -60,9 +58,8 @@ struct MapViewRepresentable: UIViewRepresentable {
         var overlaysAdded = false
         var cancellables = Set<AnyCancellable>()
 
-        init(selectedCountry: Binding<Country?>, showingDialog: Binding<Bool>) {
+        init(selectedCountry: Binding<Country?>) {
             _selectedCountry = selectedCountry
-            _showingDialog = showingDialog
         }
 
         func renderOverlayToMap(mapView: MKMapView) {
@@ -145,7 +142,6 @@ struct MapViewRepresentable: UIViewRepresentable {
                         if countryGeo.isoA3 == country.shortName {
                             DispatchQueue.main.async {
                                 self.selectedCountry = country
-                                self.showingDialog = true
                             }
                             return
                         }

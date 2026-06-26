@@ -2,28 +2,19 @@ import SwiftUI
 
 struct CountriesListView: View {
     @EnvironmentObject var countries: AppViewModel
-    @State private var showOnlyNotVisited = false
+    @State private var selectedCountry: Country?
 
     var body: some View {
         List {
             ForEach(AppViewModel.Continents.allCases, id: \.self) { continent in
-                let rows = showOnlyNotVisited
-                    ? countries.listOfCountriesNotVisited(for: continent)
-                    : countries.listOfCountries(for: continent)
-
+                let rows = countries.listOfCountries(for: continent)
                 if !rows.isEmpty {
                     Section(header: Text(continent.displayName)) {
                         ForEach(rows, id: \.objectID) { country in
-                            CountryRowView(country: country, mode: showOnlyNotVisited ? .wantToGo : .visited)
+                            CountryRowView(country: country)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-                                    if showOnlyNotVisited {
-                                        countries.updateWantToGo(country: country, index: nil)
-                                    } else {
-                                        countries.updateVisit(country: country, index: nil)
-                                    }
-                                    country.updateMap = true
-                                    countries.loadItems()
+                                    selectedCountry = country
                                 }
                         }
                     }
@@ -33,18 +24,12 @@ struct CountriesListView: View {
         .listStyle(.insetGrouped)
         .navigationTitle("Countries")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Picker("", selection: $showOnlyNotVisited) {
-                    Text("Visited").tag(false)
-                    Text("Want to go").tag(true)
-                }
-                .pickerStyle(.segmented)
-                .frame(maxWidth: 220)
-            }
-        }
         .onAppear {
             countries.loadItems()
+        }
+        .sheet(item: $selectedCountry) { country in
+            CountryEditSheet(country: country)
+                .environmentObject(countries)
         }
     }
 }

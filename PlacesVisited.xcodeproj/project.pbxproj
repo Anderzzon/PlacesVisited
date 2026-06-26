@@ -30,6 +30,7 @@
 		AA00001300000000000000F3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000300000000000000F3 /* ContentView.swift */; };
 		AA00001400000000000000F4 /* CountriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000400000000000000F4 /* CountriesListView.swift */; };
 		AA00001500000000000000F5 /* CountryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000500000000000000F5 /* CountryRowView.swift */; };
+		AA00001900000000000000FA /* CountryEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000B00000000000000FA /* CountryEditSheet.swift */; };
 		AA00001600000000000000F6 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000600000000000000F6 /* StatsView.swift */; };
 		AA00001700000000000000F7 /* WorldMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000700000000000000F7 /* WorldMapView.swift */; };
 		AA00001800000000000000F8 /* MapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000800000000000000F8 /* MapViewRepresentable.swift */; };
@@ -81,6 +82,7 @@
 		AA00000300000000000000F3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA00000400000000000000F4 /* CountriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesListView.swift; sourceTree = "<group>"; };
 		AA00000500000000000000F5 /* CountryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryRowView.swift; sourceTree = "<group>"; };
+		AA00000B00000000000000FA /* CountryEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryEditSheet.swift; sourceTree = "<group>"; };
 		AA00000600000000000000F6 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		AA00000700000000000000F7 /* WorldMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapView.swift; sourceTree = "<group>"; };
 		AA00000800000000000000F8 /* MapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRepresentable.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				AA00000300000000000000F3 /* ContentView.swift */,
 				AA00000400000000000000F4 /* CountriesListView.swift */,
 				AA00000500000000000000F5 /* CountryRowView.swift */,
+				AA00000B00000000000000FA /* CountryEditSheet.swift */,
 				AA00000600000000000000F6 /* StatsView.swift */,
 				AA00000700000000000000F7 /* WorldMapView.swift */,
 				AA00000800000000000000F8 /* MapViewRepresentable.swift */,
@@ -430,6 +433,7 @@
 				AA00001300000000000000F3 /* ContentView.swift in Sources */,
 				AA00001400000000000000F4 /* CountriesListView.swift in Sources */,
 				AA00001500000000000000F5 /* CountryRowView.swift in Sources */,
+				AA00001900000000000000FA /* CountryEditSheet.swift in Sources */,
 				AA00001600000000000000F6 /* StatsView.swift in Sources */,
 				AA00001700000000000000F7 /* WorldMapView.swift in Sources */,
 				AA00001800000000000000F8 /* MapViewRepresentable.swift in Sources */,
