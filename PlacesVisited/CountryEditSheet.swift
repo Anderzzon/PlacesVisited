@@ -24,7 +24,7 @@ struct CountryEditSheet: View {
                 }
 
                 Section {
-                    Button(action: { selection = .wantToGo }) {
+                    Button(action: { selection = selection == .wantToGo ? .none : .wantToGo }) {
                         HStack {
                             Image(systemName: selection == .wantToGo ? "circle.fill" : "circle")
                                 .foregroundColor(selection == .wantToGo ? .orange : .secondary)
@@ -33,7 +33,7 @@ struct CountryEditSheet: View {
                             Image(systemName: "bookmark.fill").foregroundColor(.orange)
                         }
                     }
-                    Button(action: { selection = .visited }) {
+                    Button(action: { selection = selection == .visited ? .none : .visited }) {
                         HStack {
                             Image(systemName: selection == .visited ? "circle.fill" : "circle")
                                 .foregroundColor(selection == .visited ? .orange : .secondary)

@@ -1,12 +1,13 @@
 import Foundation
 import MapKit
 
+@MainActor
 class MapDataStore: ObservableObject {
     @Published var overlayDict: [String: CountryGeo] = [:]
     @Published var isReady = false
 
     func load(countries: AppViewModel) {
-        DispatchQueue.global(qos: .background).async {
+        Task {
             var newOverlayDict = [String: CountryGeo]()
 
             if let path = Bundle.main.path(forResource: "allCountries", ofType: "json"),
@@ -29,10 +30,8 @@ class MapDataStore: ObservableObject {
                 }
             }
 
-            DispatchQueue.main.async {
-                self.overlayDict = newOverlayDict
-                self.isReady = true
-            }
+            self.overlayDict = newOverlayDict
+            self.isReady = true
         }
     }
 }

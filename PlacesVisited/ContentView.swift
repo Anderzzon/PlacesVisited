@@ -3,24 +3,24 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            NavigationStack {
-                CountriesListView()
-            }
-            .tabItem {
-                Label("Countries", systemImage: "list.bullet")
-            }
-
-            NavigationStack {
-                StatsView()
-            }
-            .tabItem {
-                Label("Stats", systemImage: "chart.pie")
-            }
-
-            WorldMapView()
-                .tabItem {
-                    Label("Map", systemImage: "map")
+            Tab("Countries", systemImage: "list.bullet") {
+                NavigationStack {
+                    CountriesListView()
                 }
+            }
+            Tab("Stats", systemImage: "chart.pie") {
+                NavigationStack {
+                    StatsView()
+                }
+            }
+            Tab("Map", systemImage: "map") {
+                WorldMapView()
+            }
+            Tab(role: .search) {
+                NavigationStack {
+                    CountriesListView(focusSearchOnAppear: true)
+                }
+            }
         }
         .accentColor(.orange)
     }
