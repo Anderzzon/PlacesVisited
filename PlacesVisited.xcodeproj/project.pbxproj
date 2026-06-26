@@ -20,6 +20,7 @@
 		03B014B823FAC47A0060794A /* caymenIslands.json in Resources */ = {isa = PBXBuildFile; fileRef = 03B014B723FAC47A0060794A /* caymenIslands.json */; };
 		03B014C023FD3AF60060794A /* CustomPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B014BF23FD3AF60060794A /* CustomPolygon.swift */; };
 		03B014C423FDE5450060794A /* allCountries.json in Resources */ = {isa = PBXBuildFile; fileRef = 03B014C323FDE5450060794A /* allCountries.json */; };
+		AA00000C00000000000000FA /* seed.json in Resources */ = {isa = PBXBuildFile; fileRef = AA00000B00000000000000FA /* seed.json */; };
 		03E7994A23E1A5E900AC25FE /* PlacesVisited.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03E7994823E1A5E900AC25FE /* PlacesVisited.xcdatamodeld */; };
 		3F1F5274862B88AF35DD2901 /* libPods-PlacesVisited-PlacesVisitedUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDA1FAA45CF13E14753F7F6 /* libPods-PlacesVisited-PlacesVisitedUITests.a */; };
 		8A76AE3075059776E56FB7EE /* libPods-PlacesVisitedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF1366DD1333DC13A671908 /* libPods-PlacesVisitedTests.a */; };
@@ -72,6 +73,7 @@
 		03B014B723FAC47A0060794A /* caymenIslands.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = caymenIslands.json; sourceTree = "<group>"; };
 		03B014BF23FD3AF60060794A /* CustomPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPolygon.swift; sourceTree = "<group>"; };
 		03B014C323FDE5450060794A /* allCountries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allCountries.json; sourceTree = "<group>"; };
+		AA00000B00000000000000FA /* seed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = seed.json; sourceTree = "<group>"; };
 		03E7994923E1A5E900AC25FE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		AA00000100000000000000F1 /* PlacesVisitedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesVisitedApp.swift; sourceTree = "<group>"; };
 		AA00000900000000000000F9 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				036E1EBB23F57E0F001250C5 /* CountriesClean.json */,
 				03B014B723FAC47A0060794A /* caymenIslands.json */,
 				03B014C323FDE5450060794A /* allCountries.json */,
+				AA00000B00000000000000FA /* seed.json */,
 			);
 			path = PlacesVisited;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				036E1EBA23F56F65001250C5 /* countries.json in Resources */,
 				03B014B823FAC47A0060794A /* caymenIslands.json in Resources */,
 				03B014C423FDE5450060794A /* allCountries.json in Resources */,
+				AA00000C00000000000000FA /* seed.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
