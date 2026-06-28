@@ -28,8 +28,19 @@ struct StatsView: View {
                         .font(.headline).foregroundColor(.orange)
                     Text("\(countries.numberOfCountriesWantToGoTo) more to go")
                         .font(.subheadline).foregroundColor(.orange)
-                    if let endYear = countries.travelProgressChartData.last(where: { $0.isProjection })?.year {
-                        Text("Done by \(String(endYear))")
+                    if let doneByText = {
+                        let data = countries.travelProgressChartData
+                        let allTime = data.last(where: { $0.series == .projected })?.year
+                        let recent = data.last(where: { $0.series == .recentProjected })?.year
+                        if let a = allTime, let r = recent {
+                            let lo = min(a, r), hi = max(a, r)
+                            return lo == hi ? "Done by \(String(lo))" : "Done by \(String(lo))–\(String(hi))"
+                        } else if let year = allTime ?? recent {
+                            return "Done by \(String(year))"
+                        }
+                        return nil
+                    }() {
+                        Text(doneByText)
                             .font(.caption)
                             .foregroundColor(.orange.opacity(0.6))
                     }
@@ -125,7 +136,7 @@ struct CountryProgressChartView: View {
                     .frame(maxWidth: .infinity, minHeight: 220, alignment: .center)
             } else {
                 Chart {
-                    ForEach(data.filter { !$0.isProjection }) { point in
+                    ForEach(data.filter { $0.series == .actual }) { point in
                         LineMark(
                             x: .value("Year", point.year),
                             y: .value("Countries", point.count),
@@ -135,13 +146,24 @@ struct CountryProgressChartView: View {
                         .interpolationMethod(.stepEnd)
                     }
 
-                    ForEach(data.filter { $0.isProjection }) { point in
+                    ForEach(data.filter { $0.series == .projected }) { point in
                         LineMark(
                             x: .value("Year", point.year),
                             y: .value("Countries", point.count),
                             series: .value("Series", "projected")
                         )
                         .foregroundStyle(.orange.opacity(0.45))
+                        .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 3]))
+                        .interpolationMethod(.linear)
+                    }
+
+                    ForEach(data.filter { $0.series == .recentProjected }) { point in
+                        LineMark(
+                            x: .value("Year", point.year),
+                            y: .value("Countries", point.count),
+                            series: .value("Series", "recentProjected")
+                        )
+                        .foregroundStyle(.gray.opacity(0.5))
                         .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 3]))
                         .interpolationMethod(.linear)
                     }
@@ -156,7 +178,7 @@ struct CountryProgressChartView: View {
                             }
                     }
                 }
-                .chartXScale(domain: (data.first?.year ?? 0)...(data.last?.year ?? 1))
+                .chartXScale(domain: (data.first?.year ?? 0)...(data.map { $0.year }.max() ?? 1))
                 .chartPlotStyle { $0.padding(.trailing, 24) }
                 .chartYScale(domain: 0...max(target, 1))
                 .chartXAxis {
@@ -175,7 +197,40 @@ struct CountryProgressChartView: View {
                     }
                 }
                 .frame(height: 220)
+
+                HStack(spacing: 16) {
+                    LegendItem(color: .orange, dashed: false, label: "Visited")
+                    LegendItem(color: .orange.opacity(0.45), dashed: true, label: "All-time pace")
+                    LegendItem(color: .gray.opacity(0.5), dashed: true, label: "3-year pace")
+                }
+                .padding(.top, 4)
             }
+        }
+    }
+}
+
+private struct LegendItem: View {
+    let color: Color
+    let dashed: Bool
+    let label: String
+
+    var body: some View {
+        HStack(spacing: 6) {
+            if dashed {
+                Path { path in
+                    path.move(to: .init(x: 0, y: 4))
+                    path.addLine(to: .init(x: 20, y: 4))
+                }
+                .stroke(color, style: StrokeStyle(lineWidth: 2, dash: [4, 2]))
+                .frame(width: 20, height: 8)
+            } else {
+                Rectangle()
+                    .fill(color)
+                    .frame(width: 20, height: 2)
+            }
+            Text(label)
+                .font(.caption2)
+                .foregroundColor(.secondary)
         }
     }
 }
