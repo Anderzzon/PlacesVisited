@@ -22,9 +22,10 @@ struct MapViewRepresentable: UIViewRepresentable {
                                         longitudinalMeters: 5_000_000)
         mapView.setRegion(region, animated: false)
         mapView.setCameraZoomRange(
-            MKMapView.CameraZoomRange(minCenterCoordinateDistance: 2_500_000,
+            MKMapView.CameraZoomRange(minCenterCoordinateDistance: 1_000_000,
                                       maxCenterCoordinateDistance: 100_000_000),
             animated: false)
+        mapView.isPitchEnabled = false
 
         let tap = UITapGestureRecognizer(target: context.coordinator,
                                          action: #selector(Coordinator.handleTap(_:)))
@@ -106,12 +107,17 @@ struct MapViewRepresentable: UIViewRepresentable {
             if let polygon = overlay as? CustomPolygon, polygon.identifier == "visited" {
                 fillColor = visitedColor ?? .green
                 alpha = 1.0
+                renderer.strokeColor = UIColor.black
+                renderer.lineWidth = polygon.hasHoles ? 0.1 : 0.3
             } else if let polygon = overlay as? CustomPolygon, polygon.identifier == "wantToGo" {
                 fillColor = .orange
                 alpha = 1.0
+                renderer.strokeColor = UIColor.black
+                renderer.lineWidth = polygon.hasHoles ? 0.1 : 0.3
             } else {
                 fillColor = .red
                 alpha = 0.0
+                renderer.lineWidth = 0
             }
             renderer.fillColor = fillColor.withAlphaComponent(alpha)
         }
@@ -152,8 +158,7 @@ struct MapViewRepresentable: UIViewRepresentable {
 
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             let renderer = MKPolygonRenderer(overlay: overlay)
-            renderer.strokeColor = UIColor.black
-            renderer.lineWidth = 0.3
+            renderer.lineWidth = 0
             configureColor(renderer: renderer, overlay: overlay)
             return renderer
         }

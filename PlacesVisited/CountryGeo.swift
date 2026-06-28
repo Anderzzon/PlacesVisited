@@ -27,42 +27,64 @@ class CountryGeo {
         switch type {
         case "Polygon":
             let coordinates = geometry?["coordinates"] as? [Any]
-            
-            let polygons = coordinates?[0] as? [Any]
-            
-            for coordinate in polygons! {
+
+            var outerPoints: [CLLocationCoordinate2D] = []
+            for coordinate in (coordinates?[0] as? [Any]) ?? [] {
                 let lngLat = coordinate as? [Double]
-                
-                points.append(CLLocationCoordinate2DMake((lngLat?[1])!, (lngLat?[0])!))
-                
+                outerPoints.append(CLLocationCoordinate2DMake((lngLat?[1])!, (lngLat?[0])!))
             }
-            let polygon = CustomPolygon(coordinates: &points, count: points.count)
-            
+
+            var holes: [MKPolygon] = []
+            if let rings = coordinates, rings.count > 1 {
+                for i in 1..<rings.count {
+                    var innerPoints: [CLLocationCoordinate2D] = []
+                    for coordinate in (rings[i] as? [Any]) ?? [] {
+                        let lngLat = coordinate as? [Double]
+                        innerPoints.append(CLLocationCoordinate2DMake((lngLat?[1])!, (lngLat?[0])!))
+                    }
+                    if !innerPoints.isEmpty {
+                        holes.append(MKPolygon(coordinates: &innerPoints, count: innerPoints.count))
+                    }
+                }
+            }
+
+            let polygon = CustomPolygon(coordinates: &outerPoints, count: outerPoints.count,
+                                        interiorPolygons: holes.isEmpty ? nil : holes)
+            polygon.hasHoles = !holes.isEmpty
             self.polygons.append(polygon)
         case "MultiPolygon":
-            
+
             let coordinates = geometry?["coordinates"] as! [Any]
-            
+
             for geografic in coordinates {
                 let geo = geografic as! [Any]
                 let arrayOfCoordinates = geo[0] as! [Any]
-                
+
                 var pointsToAdd: [CLLocationCoordinate2D] = []
-                
+
                 for coordinate in arrayOfCoordinates {
-                    
                     let lngLat = coordinate as! [Double]
-                    
                     pointsToAdd.append(CLLocationCoordinate2DMake((lngLat[1]), (lngLat[0])))
-                    
                 }
-                let polygon = CustomPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count)
-                //print("Making MKPolygon")
-                if pointsToAdd.count > 70 {
-                    
+
+                var holes: [MKPolygon] = []
+                if geo.count > 1 {
+                    for i in 1..<geo.count {
+                        var innerPoints: [CLLocationCoordinate2D] = []
+                        for coordinate in (geo[i] as! [Any]) {
+                            let lngLat = coordinate as! [Double]
+                            innerPoints.append(CLLocationCoordinate2DMake((lngLat[1]), (lngLat[0])))
+                        }
+                        holes.append(MKPolygon(coordinates: &innerPoints, count: innerPoints.count))
+                    }
+                }
+
+                if pointsToAdd.count > 50 {
+                    let polygon = CustomPolygon(coordinates: &pointsToAdd, count: pointsToAdd.count,
+                                                interiorPolygons: holes.isEmpty ? nil : holes)
+                    polygon.hasHoles = !holes.isEmpty
                     self.polygons.append(polygon)
                 }
-                //print("Adding MKPolygon to array")
             }
             
         default:

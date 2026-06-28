@@ -11,5 +11,5 @@ import MapKit
 
 class CustomPolygon: MKPolygon {
     var identifier: String? = nil
-    
+    var hasHoles: Bool = false
 }
