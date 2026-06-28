@@ -10,11 +10,15 @@ import Foundation
 import CoreData
 import Combine
 
+enum YearSeriesType: String {
+    case actual, projected, recentProjected
+}
+
 struct YearDataPoint: Identifiable {
-    var id: String { "\(isProjection ? "p" : "a")-\(year)" }
+    var id: String { "\(series.rawValue)-\(year)" }
     let year: Int
     let count: Int
-    let isProjection: Bool
+    let series: YearSeriesType
 }
 
 // Shared controller for all three screens. Holds country state and handles
@@ -468,7 +472,7 @@ class AppViewModel: ObservableObject {
         var cumulative = 0
         for year in firstYear...currentYear {
             cumulative += countByYear[year, default: 0]
-            result.append(YearDataPoint(year: year, count: cumulative, isProjection: false))
+            result.append(YearDataPoint(year: year, count: cumulative, series: .actual))
         }
         print("[Chart] actual data points: \(result.map { "\($0.year):\($0.count)" })")
 
@@ -478,18 +482,29 @@ class AppViewModel: ObservableObject {
             return result
         }
 
+        let target = numberOfCountriesVisited + bucketList
+
+        // All-time average projection
         let yearsActive = currentYear - firstYear + 1
         let avgPerYear = Double(numberOfCountriesVisited) / Double(yearsActive)
-        print("[Chart] avgPerYear: \(avgPerYear), target: \(numberOfCountriesVisited + bucketList)")
-        guard avgPerYear > 0 else { return result }
+        print("[Chart] avgPerYear (all-time): \(avgPerYear), target: \(target)")
+        if avgPerYear > 0 {
+            let endYear = min(currentYear + Int((Double(bucketList) / avgPerYear).rounded(.up)), currentYear + 100)
+            result.append(YearDataPoint(year: currentYear, count: cumulative, series: .projected))
+            result.append(YearDataPoint(year: endYear, count: target, series: .projected))
+            print("[Chart] all-time projection: \(currentYear) → \(endYear)")
+        }
 
-        let target = numberOfCountriesVisited + bucketList
-        let yearsToComplete = Int((Double(bucketList) / avgPerYear).rounded(.up))
-        let endYear = min(currentYear + yearsToComplete, currentYear + 100)
-
-        result.append(YearDataPoint(year: currentYear, count: cumulative, isProjection: true))
-        result.append(YearDataPoint(year: endYear, count: target, isProjection: true))
-        print("[Chart] projection: \(currentYear) → \(endYear), total points: \(result.count)")
+        // 3-year average projection
+        let recentVisits = (1...3).reduce(0) { $0 + (countByYear[currentYear - $1] ?? 0) }
+        let recentAvgPerYear = Double(recentVisits) / 3.0
+        print("[Chart] avgPerYear (3-year): \(recentAvgPerYear)")
+        if recentAvgPerYear > 0 {
+            let recentEndYear = min(currentYear + Int((Double(bucketList) / recentAvgPerYear).rounded(.up)), currentYear + 100)
+            result.append(YearDataPoint(year: currentYear, count: cumulative, series: .recentProjected))
+            result.append(YearDataPoint(year: recentEndYear, count: target, series: .recentProjected))
+            print("[Chart] 3-year projection: \(currentYear) → \(recentEndYear)")
+        }
 
         return result
     }
