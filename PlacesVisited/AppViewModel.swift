@@ -10,6 +10,13 @@ import Foundation
 import CoreData
 import Combine
 
+struct YearDataPoint: Identifiable {
+    var id: String { "\(isProjection ? "p" : "a")-\(year)" }
+    let year: Int
+    let count: Int
+    let isProjection: Bool
+}
+
 // Shared controller for all three screens. Holds country state and handles
 // all mutations (visit, want-to-go). Injected as @EnvironmentObject from PlacesVisitedApp.
 class AppViewModel: ObservableObject {
@@ -25,13 +32,13 @@ class AppViewModel: ObservableObject {
         case Europe, Asia, NorthAmerica, Africa, SouthAmerica, Oceania
     }
 
-    // Publishing per-continent arrays so views re-render when any country changes
-    @Published private var countriesInEurope: [Country] = []
-    @Published private var countriesInAsia: [Country] = []
-    @Published private var countriesInNorthAmerica: [Country] = []
-    @Published private var countriesInAfrica: [Country] = []
-    @Published private var countriesInSouthAmerica: [Country] = []
-    @Published private var countriesInOceania: [Country] = []
+    private var countriesInEurope: [Country] = []
+    private var countriesInAsia: [Country] = []
+    private var countriesInNorthAmerica: [Country] = []
+    private var countriesInAfrica: [Country] = []
+    private var countriesInSouthAmerica: [Country] = []
+    private var countriesInOceania: [Country] = []
+    @Published var travelProgressChartData: [YearDataPoint] = []
     
     func createCountry(fullName:String, shortName:String, continent:String, flagIcon:String) {
         
@@ -127,13 +134,22 @@ class AppViewModel: ObservableObject {
         //let fetchALL = NSFetchRequest<Country>(entityName: "Country")
         
         do {
-            countriesInAsia = try managedContext.fetch(fetchAsia)
-            countriesInEurope = try managedContext.fetch(fetchEurope)
-            countriesInAfrica = try managedContext.fetch(fetchAfrica)
-            countriesInNorthAmerica = try managedContext.fetch(fetchNorthAmerica)
-            countriesInSouthAmerica = try managedContext.fetch(fetchSouthAmerica)
-            countriesInOceania = try managedContext.fetch(fetchOceania)
-            
+            let asia = try managedContext.fetch(fetchAsia)
+            let europe = try managedContext.fetch(fetchEurope)
+            let africa = try managedContext.fetch(fetchAfrica)
+            let northAmerica = try managedContext.fetch(fetchNorthAmerica)
+            let southAmerica = try managedContext.fetch(fetchSouthAmerica)
+            let oceania = try managedContext.fetch(fetchOceania)
+
+            objectWillChange.send()
+            countriesInAsia = asia
+            countriesInEurope = europe
+            countriesInAfrica = africa
+            countriesInNorthAmerica = northAmerica
+            countriesInSouthAmerica = southAmerica
+            countriesInOceania = oceania
+            travelProgressChartData = buildTravelProgressChartData()
+
         } catch let error as NSError {
             print("Could not fetch \(error)")
         }
@@ -422,6 +438,62 @@ class AppViewModel: ObservableObject {
         return percent
     }
     
+    private func buildTravelProgressChartData() -> [YearDataPoint] {
+        let allCountries = countriesInEurope + countriesInAsia + countriesInNorthAmerica +
+                           countriesInAfrica + countriesInSouthAmerica + countriesInOceania
+        let calendar = Calendar.current
+        let visitedYears = allCountries
+            .filter { $0.visited }
+            .compactMap { $0.firstVisited }
+            .map { calendar.component(.year, from: $0) }
+
+        print("[Chart] visited countries with dates: \(visitedYears.count)")
+
+        guard !visitedYears.isEmpty else {
+            print("[Chart] no dated visits — returning empty")
+            return []
+        }
+
+        let firstYear = visitedYears.min()!
+        let currentYear = calendar.component(.year, from: Date())
+        print("[Chart] year range: \(firstYear)–\(currentYear)")
+
+        var countByYear: [Int: Int] = [:]
+        for year in visitedYears {
+            countByYear[year, default: 0] += 1
+        }
+        print("[Chart] counts per year: \(countByYear.sorted { $0.key < $1.key })")
+
+        var result: [YearDataPoint] = []
+        var cumulative = 0
+        for year in firstYear...currentYear {
+            cumulative += countByYear[year, default: 0]
+            result.append(YearDataPoint(year: year, count: cumulative, isProjection: false))
+        }
+        print("[Chart] actual data points: \(result.map { "\($0.year):\($0.count)" })")
+
+        let bucketList = numberOfCountriesWantToGoTo
+        guard bucketList > 0 else {
+            print("[Chart] no bucket list items — skipping projection")
+            return result
+        }
+
+        let yearsActive = currentYear - firstYear + 1
+        let avgPerYear = Double(numberOfCountriesVisited) / Double(yearsActive)
+        print("[Chart] avgPerYear: \(avgPerYear), target: \(numberOfCountriesVisited + bucketList)")
+        guard avgPerYear > 0 else { return result }
+
+        let target = numberOfCountriesVisited + bucketList
+        let yearsToComplete = Int((Double(bucketList) / avgPerYear).rounded(.up))
+        let endYear = min(currentYear + yearsToComplete, currentYear + 100)
+
+        result.append(YearDataPoint(year: currentYear, count: cumulative, isProjection: true))
+        result.append(YearDataPoint(year: endYear, count: target, isProjection: true))
+        print("[Chart] projection: \(currentYear) → \(endYear), total points: \(result.count)")
+
+        return result
+    }
+
     func bucketListProgress() -> Double {
         let total = numberOfCountriesVisited + numberOfCountriesWantToGoTo
         guard total > 0 else { return 0 }

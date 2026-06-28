@@ -11,7 +11,7 @@ struct CountryRowView: View {
             if country.visited {
                 Image(systemName: "mappin.and.ellipse").foregroundColor(.orange)
             } else if country.wantToGo {
-                Image(systemName: "bookmark.fill").foregroundColor(.orange)
+                Image(systemName: "bookmark").foregroundColor(.gray)
             }
         }
     }

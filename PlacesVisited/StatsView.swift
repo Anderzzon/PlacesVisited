@@ -1,21 +1,38 @@
 import SwiftUI
+import Charts
 
 struct StatsView: View {
     @EnvironmentObject var countries: AppViewModel
-    @State private var bucketProgress: CGFloat = 0
-    @State private var worldProgress: CGFloat = 0
+    @State private var chartVisible = false
 
     var body: some View {
         ScrollView {
             VStack(spacing: 32) {
+                if chartVisible {
+                    CountryProgressChartView(
+                        data: countries.travelProgressChartData,
+                        target: countries.numberOfCountriesVisited + countries.numberOfCountriesWantToGoTo
+                    )
+                    .padding(.horizontal)
+                } else {
+                    Color.clear.frame(height: 256)
+                }
+
+                Divider()
+
                 VStack(spacing: 8) {
-                    BucketCircleView(progress: bucketProgress,
+                    BucketCircleView(progress: CGFloat(countries.bucketListProgress() / 100),
                                      centerText: "\(Int(countries.bucketListProgress()))%",
                                      diameter: 240)
                     Text("My bucket list")
                         .font(.headline).foregroundColor(.orange)
                     Text("\(countries.numberOfCountriesWantToGoTo) more to go")
                         .font(.subheadline).foregroundColor(.orange)
+                    if let endYear = countries.travelProgressChartData.last(where: { $0.isProjection })?.year {
+                        Text("Done by \(String(endYear))")
+                            .font(.caption)
+                            .foregroundColor(.orange.opacity(0.6))
+                    }
                 }
 
                 Divider()
@@ -27,7 +44,7 @@ struct StatsView: View {
                     SmallStatView(progress: 1.0,
                                   value: "\(countries.numberOfCountriesWantToGoTo)",
                                   label: "On your\nbucket list")
-                    SmallStatView(progress: worldProgress,
+                    SmallStatView(progress: CGFloat(countries.percentOfWorldVisited() / 100),
                                   value: "\(countries.percentOfWorldVisited())%",
                                   label: "Of the\nworld")
                 }
@@ -35,17 +52,7 @@ struct StatsView: View {
             .padding(.vertical, 32)
         }
         .navigationTitle("Stats")
-        .onAppear {
-            countries.loadItems()
-            animateStats()
-        }
-    }
-
-    private func animateStats() {
-        withAnimation(.easeInOut(duration: 0.8)) {
-            bucketProgress = CGFloat(countries.bucketListProgress() / 100)
-            worldProgress = CGFloat(countries.percentOfWorldVisited() / 100)
-        }
+        .task { chartVisible = true }
     }
 }
 
@@ -95,5 +102,80 @@ struct SmallStatView: View {
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
+    }
+}
+
+struct CountryProgressChartView: View {
+    let data: [YearDataPoint]
+    let target: Int
+
+    private var firstYear: Int { data.first?.year ?? 0 }
+    private var currentYear: Int { Calendar.current.component(.year, from: Date()) }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Travel progress")
+                .font(.headline)
+                .foregroundColor(.orange)
+
+            if data.isEmpty {
+                Text("Visit countries to see your progress")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, minHeight: 220, alignment: .center)
+            } else {
+                Chart {
+                    ForEach(data.filter { !$0.isProjection }) { point in
+                        LineMark(
+                            x: .value("Year", point.year),
+                            y: .value("Countries", point.count),
+                            series: .value("Series", "actual")
+                        )
+                        .foregroundStyle(.orange)
+                        .interpolationMethod(.stepEnd)
+                    }
+
+                    ForEach(data.filter { $0.isProjection }) { point in
+                        LineMark(
+                            x: .value("Year", point.year),
+                            y: .value("Countries", point.count),
+                            series: .value("Series", "projected")
+                        )
+                        .foregroundStyle(.orange.opacity(0.45))
+                        .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 3]))
+                        .interpolationMethod(.linear)
+                    }
+
+                    if target > 0 {
+                        RuleMark(y: .value("Goal", target))
+                            .foregroundStyle(.orange.opacity(0.0))
+                            .annotation(position: .top, alignment: .trailing) {
+                                Text("Goal: \(target)")
+                                    .font(.caption2)
+                                    .foregroundColor(.orange)
+                            }
+                    }
+                }
+                .chartXScale(domain: (data.first?.year ?? 0)...(data.last?.year ?? 1))
+                .chartPlotStyle { $0.padding(.trailing, 24) }
+                .chartYScale(domain: 0...max(target, 1))
+                .chartXAxis {
+                    AxisMarks(values: [firstYear, currentYear]) { value in
+                        AxisTick()
+                        AxisValueLabel {
+                            if let year = value.as(Int.self) {
+                                Text(String(year))
+                            }
+                        }
+                    }
+                }
+                .chartYAxis {
+                    AxisMarks(values: .automatic) {
+                        AxisValueLabel()
+                    }
+                }
+                .frame(height: 220)
+            }
+        }
     }
 }

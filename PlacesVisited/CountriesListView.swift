@@ -18,11 +18,20 @@ struct CountriesListView: View {
                 ForEach(AppViewModel.Continents.allCases, id: \.self) { continent in
                     let rows = countries.listOfCountries(for: continent)
                     if !rows.isEmpty {
-                        Section(header: Text(continent.displayName)) {
+                        Section {
                             ForEach(rows, id: \.objectID) { country in
                                 CountryRowView(country: country)
                                     .contentShape(Rectangle())
                                     .onTapGesture { selectedCountry = country }
+                            }
+                        } header: {
+                            HStack {
+                                Text(continent.displayName)
+                                Spacer()
+                                let visited = rows.filter { $0.visited }.count
+                                let percent = rows.count > 0 ? Int((Double(visited) / Double(rows.count) * 100).rounded()) : 0
+                                Text("\(visited) / \(rows.count) · \(percent)%")
+                                    .font(.caption.monospacedDigit())
                             }
                         }
                     }
@@ -40,7 +49,6 @@ struct CountriesListView: View {
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchText, isPresented: $isSearchPresented, prompt: "Country name")
         .onAppear {
-            countries.loadItems()
             if focusSearchOnAppear {
                 isSearchPresented = true
             }
