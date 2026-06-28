@@ -1,22 +1,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selectedTab = 1
+
     var body: some View {
-        TabView {
-            Tab("Countries", systemImage: "list.bullet") {
+        TabView(selection: $selectedTab) {
+            Tab("Countries", systemImage: "list.bullet", value: 0) {
                 NavigationStack {
                     CountriesListView()
                 }
             }
-            Tab("Stats", systemImage: "chart.pie") {
+            Tab("Map", systemImage: "map", value: 1) {
+                WorldMapView()
+            }
+            Tab("Stats", systemImage: "chart.pie", value: 2) {
                 NavigationStack {
                     StatsView()
                 }
             }
-            Tab("Map", systemImage: "map") {
-                WorldMapView()
-            }
-            Tab(role: .search) {
+            Tab(value: 3, role: .search) {
                 NavigationStack {
                     CountriesListView(focusSearchOnAppear: true)
                 }
